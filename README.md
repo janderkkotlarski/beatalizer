@@ -1,2 +1,2 @@
 # beatalizer
-a simple visualizer for music with adjustable 
+a simple 3D visualizer for music with adjustable BPM options
