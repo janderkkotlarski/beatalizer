@@ -19,21 +19,25 @@ void video::run()
   // Initialization
       //--------------------------------------------------------------------------------------
       const int screenWidth = 800;
-      const int screenHeight = 450;
+      const int screenHeight = 800;
 
       SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
       InitWindow(screenWidth, screenHeight, "raylib [shaders] example - model shader");
 
+      const float cam_dist
+      { 8.0f };
+
       // Define the camera to look into our 3d world
       Camera camera = { 0 };
-      camera.position = (Vector3){ 4.0f, 4.0f, 4.0f };
-      camera.target = (Vector3){ 0.0f, 1.0f, -1.0f };
-      camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+      camera.position = (Vector3){ cam_dist, cam_dist, cam_dist  };
+      camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+      camera.up = (Vector3){ 0.0f, 0.0f, 1.0f };
       camera.fovy = 45.0f;
       // camera.projection = CAMERA_PERSPECTIVE;
 
       Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+      Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
       // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
       // Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
 
@@ -42,7 +46,7 @@ void video::run()
 
       Vector3 position = { 0.0f, 0.0f, 0.0f };    // Set model position
 
-      SetCameraMode(camera, CAMERA_FREE);         // Set an orbital camera mode
+      SetCameraMode(camera, CAMERA_PERSPECTIVE);         // Set an orbital camera mode
 
       SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
@@ -59,17 +63,18 @@ void video::run()
           //----------------------------------------------------------------------------------
           BeginDrawing();
 
-              ClearBackground(RAYWHITE);
+              ClearBackground(BLACK);
 
               BeginMode3D(camera);
 
-                  DrawModel(model, position, 0.2f, RED);   // Draw 3d model with texture
 
-                  DrawGrid(10, 1.0f);     // Draw a grid
+
+                  DrawModelWires(model, position, 1.0f, WHITE);
+
+                  DrawModel(model_2, position, 1.0f, RED);
+
 
               EndMode3D();
-
-              DrawText("(c) Watermill 3D model by Alberto Cano", screenWidth - 210, screenHeight - 20, 10, GRAY);
 
               DrawFPS(10, 10);
 
