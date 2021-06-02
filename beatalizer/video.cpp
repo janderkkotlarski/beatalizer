@@ -33,14 +33,11 @@ void video::run()
       camera.fovy = 45.0f;
       // camera.projection = CAMERA_PERSPECTIVE;
 
-      Model model = LoadModel("resources/models/watermill.obj");                   // Load OBJ model
-      Texture2D texture = LoadTexture("resources/models/watermill_diffuse.png");   // Load model texture
-
-      // Load shader for model
+      Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
       // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
-      Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
+      // Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
 
-      model.materials[0].shader = shader;                     // Set shader effect to 3d model
+      // model.materials[0].shader = shader;                     // Set shader effect to 3d model
       // model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture; // Bind texture to model
 
       Vector3 position = { 0.0f, 0.0f, 0.0f };    // Set model position
@@ -66,7 +63,7 @@ void video::run()
 
               BeginMode3D(camera);
 
-                  DrawModel(model, position, 0.2f, WHITE);   // Draw 3d model with texture
+                  DrawModel(model, position, 0.2f, RED);   // Draw 3d model with texture
 
                   DrawGrid(10, 1.0f);     // Draw a grid
 
@@ -82,8 +79,8 @@ void video::run()
 
       // De-Initialization
       //--------------------------------------------------------------------------------------
-      UnloadShader(shader);       // Unload shader
-      UnloadTexture(texture);     // Unload texture
+      // UnloadShader(shader);       // Unload shader
+      // UnloadTexture(texture);     // Unload texture
       UnloadModel(model);         // Unload model
 
       CloseWindow();              // Close window and OpenGL context
