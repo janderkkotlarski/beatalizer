@@ -7,6 +7,8 @@ class video
 public:
   video();
 
+  void initialize();
+
   void run();
 };
 

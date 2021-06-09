@@ -14,6 +14,11 @@ video::video()
 
 }
 
+void video::initialize()
+{
+
+}
+
 void video::run()
 {
   // Initialization
@@ -69,7 +74,7 @@ void video::run()
 
 
 
-                  DrawModelWires(model, position, 1.0f, WHITE);
+                  // DrawModelWires(model, position, 1.0f, WHITE);
 
                   DrawModel(model_2, position, 1.0f, RED);
 
