@@ -56,17 +56,19 @@ void video::run()
       Camera camera = { 0 };
       camera.position = m_cam_pos;
       camera.target = m_cam_target;
-      camera.up = (Vector3){ 0.0f, 0.0f, 1.0f };
+      camera.up = m_cam_up;
       camera.fovy = 45.0f;
-      // camera.projection = CAMERA_PERSPECTIVE;
+      camera.type = CAMERA_PERSPECTIVE;
+
+      Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+      Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
 
       Light light
       { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
 
-      Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
 
       model.materials->shader = m_lighting_shader;
-      Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+
       model_2.materials->shader = m_lighting_shader;
       // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
       // Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
@@ -99,7 +101,7 @@ void video::run()
 
 
 
-                  DrawModelWires(model, position, 1.0f, WHITE);
+                  DrawModelWires(model, position, 1.0f, BLUE);
 
                   // DrawModel(model_2, position, 1.0f, RED);
 

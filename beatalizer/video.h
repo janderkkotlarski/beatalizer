@@ -22,7 +22,7 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Vector3 m_cam_up
-  { 0.0f, 1.0f, 0.0f };
+  { 0.0f, 0.0f, 1.0f };
 
   Camera m_camera;
 
