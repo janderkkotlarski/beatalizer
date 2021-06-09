@@ -1,13 +1,13 @@
 #include "video.h"
 
-
-#include "raylib.h"
-
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
+
+#define RLIGHTS_IMPLEMENTATION
+#include "rlights.h"
 
 video::video()
 {
@@ -17,6 +17,25 @@ video::video()
 void video::initialize()
 {
 
+  SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
+  InitWindow(m_screen_width, m_screen_height, "beatalizer");
+
+  SetTargetFPS(m_fps);
+
+
+  m_camera.position = m_cam_pos;    // Camera position
+  m_camera.target = m_cam_target;      // Camera looking at point
+  m_camera.up = m_cam_up;          // Camera up vector (rotation towards target)
+  m_camera.fovy = 45.0f;                                // Camera field-of-view Y
+  m_camera.type = CAMERA_PERSPECTIVE;                  // Camera mode type
+
+  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  // LoadShader("base_lighting.vs", "lighting.fs");
+
+  m_lighting_shader.locs[LOC_MATRIX_MODEL] =
+      GetShaderLocation(m_lighting_shader, "matModel");
+  m_lighting_shader.locs[LOC_VECTOR_VIEW] =
+      GetShaderLocation(m_lighting_shader, "viewPos");
 }
 
 void video::run()
@@ -35,14 +54,20 @@ void video::run()
 
       // Define the camera to look into our 3d world
       Camera camera = { 0 };
-      camera.position = (Vector3){ cam_dist, cam_dist, cam_dist  };
-      camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+      camera.position = m_cam_pos;
+      camera.target = m_cam_target;
       camera.up = (Vector3){ 0.0f, 0.0f, 1.0f };
       camera.fovy = 45.0f;
       // camera.projection = CAMERA_PERSPECTIVE;
 
+      Light light
+      { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
+
       Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+
+      model.materials->shader = m_lighting_shader;
       Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+      model_2.materials->shader = m_lighting_shader;
       // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
       // Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
 
@@ -53,7 +78,7 @@ void video::run()
 
       SetCameraMode(camera, CAMERA_PERSPECTIVE);         // Set an orbital camera mode
 
-      SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
+      SetTargetFPS(100);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
 
       // Main game loop
@@ -74,9 +99,9 @@ void video::run()
 
 
 
-                  // DrawModelWires(model, position, 1.0f, WHITE);
+                  DrawModelWires(model, position, 1.0f, WHITE);
 
-                  DrawModel(model_2, position, 1.0f, RED);
+                  // DrawModel(model_2, position, 1.0f, RED);
 
 
               EndMode3D();
