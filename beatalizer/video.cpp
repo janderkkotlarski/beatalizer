@@ -60,7 +60,7 @@ void video::run()
       camera.fovy = 45.0f;
       camera.type = CAMERA_PERSPECTIVE;
 
-      Model model = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
+      Model model = LoadModelFromMesh(GenMeshCube(4.0f, 4.0f, 4.0f));
       Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
 
       Light light
@@ -99,7 +99,7 @@ void video::run()
 
               BeginMode3D(camera);
 
-                  DrawCube((Vector3){-2.0f, -2.0f, -2.0f}, 4.0f, 4.0f, 4.0f, RED);
+                  DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
 
                   DrawModelWires(model, position, 1.0f, BLUE);
 
