@@ -54,9 +54,9 @@ void video::run()
 
       // Define the camera to look into our 3d world
       Camera camera = { 0 };
-      camera.position = m_cam_pos;
-      camera.target = m_cam_target;
-      camera.up = m_cam_up;
+      camera.position = { 12.0f, 12.0f, 12.0f };
+      camera.target = { 0.0f, 0.0f, 0.0f };
+      camera.up = { 0.0f, 0.0f, 1.0f };
       camera.fovy = 45.0f;
       camera.type = CAMERA_PERSPECTIVE;
 
@@ -67,18 +67,18 @@ void video::run()
       { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
 
 
-      model.materials->shader = m_lighting_shader;
+      // model.materials->shader = m_lighting_shader;
 
       model_2.materials->shader = m_lighting_shader;
       // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
-      // Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
+      Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
 
       // model.materials[0].shader = shader;                     // Set shader effect to 3d model
       // model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture; // Bind texture to model
 
       Vector3 position = { 0.0f, 0.0f, 0.0f };    // Set model position
 
-      SetCameraMode(camera, CAMERA_PERSPECTIVE);         // Set an orbital camera mode
+      // SetCameraMode(camera, CAMERA_FIRST_PERSON);         // Set an orbital camera mode
 
       SetTargetFPS(100);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ void video::run()
 
               BeginMode3D(camera);
 
-
+                  DrawCube((Vector3){-2.0f, -2.0f, -2.0f}, 4.0f, 4.0f, 4.0f, RED);
 
                   DrawModelWires(model, position, 1.0f, BLUE);
 
