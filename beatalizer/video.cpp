@@ -64,7 +64,7 @@ void video::run()
       Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
 
       Light light
-      { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
+      { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, BLUE, m_lighting_shader) };
 
 
       // model.materials->shader = m_lighting_shader;
@@ -88,7 +88,7 @@ void video::run()
       {
           // Update
           //----------------------------------------------------------------------------------
-          UpdateCamera(&camera);                  // Update camera
+          UpdateCamera(&m_camera);                  // Update camera
           //----------------------------------------------------------------------------------
 
           // Draw
@@ -97,11 +97,11 @@ void video::run()
 
               ClearBackground(BLACK);
 
-              BeginMode3D(camera);
+              BeginMode3D(m_camera);
 
                   DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
 
-                  DrawModelWires(model, position, 1.0f, BLUE);
+                  // DrawModelWires(model, position, 1.0f, BLUE);
 
                   // DrawModel(model_2, position, 1.0f, RED);
 

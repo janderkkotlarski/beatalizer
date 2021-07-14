@@ -16,7 +16,7 @@ private:
   { 100 };
 
   Vector3 m_cam_pos
-  { 0.0f, 0.0f, 12.0f };
+  { 4.0f, 8.0f, 12.0f };
 
   Vector3 m_cam_target
   { 0.0f, 0.0f, 0.0f };
