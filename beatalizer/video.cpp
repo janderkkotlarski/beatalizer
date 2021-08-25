@@ -23,9 +23,7 @@ void video::initialize()
   SetTargetFPS(m_fps);
 
 
-  m_camera.position = m_cam_pos;    // Camera position
-  m_camera.target = m_cam_target;      // Camera looking at point
-  m_camera.up = m_cam_up;          // Camera up vector (rotation towards target)
+  update_cam();
   m_camera.fovy = 45.0f;                                // Camera field-of-view Y
   m_camera.type = CAMERA_PERSPECTIVE;                  // Camera mode type
 
@@ -36,6 +34,13 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "matModel");
   m_lighting_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_lighting_shader, "viewPos");
+}
+
+void video::update_cam()
+{
+  m_camera.position = m_cam_pos;    // Camera position
+  m_camera.target = m_cam_target;      // Camera looking at point
+  m_camera.up = m_cam_up;          // Camera up vector (rotation towards target)
 }
 
 void video::run()
@@ -51,14 +56,6 @@ void video::run()
 
       const float cam_dist
       { 8.0f };
-
-      // Define the camera to look into our 3d world
-      Camera camera = { 0 };
-      camera.position = { 12.0f, 12.0f, 12.0f };
-      camera.target = { 0.0f, 0.0f, 0.0f };
-      camera.up = { 0.0f, 0.0f, 1.0f };
-      camera.fovy = 45.0f;
-      camera.type = CAMERA_PERSPECTIVE;
 
       Model model = LoadModelFromMesh(GenMeshCube(4.0f, 4.0f, 4.0f));
       Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
@@ -100,11 +97,6 @@ void video::run()
               BeginMode3D(m_camera);
 
                   DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
-
-                  // DrawModelWires(model, position, 1.0f, BLUE);
-
-                  // DrawModel(model_2, position, 1.0f, RED);
-
 
               EndMode3D();
 

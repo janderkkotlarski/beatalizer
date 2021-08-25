@@ -34,6 +34,8 @@ public:
 
   void initialize();
 
+  void update_cam();
+
   void run();
 };
 
