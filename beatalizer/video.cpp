@@ -43,6 +43,21 @@ void video::update_cam()
   m_camera.up = m_cam_up;          // Camera up vector (rotation towards target)
 }
 
+void video::move_cam()
+{
+  if (IsKeyDown(KEY_W))
+  { m_cam_pos.x += m_cam_speed; }
+
+  if (IsKeyDown(KEY_S))
+  { m_cam_pos.x -= m_cam_speed; }
+
+  if (IsKeyDown(KEY_D))
+  { m_cam_pos.y += m_cam_speed; }
+
+  if (IsKeyDown(KEY_A))
+  { m_cam_pos.y -= m_cam_speed; }
+}
+
 void video::run()
 {
   // Initialization
@@ -85,6 +100,9 @@ void video::run()
       {
           // Update
           //----------------------------------------------------------------------------------
+          move_cam();
+          update_cam();
+
           UpdateCamera(&m_camera);                  // Update camera
           //----------------------------------------------------------------------------------
 

@@ -24,6 +24,9 @@ private:
   Vector3 m_cam_up
   { 0.0f, 0.0f, 1.0f };
 
+  const float m_cam_speed
+  { 0.01 };
+
   Camera m_camera;
 
   Shader m_lighting_shader;
@@ -35,6 +38,8 @@ public:
   void initialize();
 
   void update_cam();
+
+  void move_cam();
 
   void run();
 };
