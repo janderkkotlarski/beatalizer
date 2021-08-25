@@ -8,6 +8,7 @@
 
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
+#include "raymath.h"
 
 video::video()
 {
@@ -46,16 +47,85 @@ void video::update_cam()
 void video::move_cam()
 {
   if (IsKeyDown(KEY_W))
-  { m_cam_pos.x += m_cam_speed; }
+  {
+    m_cam_target.x += m_cam_speed;
+    m_cam_pos.x += m_cam_speed;
+    // m_cam_up.x += m_cam_speed;
+  }
 
   if (IsKeyDown(KEY_S))
-  { m_cam_pos.x -= m_cam_speed; }
+  {
+    m_cam_target.x -= m_cam_speed;
+    m_cam_pos.x -= m_cam_speed;
+    // m_cam_up.x -= m_cam_speed;
+  }
 
   if (IsKeyDown(KEY_D))
-  { m_cam_pos.y += m_cam_speed; }
+  {
+    m_cam_target.y += m_cam_speed;
+    m_cam_pos.y += m_cam_speed;
+    // m_cam_up.y += m_cam_speed;
+  }
 
   if (IsKeyDown(KEY_A))
-  { m_cam_pos.y -= m_cam_speed; }
+  {
+    m_cam_target.y -= m_cam_speed;
+    m_cam_pos.y -= m_cam_speed;
+    // m_cam_up.y -= m_cam_speed;
+  }
+
+  if (IsKeyDown(KEY_E))
+  {
+    m_cam_target.z += m_cam_speed;
+    m_cam_pos.z += m_cam_speed;
+    // m_cam_up.z += m_cam_speed;
+  }
+
+  if (IsKeyDown(KEY_Q))
+  {
+    m_cam_target.z -= m_cam_speed;
+    m_cam_pos.z -= m_cam_speed;
+    // m_cam_up.z -= m_cam_speed;
+  }
+}
+
+void video::around_x()
+{
+  if (IsKeyDown(KEY_L))
+  {
+    const Vector3 new_right
+    { Vector3Add(Vector3Scale(m_right_norm, cos(m_rotation_speed)),
+                 Vector3Scale(m_up_norm, sin(m_rotation_speed)))};
+
+    const Vector3 new_up
+    { Vector3Add(Vector3Scale(m_right_norm, -sin(m_rotation_speed)),
+                 Vector3Scale(m_up_norm, cos(m_rotation_speed)))};
+
+    m_right_norm = Vector3Normalize(new_right);
+
+    m_up_norm = Vector3Normalize(new_up);
+  }
+
+  if (IsKeyDown(KEY_J))
+  {
+    const Vector3 new_right
+    { Vector3Add(Vector3Scale(m_right_norm, cos(m_rotation_speed)),
+                 Vector3Scale(m_up_norm, -sin(m_rotation_speed)))};
+
+    const Vector3 new_up
+    { Vector3Add(Vector3Scale(m_right_norm, sin(m_rotation_speed)),
+                 Vector3Scale(m_up_norm, cos(m_rotation_speed)))};
+
+    m_right_norm = Vector3Normalize(new_right);
+
+    m_up_norm = Vector3Normalize(new_up);
+  }
+}
+
+void video::rotate_cam()
+{
+  around_x();
+
 }
 
 void video::run()
@@ -67,30 +137,7 @@ void video::run()
 
       SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
-      InitWindow(screenWidth, screenHeight, "raylib [shaders] example - model shader");
-
-      const float cam_dist
-      { 8.0f };
-
-      Model model = LoadModelFromMesh(GenMeshCube(4.0f, 4.0f, 4.0f));
-      Model model_2 = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
-
-      Light light
-      { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, BLUE, m_lighting_shader) };
-
-
-      // model.materials->shader = m_lighting_shader;
-
-      model_2.materials->shader = m_lighting_shader;
-      // NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
-      Shader shader = LoadShader(0, TextFormat("resources/shaders/glsl%i/grayscale.fs", GLSL_VERSION));
-
-      // model.materials[0].shader = shader;                     // Set shader effect to 3d model
-      // model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture; // Bind texture to model
-
-      Vector3 position = { 0.0f, 0.0f, 0.0f };    // Set model position
-
-      // SetCameraMode(camera, CAMERA_FIRST_PERSON);         // Set an orbital camera mode
+      InitWindow(screenWidth, screenHeight, "testing");
 
       SetTargetFPS(100);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
@@ -124,11 +171,7 @@ void video::run()
           //----------------------------------------------------------------------------------
       }
 
-      // De-Initialization
-      //--------------------------------------------------------------------------------------
-      // UnloadShader(shader);       // Unload shader
-      // UnloadTexture(texture);     // Unload texture
-      UnloadModel(model);         // Unload model
+
 
       CloseWindow();              // Close window and OpenGL context
       //--------------------------------------------------------------------------------------
