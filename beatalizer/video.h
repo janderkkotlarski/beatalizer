@@ -28,22 +28,13 @@ private:
   { 0.0f, 0.0f, 1.0f };
 
   float m_dist
-  { 8.0f };
-
-  Vector3 m_cam_pos
-  { 4.0f, 8.0f, 12.0f };
-
-  Vector3 m_cam_target
-  { 0.0f, 0.0f, 0.0f };
-
-  Vector3 m_cam_up
-  { 0.0f, 0.0f, 1.0f };
+  { 16.0f };
 
   const float m_rotation_speed
-  { 0.03 };
+  { 0.03f };
 
-  const float m_cam_speed
-  { 0.03 };
+  const float m_multiply
+  { 1.01f };
 
   Camera m_camera;
 
@@ -57,9 +48,7 @@ public:
 
   void update_cam();
 
-  void move_cam();
-
-  void around_x();
+  void rotate(Vector3 &from, Vector3 &toward);
 
   void rotate_cam();
 

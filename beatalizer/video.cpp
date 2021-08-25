@@ -39,93 +39,51 @@ void video::initialize()
 
 void video::update_cam()
 {
-  m_camera.position = m_cam_pos;    // Camera position
-  m_camera.target = m_cam_target;      // Camera looking at point
-  m_camera.up = m_cam_up;          // Camera up vector (rotation towards target)
+  m_camera.position = Vector3Scale(m_front_norm, m_dist);    // Camera position
+  m_camera.target = m_anchor;      // Camera looking at point
+  m_camera.up = m_up_norm;          // Camera up vector (rotation towards target)
 }
 
-void video::move_cam()
+void video::rotate(Vector3 &from, Vector3 &toward)
 {
-  if (IsKeyDown(KEY_W))
-  {
-    m_cam_target.x += m_cam_speed;
-    m_cam_pos.x += m_cam_speed;
-    // m_cam_up.x += m_cam_speed;
-  }
+  const Vector3 new_from
+  { Vector3Add(Vector3Scale(from, cos(m_rotation_speed)),
+               Vector3Scale(toward, -sin(m_rotation_speed)))};
 
-  if (IsKeyDown(KEY_S))
-  {
-    m_cam_target.x -= m_cam_speed;
-    m_cam_pos.x -= m_cam_speed;
-    // m_cam_up.x -= m_cam_speed;
-  }
+  const Vector3 new_toward
+  { Vector3Add(Vector3Scale(from, sin(m_rotation_speed)),
+               Vector3Scale(toward, cos(m_rotation_speed)))};
 
-  if (IsKeyDown(KEY_D))
-  {
-    m_cam_target.y += m_cam_speed;
-    m_cam_pos.y += m_cam_speed;
-    // m_cam_up.y += m_cam_speed;
-  }
+  from = Vector3Normalize(new_from);
 
-  if (IsKeyDown(KEY_A))
-  {
-    m_cam_target.y -= m_cam_speed;
-    m_cam_pos.y -= m_cam_speed;
-    // m_cam_up.y -= m_cam_speed;
-  }
-
-  if (IsKeyDown(KEY_E))
-  {
-    m_cam_target.z += m_cam_speed;
-    m_cam_pos.z += m_cam_speed;
-    // m_cam_up.z += m_cam_speed;
-  }
-
-  if (IsKeyDown(KEY_Q))
-  {
-    m_cam_target.z -= m_cam_speed;
-    m_cam_pos.z -= m_cam_speed;
-    // m_cam_up.z -= m_cam_speed;
-  }
-}
-
-void video::around_x()
-{
-  if (IsKeyDown(KEY_L))
-  {
-    const Vector3 new_right
-    { Vector3Add(Vector3Scale(m_right_norm, cos(m_rotation_speed)),
-                 Vector3Scale(m_up_norm, sin(m_rotation_speed)))};
-
-    const Vector3 new_up
-    { Vector3Add(Vector3Scale(m_right_norm, -sin(m_rotation_speed)),
-                 Vector3Scale(m_up_norm, cos(m_rotation_speed)))};
-
-    m_right_norm = Vector3Normalize(new_right);
-
-    m_up_norm = Vector3Normalize(new_up);
-  }
-
-  if (IsKeyDown(KEY_J))
-  {
-    const Vector3 new_right
-    { Vector3Add(Vector3Scale(m_right_norm, cos(m_rotation_speed)),
-                 Vector3Scale(m_up_norm, -sin(m_rotation_speed)))};
-
-    const Vector3 new_up
-    { Vector3Add(Vector3Scale(m_right_norm, sin(m_rotation_speed)),
-                 Vector3Scale(m_up_norm, cos(m_rotation_speed)))};
-
-    m_right_norm = Vector3Normalize(new_right);
-
-    m_up_norm = Vector3Normalize(new_up);
-  }
+  toward = Vector3Normalize(new_toward);
 }
 
 void video::rotate_cam()
 {
-  around_x();
+  if (IsKeyDown(KEY_W))
+  { rotate(m_up_norm, m_front_norm); }
 
+  if (IsKeyDown(KEY_S))
+  { rotate(m_front_norm, m_up_norm); }
+
+  if (IsKeyDown(KEY_D))
+  { rotate(m_right_norm, m_front_norm); }
+
+  if (IsKeyDown(KEY_A))
+  { rotate(m_front_norm, m_right_norm); }
+
+  if (IsKeyDown(KEY_L))
+  { rotate(m_up_norm, m_right_norm); }
+
+  if (IsKeyDown(KEY_J))
+  { rotate(m_right_norm, m_up_norm); }
+
+  if (IsKeyDown(KEY_I))
+  { m_dist /= m_multiply; }
+
+  if (IsKeyDown(KEY_K))
+  { m_dist *= m_multiply; }
 }
 
 void video::run()
@@ -147,7 +105,7 @@ void video::run()
       {
           // Update
           //----------------------------------------------------------------------------------
-          move_cam();
+          rotate_cam();
           update_cam();
 
           UpdateCamera(&m_camera);                  // Update camera
