@@ -109,6 +109,8 @@ void video::run()
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
+
+
           // Update
           //----------------------------------------------------------------------------------
           rotate_cam();
@@ -129,23 +131,27 @@ void video::run()
 
               EndMode3D();
 
-              DrawFPS(10, 10);
-
-              const int number
-              { 218674 };
-
-
+              const int ticks
+              { static_cast<int>(m_tick.count()) };
 
               const std::string message
               { "A different yet more convoluted and not succint message that one may not like!"};
 
+              m_now = std::chrono::steady_clock::now();
 
+              std::chrono::duration<float> period
+              { m_now - m_then };
 
-              DrawText(message.c_str(), 10, 50, 20, VIOLET);
+              const float micros
+              { 1000000000.0f*static_cast<float>(period.count()) };
 
-              DrawText(std::to_string(number).c_str(), 10, 90, 20, BLUE);
+              DrawText(std::to_string(1*micros).c_str(), 10, 10, 20, GREEN);
 
           EndDrawing();
+
+          m_then = std::chrono::steady_clock::now();
+
+
           //----------------------------------------------------------------------------------
       }
 

@@ -48,7 +48,8 @@ private:
   const float m_division
   { 1000.0f/1.024f };
 
-  std::chrono::steady_clock m_clock;
+  std::chrono::steady_clock::time_point m_now;
+  std::chrono::steady_clock::time_point m_then;
 
   std::chrono::microseconds m_tick
   { static_cast<int>(m_division/m_bps) };
