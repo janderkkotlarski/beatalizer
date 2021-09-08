@@ -1,5 +1,7 @@
 #include "video.h"
 
+#include <string>
+
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
@@ -129,7 +131,19 @@ void video::run()
 
               DrawFPS(10, 10);
 
-              DrawText("hello", 10, 50, 20, ORANGE);
+              const int number
+              { 218674 };
+
+
+
+              const std::string message
+              { "A different yet more convoluted and not succint message that one may not like!"};
+
+
+
+              DrawText(message.c_str(), 10, 50, 20, VIOLET);
+
+              DrawText(std::to_string(number).c_str(), 10, 90, 20, BLUE);
 
           EndDrawing();
           //----------------------------------------------------------------------------------
