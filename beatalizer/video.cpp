@@ -97,6 +97,10 @@ void video::run()
 
       InitWindow(screenWidth, screenHeight, "testing");
 
+      GetFontDefault();
+
+
+
       SetTargetFPS(100);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
 
@@ -124,6 +128,8 @@ void video::run()
               EndMode3D();
 
               DrawFPS(10, 10);
+
+              DrawText("hello", 10, 50, 20, ORANGE);
 
           EndDrawing();
           //----------------------------------------------------------------------------------

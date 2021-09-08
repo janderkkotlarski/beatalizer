@@ -1,6 +1,8 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include <chrono>
+
 #include "raylib.h"
 
 class video
@@ -39,6 +41,17 @@ private:
   Camera m_camera;
 
   Shader m_lighting_shader;
+
+  float m_bps
+  { 2.0f };
+
+  const float m_division
+  { 1000.0f/1.024f };
+
+  std::chrono::steady_clock m_clock;
+
+  std::chrono::microseconds m_tick
+  { static_cast<int>(m_division/m_bps) };
 
 
 public:
