@@ -2,6 +2,7 @@
 #define VIDEO_H
 
 #include <chrono>
+#include <thread>
 
 #include "raylib.h"
 

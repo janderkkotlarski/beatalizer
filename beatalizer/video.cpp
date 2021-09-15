@@ -2,6 +2,7 @@
 
 #include <string>
 
+
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
@@ -101,9 +102,13 @@ void video::run()
 
       GetFontDefault();
 
+      auto now_1 = std::chrono::steady_clock::now();
+
+      auto now_2 = std::chrono::steady_clock::now();
 
 
-      SetTargetFPS(100);                           // Set our game to run at 60 frames-per-second
+
+      SetTargetFPS(m_fps);                           // Set our game to run at 60 frames-per-second
       //--------------------------------------------------------------------------------------
 
       // Main game loop
@@ -137,19 +142,32 @@ void video::run()
               const std::string message
               { "A different yet more convoluted and not succint message that one may not like!"};
 
-              m_now = std::chrono::steady_clock::now();
+              now_2 = std::chrono::steady_clock::now();
 
-              std::chrono::duration<float> period
-              { m_now - m_then };
+              std::chrono::steady_clock::duration period
+              { now_2 - now_1 };
 
-              const float micros
-              { 1000000000.0f*static_cast<float>(period.count()) };
+              while (period.count() < -1)
+              {
+                now_2 = std::chrono::steady_clock::now();
 
-              DrawText(std::to_string(1*micros).c_str(), 10, 10, 20, GREEN);
+                period = now_2 - now_1;
+              }
+
+              now_1 = std::chrono::steady_clock::now();
+
+
+              // std::this_thread::sleep_for(std::chrono::seconds(1));
+
+
+              /// std::chrono::duration<double> elapsed_seconds = end - start;
+              /// std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+              // std::chrono::duration<double, std::nano> micros = now_2 - now_1;
+              DrawText(std::to_string(period.count()).c_str(), 10, 10, 20, GREEN);
 
           EndDrawing();
 
-          m_then = std::chrono::steady_clock::now();
 
 
           //----------------------------------------------------------------------------------
