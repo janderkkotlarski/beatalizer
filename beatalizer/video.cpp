@@ -102,14 +102,9 @@ void video::run()
 
       GetFontDefault();
 
-      auto now_1 = std::chrono::steady_clock::now();
+      m_then = std::chrono::steady_clock::now();
 
-      auto now_2 = std::chrono::steady_clock::now();
-
-
-
-      SetTargetFPS(m_fps);                           // Set our game to run at 60 frames-per-second
-      //--------------------------------------------------------------------------------------
+      m_rest = (std::chrono::steady_clock::duration)0;
 
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
@@ -138,16 +133,26 @@ void video::run()
 
               m_now = std::chrono::steady_clock::now();
 
-              m_period = m_now - m_then;
+              m_period = m_rest + m_now - m_then;
 
-              while (m_period.count() < 9999000)
+              while (m_period.count() < m_division)
               {
                 m_now = std::chrono::steady_clock::now();
-                m_period = m_now - m_then;
+                m_period = m_rest + m_now - m_then;
+
+
               }
               m_then = std::chrono::steady_clock::now();
 
+              m_rest = m_period - (std::chrono::steady_clock::duration)m_division;
+
+              m_period = m_rest;
+
               DrawText(std::to_string(m_period.count()).c_str(), 10, 10, 20, GREEN);
+
+              DrawText(std::to_string(m_division).c_str(), 10, 50, 20, YELLOW);
+
+              DrawText(std::to_string(m_rest.count()).c_str(), 10, 90, 20, YELLOW);
 
           EndDrawing();
 
@@ -160,4 +165,11 @@ void video::run()
 
       CloseWindow();              // Close window and OpenGL context
       //--------------------------------------------------------------------------------------
+}
+
+
+float to_seconds(const int period)
+noexcept
+{
+  return static_cast<float>(period)/1000000000.0f;
 }

@@ -16,7 +16,7 @@ private:
   { 800 };
 
   const int m_fps
-  { 100 };
+  { 1000 };
 
   const Vector3 m_anchor
   { 0.0f, 0.0f, 0.0f };
@@ -46,13 +46,15 @@ private:
   float m_bps
   { 2.0f };
 
-  const float m_division
-  { 1000.0f/1.024f };
+  const int m_division
+  { 1000000000/1024 };
 
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
   std::chrono::steady_clock::duration m_period;
+
+  std::chrono::steady_clock::duration m_rest;
 
   std::chrono::microseconds m_tick
   { static_cast<int>(m_division/m_bps) };
@@ -71,5 +73,8 @@ public:
 
   void run();
 };
+
+float to_seconds(const int period)
+noexcept;
 
 #endif // VIDEO_H
