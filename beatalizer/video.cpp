@@ -136,35 +136,18 @@ void video::run()
 
               EndMode3D();
 
-              const int ticks
-              { static_cast<int>(m_tick.count()) };
+              m_now = std::chrono::steady_clock::now();
 
-              const std::string message
-              { "A different yet more convoluted and not succint message that one may not like!"};
+              m_period = m_now - m_then;
 
-              now_2 = std::chrono::steady_clock::now();
-
-              std::chrono::steady_clock::duration period
-              { now_2 - now_1 };
-
-              while (period.count() < -1)
+              while (m_period.count() < 9999000)
               {
-                now_2 = std::chrono::steady_clock::now();
-
-                period = now_2 - now_1;
+                m_now = std::chrono::steady_clock::now();
+                m_period = m_now - m_then;
               }
+              m_then = std::chrono::steady_clock::now();
 
-              now_1 = std::chrono::steady_clock::now();
-
-
-              // std::this_thread::sleep_for(std::chrono::seconds(1));
-
-
-              /// std::chrono::duration<double> elapsed_seconds = end - start;
-              /// std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-
-              // std::chrono::duration<double, std::nano> micros = now_2 - now_1;
-              DrawText(std::to_string(period.count()).c_str(), 10, 10, 20, GREEN);
+              DrawText(std::to_string(m_period.count()).c_str(), 10, 10, 20, GREEN);
 
           EndDrawing();
 

@@ -52,6 +52,8 @@ private:
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
+  std::chrono::steady_clock::duration m_period;
+
   std::chrono::microseconds m_tick
   { static_cast<int>(m_division/m_bps) };
 
