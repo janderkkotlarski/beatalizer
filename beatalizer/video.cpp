@@ -139,10 +139,10 @@ void video::run()
               {
                 m_now = std::chrono::steady_clock::now();
                 m_period = m_rest + m_now - m_then;
-
-
               }
+
               m_then = std::chrono::steady_clock::now();
+
 
               m_rest = m_period - (std::chrono::steady_clock::duration)m_division;
 
