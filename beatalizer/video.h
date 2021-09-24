@@ -56,6 +56,10 @@ private:
 
   std::chrono::steady_clock::duration m_rest;
 
+
+  std::chrono::steady_clock::duration m_divider
+  { m_division };
+
   std::chrono::microseconds m_tick
   { static_cast<int>(m_division/m_bps) };
 

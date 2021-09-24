@@ -135,7 +135,7 @@ void video::run()
 
               m_period = m_rest + m_now - m_then;
 
-              while (m_period.count() < m_division)
+              while (m_period < m_divider)
               {
                 m_now = std::chrono::steady_clock::now();
                 m_period = m_rest + m_now - m_then;
@@ -143,8 +143,10 @@ void video::run()
 
               m_then = std::chrono::steady_clock::now();
 
+              m_rest = m_period - m_divider;
 
-              m_rest = m_period - (std::chrono::steady_clock::duration)m_division;
+              while (m_rest > m_divider)
+              { m_rest -= m_divider; }
 
               m_period = m_rest;
 
