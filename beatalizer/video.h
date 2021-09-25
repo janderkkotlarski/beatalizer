@@ -43,11 +43,11 @@ private:
 
   Shader m_lighting_shader;
 
-  float m_bps
-  { 2.0f };
+  float m_bpm
+  { 120.0f };
 
   const int m_division
-  { 1000000000/1024 };
+  { int(60.0f*1000000000.0f/(m_bpm*1024.0f)) };
 
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
@@ -59,9 +59,6 @@ private:
 
   std::chrono::steady_clock::duration m_divider
   { m_division };
-
-  std::chrono::microseconds m_tick
-  { static_cast<int>(m_division/m_bps) };
 
 
 public:
