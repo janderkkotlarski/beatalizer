@@ -139,23 +139,29 @@ void video::run()
                 m_period = m_rest + m_now - m_then;
               }
 
+              m_then = std::chrono::steady_clock::now();
+
+              m_now = std::chrono::steady_clock::now();
+              m_period = m_rest + m_now - m_then;
+
               const std::chrono::steady_clock::duration period
               { m_period };
 
-              m_then = std::chrono::steady_clock::now();
 
-              m_rest = m_period - m_divider;
+              // m_rest = m_period - m_frame_period;
 
-              while (m_rest > m_divider)
-              { m_rest -= m_divider; }
+              // while (m_rest > m_frame_period)
+              // { m_rest -= m_frame_period; }
 
-              m_period = m_rest;
+
 
               DrawText(std::to_string(period.count()).c_str(), 10, 10, 20, GREEN);
 
               DrawText(std::to_string(m_frame_period.count()).c_str(), 10, 50, 20, YELLOW);
 
               DrawText(std::to_string(m_rest.count()).c_str(), 10, 90, 20, YELLOW);
+
+              m_period = m_rest;
 
           EndDrawing();
 
