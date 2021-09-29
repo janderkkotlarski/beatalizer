@@ -15,9 +15,6 @@ private:
   const int m_screen_height
   { 800 };
 
-  const int m_fps
-  { 1000 };
-
   const Vector3 m_anchor
   { 0.0f, 0.0f, 0.0f };
 
@@ -43,19 +40,35 @@ private:
 
   Shader m_lighting_shader;
 
+  const float m_billion
+  { 1000000000.0f };
+
+  const float m_thousand24
+  { 1024.0f };
+
+  const float m_minute
+  { 60.0f };
+
   float m_bpm
   { 120.0f };
 
+  const float m_fps
+  { 60.0f };
+
+
   const int m_division
-  { int(60.0f*1000000000.0f/(m_bpm*1024.0f)) };
+  { int(m_minute*m_billion/(m_bpm*m_thousand24)) };
 
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
   std::chrono::steady_clock::duration m_period;
 
-  std::chrono::steady_clock::duration m_rest;
+  std::chrono::steady_clock::duration m_rest
+  { (std::chrono::steady_clock::duration)0 };
 
+  const std::chrono::steady_clock::duration m_frame_period
+  { (std::chrono::steady_clock::duration)(int)(m_billion/m_fps) };
 
   std::chrono::steady_clock::duration m_divider
   { m_division };
