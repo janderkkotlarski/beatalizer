@@ -129,33 +129,29 @@ void video::run()
 
               EndMode3D();
 
-              m_now = std::chrono::steady_clock::now();
+              // m_now = std::chrono::steady_clock::now();
 
-              m_period = m_rest + m_now - m_then;
+              // m_period = m_rest + m_now - m_then;
 
+              /*
               while (m_period < m_frame_period)
               {
-                m_now = std::chrono::steady_clock::now();
-                m_period = m_rest + m_now - m_then;
+                // m_now = std::chrono::steady_clock::now();
+                // m_period = m_rest + m_now - m_then;
               }
+              */
 
-              m_then = std::chrono::steady_clock::now();
+              // m_then = std::chrono::steady_clock::now();
 
-              m_now = std::chrono::steady_clock::now();
-              m_period = m_rest + m_now - m_then;
-
-              const std::chrono::steady_clock::duration period
-              { m_period };
-
+              // m_now = std::chrono::steady_clock::now();
+              // m_period = m_rest + m_now - m_then;
 
               // m_rest = m_period - m_frame_period;
 
               // while (m_rest > m_frame_period)
               // { m_rest -= m_frame_period; }
 
-
-
-              DrawText(std::to_string(period.count()).c_str(), 10, 10, 20, GREEN);
+              DrawText(std::to_string(m_period.count()).c_str(), 10, 10, 20, GREEN);
 
               DrawText(std::to_string(m_frame_period.count()).c_str(), 10, 50, 20, YELLOW);
 
