@@ -145,6 +145,22 @@ void video::run()
                 // Elapsed time
               }
 
+              m_thenh = std::chrono::high_resolution_clock::now();
+              // When time counting starts
+
+              // m_period = m_rest + m_now - m_then;
+
+              m_periodh = m_thenh - m_thenh;
+
+              while (m_periodh < m_frame_periodh)
+              {
+                m_nowh = std::chrono::high_resolution_clock::now();
+                // Current time counting
+
+                m_periodh = m_nowh - m_thenh;
+                // Elapsed time
+              }
+
 
               // m_then = std::chrono::steady_clock::now();
 
@@ -156,15 +172,15 @@ void video::run()
               // while (m_rest > m_frame_period)
               // { m_rest -= m_frame_period; }
 
-              DrawText(std::to_string(m_period.count()).c_str(), 10, 10, 20, GREEN);
+              DrawText(std::to_string(m_periodh.count()).c_str(), 10, 10, 20, GREEN);
 
               DrawText(std::to_string(m_frame_period.count()).c_str(), 10, 50, 20, YELLOW);
 
               DrawText(std::to_string(m_rest.count()).c_str(), 10, 90, 20, YELLOW);
 
-              DrawText(std::to_string(m_now.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
+              DrawText(std::to_string(m_nowh.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
 
-              DrawText(std::to_string(m_then.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
+              DrawText(std::to_string(m_thenh.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
 
               // m_period = m_rest;
 

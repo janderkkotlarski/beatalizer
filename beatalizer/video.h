@@ -59,6 +59,16 @@ private:
   const int m_division
   { int(m_minute*m_billion/(m_bpm*m_thousand24)) };
 
+  std::chrono::high_resolution_clock::time_point m_nowh;
+
+  std::chrono::high_resolution_clock::time_point m_thenh;
+
+  std::chrono::high_resolution_clock::duration m_periodh;
+
+  const std::chrono::high_resolution_clock::duration m_frame_periodh
+  { (std::chrono::steady_clock::duration)(int)(m_billion/m_fps) };
+
+
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
