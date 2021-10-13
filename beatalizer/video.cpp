@@ -124,22 +124,27 @@ void video::run()
               ClearBackground(BLACK);
 
               BeginMode3D(m_camera);
-
+              {
                   DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
-
+              }
               EndMode3D();
 
-              // m_now = std::chrono::steady_clock::now();
+              m_then = std::chrono::steady_clock::now();
+              // When time counting starts
 
               // m_period = m_rest + m_now - m_then;
 
-              /*
+              m_period = m_then - m_then;
+
               while (m_period < m_frame_period)
               {
-                // m_now = std::chrono::steady_clock::now();
-                // m_period = m_rest + m_now - m_then;
+                m_now = std::chrono::steady_clock::now();
+                // Current time counting
+
+                m_period = m_now - m_then;
+                // Elapsed time
               }
-              */
+
 
               // m_then = std::chrono::steady_clock::now();
 
@@ -157,7 +162,11 @@ void video::run()
 
               DrawText(std::to_string(m_rest.count()).c_str(), 10, 90, 20, YELLOW);
 
-              m_period = m_rest;
+              DrawText(std::to_string(m_now.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
+
+              DrawText(std::to_string(m_then.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
+
+              // m_period = m_rest;
 
           EndDrawing();
 

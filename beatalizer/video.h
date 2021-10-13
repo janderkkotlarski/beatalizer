@@ -62,7 +62,8 @@ private:
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
-  std::chrono::steady_clock::duration m_period;
+  std::chrono::steady_clock::duration m_period
+  { 0 };
 
   std::chrono::steady_clock::duration m_rest
   { (std::chrono::steady_clock::duration)0 };
