@@ -147,7 +147,16 @@ void video::run()
                 // Elapsed time
               }
 
+              int i
+              { 0 };
+
               timer tim;
+
+              while (i < 490000)
+              { ++i; }
+
+              const double elapsed
+              { tim.elapsed() };
 
               m_thenh = std::chrono::high_resolution_clock::now();
               // When time counting starts
@@ -170,8 +179,7 @@ void video::run()
                 // Elapsed time
               }
 
-              const double elapsed
-              { tim.elapsed() };
+
 
 
 
