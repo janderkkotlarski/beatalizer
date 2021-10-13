@@ -56,7 +56,9 @@ LIBS += -LC:\raylib\
 
 SOURCES += \
         main.cpp \
+        timer.cpp \
         video.cpp
 
 HEADERS += \
+        timer.h \
         video.h

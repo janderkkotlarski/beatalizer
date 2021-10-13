@@ -53,7 +53,7 @@ private:
   { 120.0f };
 
   const float m_fps
-  { 60.0f };
+  { 84.0f };
 
 
   const int m_division

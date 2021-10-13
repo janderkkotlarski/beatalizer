@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "timer.h"
+
 
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
@@ -145,12 +147,19 @@ void video::run()
                 // Elapsed time
               }
 
+              timer tim;
+
               m_thenh = std::chrono::high_resolution_clock::now();
               // When time counting starts
+
+
+
 
               // m_period = m_rest + m_now - m_then;
 
               m_periodh = m_thenh - m_thenh;
+
+
 
               while (m_periodh < m_frame_periodh)
               {
@@ -160,6 +169,14 @@ void video::run()
                 m_periodh = m_nowh - m_thenh;
                 // Elapsed time
               }
+
+              const double elapsed
+              { tim.elapsed() };
+
+
+
+
+
 
 
               // m_then = std::chrono::steady_clock::now();
@@ -176,7 +193,7 @@ void video::run()
 
               DrawText(std::to_string(m_frame_period.count()).c_str(), 10, 50, 20, YELLOW);
 
-              DrawText(std::to_string(m_rest.count()).c_str(), 10, 90, 20, YELLOW);
+              DrawText(std::to_string(elapsed).c_str(), 10, 90, 20, YELLOW);
 
               DrawText(std::to_string(m_nowh.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
 
