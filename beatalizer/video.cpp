@@ -147,14 +147,20 @@ void video::run()
                 // Elapsed time
               }
 
+              const int start_1ms
+              { 200000 };
+
+              const int start_2ms
+              { 495000 };
+
               const int start
-              { 600000 };
+              { 495000 };
 
               int end
-              { start };
+              { start_1ms };
 
               const double peri
-              { 0.0019 };
+              { 0.0009 };
 
 
               timer tim;
