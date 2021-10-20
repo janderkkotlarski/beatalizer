@@ -148,17 +148,13 @@ void video::run()
               }
 
               const int start
-              { 1 };
+              { 600000 };
 
               int end
               { start };
 
               const double peri
-              { 0.001 };
-
-
-              double elapsed
-              { 0 };
+              { 0.0019 };
 
 
               timer tim;
@@ -175,6 +171,9 @@ void video::run()
                 while (i < end)
                 { ++i; }
               }
+
+              const double elapsed
+              { tim.elapsed() };
 
               m_thenh = std::chrono::high_resolution_clock::now();
               // When time counting starts
@@ -221,9 +220,11 @@ void video::run()
 
               DrawText(std::to_string(end).c_str(), 10, 90, 20, YELLOW);
 
-              DrawText(std::to_string(m_nowh.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
+              DrawText(std::to_string(elapsed).c_str(), 10, 130, 20, YELLOW);
 
-              DrawText(std::to_string(m_thenh.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
+              // DrawText(std::to_string(m_nowh.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
+
+              // DrawText(std::to_string(m_thenh.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
 
               // m_period = m_rest;
 
