@@ -22,4 +22,6 @@ public:
 
 };
 
+double elapsed();
+
 #endif // TIMER_H

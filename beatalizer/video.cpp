@@ -104,47 +104,48 @@ void video::run()
 
       GetFontDefault();
 
-      m_then = std::chrono::steady_clock::now();
+      std::vector <double> elapses;
 
-      const int start_1ms
-      { 200000 };
-
-      const int start_2ms
-      { 495000 };
-
-      const int start
-      { 495000 };
-
-      int end
-      { start_1ms };
-
-      const double peri
-      { 0.0009 };
-
-
-      timer tim;
-
-      while (tim.elapsed() < peri)
+      for (int count{ 0 }; count < 10; ++count)
       {
-        ++end;
+        const int start_1ms
+        { 265000 };
 
-        int i
-        { 0 };
+        const int start_2ms
+        { 500000 };
 
-        tim.reset();
+        int end
+        { start_1ms };
 
-        while (i < end)
-        { ++i; }
+        const double peri
+        { 0.0019 };
+
+        timer tim;
+
+        while (tim.elapsed() < peri)
+        {
+          ++end;
+
+          int i
+          { 0 };
+
+          tim.reset();
+
+          while (i < end)
+          { ++i; }
+        }
+
+        const double elapsed
+        { tim.elapsed() };
       }
-
-      const double elapsed
-      { tim.elapsed() };
 
       const int x_pos
       { 10 };
 
       const int font_size
       { 20 };
+
+      m_then = std::chrono::steady_clock::now();
 
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
@@ -192,13 +193,9 @@ void video::run()
               int y_pos
               { 10 };
 
-              std::string transient
-              { "Period : " + std::to_string(m_period.count()) };
+              std::string transient;
 
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
-              y_pos += 40;
-
-              transient = "Periodh: " + std::to_string(m_periodh.count());
+              transient = "Period : " + std::to_string(m_period.count());
 
               DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
               y_pos += 40;
@@ -207,6 +204,8 @@ void video::run()
 
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
               y_pos += 40;
+
+              /*
 
               transient = "End    : " + std::to_string(end);
 
@@ -217,6 +216,8 @@ void video::run()
 
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
               y_pos += 40;
+
+              */
 
 
           EndDrawing();
