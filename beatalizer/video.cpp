@@ -106,6 +106,46 @@ void video::run()
 
       m_then = std::chrono::steady_clock::now();
 
+      const int start_1ms
+      { 200000 };
+
+      const int start_2ms
+      { 495000 };
+
+      const int start
+      { 495000 };
+
+      int end
+      { start_1ms };
+
+      const double peri
+      { 0.0009 };
+
+
+      timer tim;
+
+      while (tim.elapsed() < peri)
+      {
+        ++end;
+
+        int i
+        { 0 };
+
+        tim.reset();
+
+        while (i < end)
+        { ++i; }
+      }
+
+      const double elapsed
+      { tim.elapsed() };
+
+      const int x_pos
+      { 10 };
+
+      const int font_size
+      { 20 };
+
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
@@ -147,104 +187,42 @@ void video::run()
                 // Elapsed time
               }
 
-              const int start_1ms
-              { 200000 };
-
-              const int start_2ms
-              { 495000 };
-
-              const int start
-              { 495000 };
-
-              int end
-              { start_1ms };
-
-              const double peri
-              { 0.0009 };
 
 
-              timer tim;
+              int y_pos
+              { 10 };
 
-              while (tim.elapsed() < peri)
-              {
-                ++end;
+              std::string transient
+              { "Period : " + std::to_string(m_period.count()) };
 
-                int i
-                { 0 };
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
+              y_pos += 40;
 
-                tim.reset();
+              transient = "Periodh: " + std::to_string(m_periodh.count());
 
-                while (i < end)
-                { ++i; }
-              }
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
+              y_pos += 40;
 
-              const double elapsed
-              { tim.elapsed() };
+              transient = "Frames : " + std::to_string(m_frame_period.count());
 
-              m_thenh = std::chrono::high_resolution_clock::now();
-              // When time counting starts
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+              y_pos += 40;
 
+              transient = "End    : " + std::to_string(end);
 
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+              y_pos += 40;
 
+              transient = "Elapsed: " + std::to_string(elapsed);
 
-              // m_period = m_rest + m_now - m_then;
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+              y_pos += 40;
 
-              m_periodh = m_thenh - m_thenh;
-
-
-
-              while (m_periodh < m_frame_periodh)
-              {
-                m_nowh = std::chrono::high_resolution_clock::now();
-                // Current time counting
-
-                m_periodh = m_nowh - m_thenh;
-                // Elapsed time
-              }
-
-
-
-
-
-
-
-
-
-              // m_then = std::chrono::steady_clock::now();
-
-              // m_now = std::chrono::steady_clock::now();
-              // m_period = m_rest + m_now - m_then;
-
-              // m_rest = m_period - m_frame_period;
-
-              // while (m_rest > m_frame_period)
-              // { m_rest -= m_frame_period; }
-
-              DrawText(std::to_string(m_periodh.count()).c_str(), 10, 10, 20, GREEN);
-
-              DrawText(std::to_string(m_frame_period.count()).c_str(), 10, 50, 20, YELLOW);
-
-              DrawText(std::to_string(end).c_str(), 10, 90, 20, YELLOW);
-
-              DrawText(std::to_string(elapsed).c_str(), 10, 130, 20, YELLOW);
-
-              // DrawText(std::to_string(m_nowh.time_since_epoch().count()).c_str(), 10, 130, 20, BLUE);
-
-              // DrawText(std::to_string(m_thenh.time_since_epoch().count()).c_str(), 10, 170, 20, BLUE);
-
-              // m_period = m_rest;
 
           EndDrawing();
-
-
-
-          //----------------------------------------------------------------------------------
       }
 
-
-
       CloseWindow();              // Close window and OpenGL context
-      //--------------------------------------------------------------------------------------
 }
 
 
