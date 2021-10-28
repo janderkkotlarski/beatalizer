@@ -22,6 +22,6 @@ public:
 
 };
 
-double elapsed();
+double cycler();
 
 #endif // TIMER_H

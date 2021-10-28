@@ -11,14 +11,14 @@ void timer::reset()
 double timer::elapsed() const
 { return std::chrono::duration_cast<second_type>(clock_type::now() - m_start).count(); }
 
-double elapsed()
+double cycler()
 {
   std::vector <double> cycles;
 
-  for (int count{ 0 }; count < 10; ++count)
+  for (int count{ 0 }; count < 100; ++count)
   {
     const int start_ms
-    { 265000 };
+    { 300000 };
 
     int end
     { start_ms };
@@ -50,7 +50,7 @@ double elapsed()
   for (const double cycle: cycles)
   { average += cycle; }
 
-  average /= elapses.size();
+  average /= cycles.size();
 
   return average;
 }

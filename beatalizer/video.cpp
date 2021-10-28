@@ -104,40 +104,8 @@ void video::run()
 
       GetFontDefault();
 
-      std::vector <double> elapses;
-
-      for (int count{ 0 }; count < 10; ++count)
-      {
-        const int start_1ms
-        { 265000 };
-
-        const int start_2ms
-        { 500000 };
-
-        int end
-        { start_1ms };
-
-        const double peri
-        { 0.0019 };
-
-        timer tim;
-
-        while (tim.elapsed() < peri)
-        {
-          ++end;
-
-          int i
-          { 0 };
-
-          tim.reset();
-
-          while (i < end)
-          { ++i; }
-        }
-
-        const double elapsed
-        { tim.elapsed() };
-      }
+      const double cycle
+      { cycler() };
 
       const int x_pos
       { 10 };
@@ -201,6 +169,11 @@ void video::run()
               y_pos += 40;
 
               transient = "Frames : " + std::to_string(m_frame_period.count());
+
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+              y_pos += 40;
+
+              transient = "Cycles    : " + std::to_string(cycle);
 
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
               y_pos += 40;
