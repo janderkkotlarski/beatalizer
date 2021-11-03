@@ -1,6 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include <vector>
 #include <chrono> // for std::chrono functions
 
 class timer
@@ -22,6 +23,8 @@ public:
 
 };
 
-double cycler();
+std::vector <double> cycler(const int cycle_step, const int repeats);
+
+double average(const std::vector <double> &vector);
 
 #endif // TIMER_H

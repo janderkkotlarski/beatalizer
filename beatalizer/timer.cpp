@@ -1,7 +1,5 @@
 #include "timer.h"
 
-#include <vector>
-
 timer::timer()
 {}
 
@@ -11,46 +9,36 @@ void timer::reset()
 double timer::elapsed() const
 { return std::chrono::duration_cast<second_type>(clock_type::now() - m_start).count(); }
 
-double cycler()
+std::vector <double> cycler(const int cycle_step, const int repeats)
 {
   std::vector <double> cycles;
 
-  for (int count{ 0 }; count < 100; ++count)
+  for (int count{ 0 }; count < repeats; ++count)
   {
-    const int start_ms
-    { 300000 };
-
     int end
-    { start_ms };
-
-    const double peri
-    { 0.0019 };
+    { cycle_step };
 
     timer tim;
 
-    while (tim.elapsed() < peri)
-    {
-      ++end;
+    for (int count2 {0}; count2 < end; ++count2)
+    { }
 
-      int i
-      { 0 };
-
-      tim.reset();
-
-      while (i < end)
-      { ++i; }
-    }
-
-    cycles.push_back(double(end));
+    cycles.push_back(tim.elapsed());
   }
 
-  double average
+  return cycles;
+}
+
+double average(const std::vector <double> &numbers)
+{
+  if (numbers.size() == 0)
+  { return 0.0; }
+
+  double culu
   { 0.0 };
 
-  for (const double cycle: cycles)
-  { average += cycle; }
+  for (const double number: numbers)
+  { culu += number; };
 
-  average /= cycles.size();
-
-  return average;
+  return culu/numbers.size();
 }

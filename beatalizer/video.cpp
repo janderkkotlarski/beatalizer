@@ -104,14 +104,14 @@ void video::run()
 
       GetFontDefault();
 
-      const double cycle
-      { cycler() };
+      const std::vector <double> cycles
+      { cycler(m_cyle_step, m_repeats) };
 
       const int x_pos
-      { 10 };
+      { 8 };
 
       const int font_size
-      { 20 };
+      { 2*x_pos };
 
       m_then = std::chrono::steady_clock::now();
 
@@ -159,9 +159,11 @@ void video::run()
 
 
               int y_pos
-              { 10 };
+              { x_pos };
 
               std::string transient;
+
+              /*
 
               transient = "Period : " + std::to_string(m_period.count());
 
@@ -173,10 +175,29 @@ void video::run()
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
               y_pos += 40;
 
-              transient = "Cycles    : " + std::to_string(cycle);
+              {
+                int count
+                { 1 };
+
+                for (const double cycle: cycles)
+                {
+                  transient = "Cycles: " + std::to_string(count*cycle_step) + " | Time: " + std::to_string(cycle);
+
+                  DrawText(transient.c_str(), x_pos, y_pos, font_size, BLUE);
+                  y_pos += font_size;
+
+                  // ++count;
+                }
+              }
+
+              */
+
+              // y_pos += font_size;
+
+              transient = "Cycles : " + std::to_string(m_cyle_step) + " | Average time: " + std::to_string(average(cycles));
 
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-              y_pos += 40;
+
 
               /*
 

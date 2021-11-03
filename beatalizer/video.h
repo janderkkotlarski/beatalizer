@@ -73,6 +73,12 @@ private:
   std::chrono::steady_clock::duration m_divider
   { m_division };
 
+  const int m_cyle_step
+  { 10000000 };
+
+  const int m_repeats
+  { 1000 };
+
 public:
   video();
 
