@@ -27,4 +27,6 @@ std::vector <double> cycler(const int cycle_step, const int repeats);
 
 double average(const std::vector <double> &vector);
 
+uint64_t nanos();
+
 #endif // TIMER_H

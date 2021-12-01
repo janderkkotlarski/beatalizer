@@ -1,4 +1,4 @@
-#include "video.h"
+ #include "video.h"
 
 #include <string>
 
@@ -153,8 +153,6 @@ void video::run()
               m_then = std::chrono::steady_clock::now();
               // When time counting starts
 
-              // m_period = m_rest + m_now - m_then;
-
               m_period = m_then - m_then;
 
               while (m_period < m_frame_period)
@@ -173,64 +171,24 @@ void video::run()
 
               std::string transient;
 
-              /*
 
-              transient = "Period : " + std::to_string(m_period.count());
-
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
-              y_pos += 40;
-
-              transient = "Frames : " + std::to_string(m_frame_period.count());
-
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-              y_pos += 40;
-
-              {
-                int count
-                { 1 };
-
-                for (const double cycle: cycles)
-                {
-                  transient = "Cycles: " + std::to_string(count*cycle_step) + " | Time: " + std::to_string(cycle);
-
-                  DrawText(transient.c_str(), x_pos, y_pos, font_size, BLUE);
-                  y_pos += font_size;
-
-                  // ++count;
-                }
-              }
-
-              */
-
-              // y_pos += font_size;
 
               for (const double cycler: cycling)
               {
                 transient = "Cycle time : " + std::to_string(m_billion*cycler) + " ns";
-
                 DrawText(transient.c_str(), x_pos, y_pos, font_size, BLUE);
                 y_pos += font_size;
               }
 
               transient = "Cycle time : " + std::to_string(m_billion*cycle_time) + " ns";
-
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+              y_pos += font_size;
 
+              m_nanos_then = m_nanos_now;
+              m_nanos_now = nanos();
 
-              /*
-
-              transient = "End    : " + std::to_string(end);
-
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-              y_pos += 40;
-
-              transient = "Elapsed: " + std::to_string(elapsed);
-
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-              y_pos += 40;
-
-              */
-
+              transient = "Period in ns : " + std::to_string(m_nanos_now - m_nanos_then) + " ns";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();
       }

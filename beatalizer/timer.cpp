@@ -42,3 +42,10 @@ double average(const std::vector <double> &numbers)
 
   return culu/numbers.size();
 }
+
+uint64_t nanos()
+{
+    uint64_t ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::
+                  now().time_since_epoch()).count();
+    return ns;
+}

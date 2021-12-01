@@ -58,6 +58,12 @@ private:
   const int m_division
   { int(m_minute*m_billion/(m_bpm*m_thousand24)) };
 
+  uint64_t m_nanos_then
+  { 0 };
+
+  uint64_t m_nanos_now
+  { 0 };
+
   std::chrono::steady_clock::time_point m_now;
   std::chrono::steady_clock::time_point m_then;
 
@@ -74,10 +80,10 @@ private:
   { m_division };
 
   const int m_cyle_step
-  { 10000000 };
+  { 1000000 };
 
   const int m_repeats
-  { 1000 };
+  { 100 };
 
 public:
   video();
