@@ -55,8 +55,23 @@ private:
   const float m_minute
   { 60.0f };
 
+  const float m_bpm_min
+  { 1.0f };
+
+  const float m_bpm_max
+  { 10000.0f };
+
+  const float m_bpm_delta
+  { 0.1f };
+
   float m_bpm
   { 120.0f };
+
+  float m_micros_per_beat
+  { m_million*m_minute/m_bpm };
+
+  float m_beat_time
+  { 0.0f };
 
   const float m_fps
   { 60.0f };
@@ -70,9 +85,6 @@ private:
   uint64_t m_micros_gap
   { 0 };
 
-  float m_beat_time
-  { 0.0f };
-
   int m_frame_counter
   { 0 };
 
@@ -85,7 +97,11 @@ public:
 
   void initialize();
 
+  void rebeat();
+
   void update_cam();
+
+  void update_bpm();
 
   void rotate(Vector3 &from, Vector3 &toward);
 

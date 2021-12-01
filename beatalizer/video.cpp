@@ -1,6 +1,7 @@
  #include "video.h"
 
 #include <string>
+#include <cmath>
 
 #include "timer.h"
 
@@ -40,6 +41,11 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "matModel");
   m_lighting_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_lighting_shader, "viewPos");
+}
+
+void video::rebeat()
+{
+  m_micros_per_beat = m_million*m_minute/m_bpm;
 }
 
 void video::update_cam()
@@ -91,6 +97,29 @@ void video::rotate_cam()
   { m_dist *= m_multiply; }
 }
 
+void video::update_bpm()
+{
+  if (IsKeyDown(KEY_T))
+  {
+    m_bpm += m_bpm_delta;
+
+    if (m_bpm > m_bpm_max)
+    { m_bpm == m_bpm_max; }
+
+    rebeat();
+  }
+
+  if (IsKeyDown(KEY_G))
+  {
+    m_bpm -= m_bpm_delta;
+
+    if (m_bpm < m_bpm_min)
+    { m_bpm == m_bpm_min; }
+
+    rebeat();
+  }
+}
+
 void video::run()
 {
   // Initialization
@@ -114,6 +143,7 @@ void video::run()
           //----------------------------------------------------------------------------------
           rotate_cam();
           update_cam();
+          update_bpm();
 
           UpdateCamera(&m_camera);                  // Update camera
           //----------------------------------------------------------------------------------
@@ -127,26 +157,42 @@ void video::run()
               m_micros_then = m_micros_now;
               m_micros_now = micros();
 
-              if (m_frame_counter == 0)
-              { m_micros_gap = m_micros_now - m_micros_then; }
+              m_micros_gap = m_micros_now - m_micros_then;
 
-              m_beat_time += float(m_micros_gap);
+              m_beat_time += float(int(m_micros_gap));
+
+              const float half_sinus
+              { sin(PI*(m_beat_time/m_micros_per_beat)) };
+
+              const float cosinus
+              { cos(2*PI*(m_beat_time/m_micros_per_beat)) };
+
+              const float double_sinus
+              { sin(4*PI*(m_beat_time/m_micros_per_beat)) };
+
 
               BeginMode3D(m_camera);
               {
-                  DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
+                  DrawCube((Vector3){0.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
               }
               EndMode3D();
+
+              while(m_beat_time > 2.0f*m_micros_per_beat)
+              { m_beat_time -= 2.0f*m_micros_per_beat; }
 
               int y_pos
               { x_pos };
 
               std::string transient;
 
-
-
-              transient = "Period in ns : " + std::to_string(m_micros_gap) + " us";
+              transient = "Period in ns : " + std::to_string(m_bpm) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Period in ns : " + std::to_string(m_beat_time) + " us";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
 
           EndDrawing();
 
