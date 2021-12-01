@@ -53,15 +53,18 @@ private:
   { 120.0f };
 
   const float m_fps
-  { 84.0f };
+  { 60.0f };
 
   const int m_division
   { int(m_minute*m_billion/(m_bpm*m_thousand24)) };
 
-  uint64_t m_nanos_then
+  uint64_t m_micros_then
   { 0 };
 
-  uint64_t m_nanos_now
+  uint64_t m_micros_now
+  { 0 };
+
+  uint64_t m_micros_gap
   { 0 };
 
   std::chrono::steady_clock::time_point m_now;

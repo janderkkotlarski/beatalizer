@@ -125,6 +125,9 @@ void video::run()
 
       m_then = std::chrono::steady_clock::now();
 
+      int counter
+      { 0 };
+
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
@@ -150,8 +153,11 @@ void video::run()
               }
               EndMode3D();
 
+              /*
+
               m_then = std::chrono::steady_clock::now();
               // When time counting starts
+
 
               m_period = m_then - m_then;
 
@@ -164,14 +170,14 @@ void video::run()
                 // Elapsed time
               }
 
+              */
+
 
 
               int y_pos
               { x_pos };
 
               std::string transient;
-
-
 
               for (const double cycler: cycling)
               {
@@ -184,13 +190,19 @@ void video::run()
               DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
               y_pos += font_size;
 
-              m_nanos_then = m_nanos_now;
-              m_nanos_now = nanos();
+              m_micros_then = m_micros_now;
+              m_micros_now = micros();
 
-              transient = "Period in ns : " + std::to_string(m_nanos_now - m_nanos_then) + " ns";
+              if (counter == 0)
+              { m_micros_gap = m_micros_now - m_micros_then; }
+
+              transient = "Period in ns : " + std::to_string(m_micros_gap) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();
+
+          ++counter;
+          counter %= 10;
       }
 
       CloseWindow();              // Close window and OpenGL context
