@@ -70,6 +70,9 @@ private:
   uint64_t m_micros_gap
   { 0 };
 
+  float m_beat_time
+  { 0.0f };
+
   int m_frame_counter
   { 0 };
 

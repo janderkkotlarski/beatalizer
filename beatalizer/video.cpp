@@ -124,6 +124,14 @@ void video::run()
 
               ClearBackground(BLACK);
 
+              m_micros_then = m_micros_now;
+              m_micros_now = micros();
+
+              if (m_frame_counter == 0)
+              { m_micros_gap = m_micros_now - m_micros_then; }
+
+              m_beat_time += float(m_micros_gap);
+
               BeginMode3D(m_camera);
               {
                   DrawCube((Vector3){0.0f, 0.0f, 0.0f}, 4.0f, 4.0f, 4.0f, RED);
@@ -135,11 +143,7 @@ void video::run()
 
               std::string transient;
 
-              m_micros_then = m_micros_now;
-              m_micros_now = micros();
 
-              if (m_frame_counter == 0)
-              { m_micros_gap = m_micros_now - m_micros_then; }
 
               transient = "Period in ns : " + std::to_string(m_micros_gap) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
