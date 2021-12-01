@@ -95,44 +95,21 @@ void video::run()
 {
   // Initialization
       //--------------------------------------------------------------------------------------
-      const int screenWidth = 800;
-      const int screenHeight = 800;
-
       SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
-      InitWindow(screenWidth, screenHeight, "testing");
+      InitWindow(m_screen_width, m_screen_height, "Beatalizer");
 
       GetFontDefault();
 
-      std::vector <double> cycling;
-
-      for (int count {0}; count < 10; ++count)
-      {
-        const std::vector <double> cycles
-        { cycler(m_cyle_step, m_repeats) };
-
-        cycling.push_back(average(cycles)/m_cyle_step);
-      }
-
-      const double cycle_time
-      { average(cycling) };
-
       const int x_pos
-      { 8 };
+      { int(float(GetScreenHeight())/100.0f) };
 
       const int font_size
       { 2*x_pos };
 
-      m_then = std::chrono::steady_clock::now();
-
-      int counter
-      { 0 };
-
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
-
-
           // Update
           //----------------------------------------------------------------------------------
           rotate_cam();
@@ -153,47 +130,15 @@ void video::run()
               }
               EndMode3D();
 
-              /*
-
-              m_then = std::chrono::steady_clock::now();
-              // When time counting starts
-
-
-              m_period = m_then - m_then;
-
-              while (m_period < m_frame_period)
-              {
-                m_now = std::chrono::steady_clock::now();
-                // Current time counting
-
-                m_period = m_now - m_then;
-                // Elapsed time
-              }
-
-              */
-
-
-
               int y_pos
               { x_pos };
 
               std::string transient;
 
-              for (const double cycler: cycling)
-              {
-                transient = "Cycle time : " + std::to_string(m_billion*cycler) + " ns";
-                DrawText(transient.c_str(), x_pos, y_pos, font_size, BLUE);
-                y_pos += font_size;
-              }
-
-              transient = "Cycle time : " + std::to_string(m_billion*cycle_time) + " ns";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-              y_pos += font_size;
-
               m_micros_then = m_micros_now;
               m_micros_now = micros();
 
-              if (counter == 0)
+              if (m_frame_counter == 0)
               { m_micros_gap = m_micros_now - m_micros_then; }
 
               transient = "Period in ns : " + std::to_string(m_micros_gap) + " us";
@@ -201,8 +146,8 @@ void video::run()
 
           EndDrawing();
 
-          ++counter;
-          counter %= 10;
+          ++m_frame_counter;
+          m_frame_counter %= m_frame_skip;
       }
 
       CloseWindow();              // Close window and OpenGL context

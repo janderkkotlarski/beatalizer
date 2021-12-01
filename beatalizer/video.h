@@ -9,11 +9,17 @@
 class video
 {
 private:
-  const int m_screen_width
+  int m_screen_width
   { 800 };
 
-  const int m_screen_height
+  int m_screen_height
   { 800 };
+
+  int m_x_pos
+  { 0 };
+
+  int m_font_size
+  { 0 };
 
   const Vector3 m_anchor
   { 0.0f, 0.0f, 0.0f };
@@ -40,10 +46,10 @@ private:
 
   Shader m_lighting_shader;
 
-  const float m_billion
-  { 1000000000.0f };
+  const float m_million
+  { 1000000.0f };
 
-  const float m_thousand24
+  const float m_2pow10
   { 1024.0f };
 
   const float m_minute
@@ -55,9 +61,6 @@ private:
   const float m_fps
   { 60.0f };
 
-  const int m_division
-  { int(m_minute*m_billion/(m_bpm*m_thousand24)) };
-
   uint64_t m_micros_then
   { 0 };
 
@@ -67,26 +70,12 @@ private:
   uint64_t m_micros_gap
   { 0 };
 
-  std::chrono::steady_clock::time_point m_now;
-  std::chrono::steady_clock::time_point m_then;
-
-  std::chrono::steady_clock::duration m_period
+  int m_frame_counter
   { 0 };
 
-  std::chrono::steady_clock::duration m_rest
-  { (std::chrono::steady_clock::duration)0 };
+  const int m_frame_skip
+  { 5 };
 
-  const std::chrono::steady_clock::duration m_frame_period
-  { (std::chrono::steady_clock::duration)(int)(m_billion/m_fps) };
-
-  std::chrono::steady_clock::duration m_divider
-  { m_division };
-
-  const int m_cyle_step
-  { 1000000 };
-
-  const int m_repeats
-  { 100 };
 
 public:
   video();
