@@ -55,10 +55,12 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
+        form.cpp \
         main.cpp \
         timer.cpp \
         video.cpp
 
 HEADERS += \
+        form.h \
         timer.h \
         video.h

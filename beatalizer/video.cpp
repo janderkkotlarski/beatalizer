@@ -190,7 +190,7 @@ void video::run()
 
               y_pos += font_size;
 
-              transient = "Period in ns : " + std::to_string(m_beat_time) + " us";
+              transient = "Beat time in ns : " + std::to_string(m_beat_time) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
 
