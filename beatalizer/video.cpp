@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "timer.h"
+#include "form.h"
 
 
 #if defined(PLATFORM_DESKTOP)
@@ -104,7 +105,7 @@ void video::update_bpm()
     m_bpm += m_bpm_delta;
 
     if (m_bpm > m_bpm_max)
-    { m_bpm == m_bpm_max; }
+    { m_bpm = m_bpm_max; }
 
     rebeat();
   }
@@ -114,7 +115,7 @@ void video::update_bpm()
     m_bpm -= m_bpm_delta;
 
     if (m_bpm < m_bpm_min)
-    { m_bpm == m_bpm_min; }
+    { m_bpm = m_bpm_min; }
 
     rebeat();
   }
@@ -136,6 +137,8 @@ void video::run()
       const int font_size
       { 2*x_pos };
 
+      form cube(2.5f);
+
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
@@ -147,6 +150,8 @@ void video::run()
 
           UpdateCamera(&m_camera);                  // Update camera
           //----------------------------------------------------------------------------------
+
+
 
           // Draw
           //----------------------------------------------------------------------------------
@@ -173,7 +178,9 @@ void video::run()
 
               BeginMode3D(m_camera);
               {
-                  DrawCube((Vector3){0.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
+                  DrawCube((Vector3){4.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
+
+                  cube.display_cube();
               }
               EndMode3D();
 
@@ -191,7 +198,13 @@ void video::run()
               y_pos += font_size;
 
               transient = "Beat time in ns : " + std::to_string(m_beat_time) + " us";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
+
+              y_pos += font_size;
+
+              transient = "Beat time in ns : " + std::to_string(m_beat_time) + " us";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
+
 
 
           EndDrawing();
