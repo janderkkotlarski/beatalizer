@@ -121,6 +121,16 @@ void video::update_bpm()
   }
 }
 
+void video::update_time()
+{
+  m_micros_then = m_micros_now;
+  m_micros_now = micros();
+
+  m_micros_gap = m_micros_now - m_micros_then;
+
+  m_time_gap = float(int(m_micros_gap));
+}
+
 void video::run()
 {
   // Initialization
@@ -161,39 +171,17 @@ void video::run()
 
               ClearBackground(BLACK);
 
-              m_micros_then = m_micros_now;
-              m_micros_now = micros();
-
-              m_micros_gap = m_micros_now - m_micros_then;
-
-              m_time_gap = float(int(m_micros_gap));
+              update_time();
 
               phase.add_time(m_time_gap, m_micros_per_beat);
 
               cube.phasing(phase.get_phase());
 
-              m_beat_time += m_time_gap;
-
-              const float half_sinus
-              { sin(PI*(m_beat_time/m_micros_per_beat)) };
-
-              const float cosinus
-              { cos(2*PI*(m_beat_time/m_micros_per_beat)) };
-
-              const float double_sinus
-              { sin(4*PI*(m_beat_time/m_micros_per_beat)) };
-
-
               BeginMode3D(m_camera);
               {
-                  // DrawCube((Vector3){4.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
-
                   cube.display_cuboid();
               }
               EndMode3D();
-
-              while(m_beat_time > 2.0f*m_micros_per_beat)
-              { m_beat_time -= 2.0f*m_micros_per_beat; }
 
               int y_pos
               { x_pos };
@@ -202,18 +190,6 @@ void video::run()
 
               transient = "Period in ns : " + std::to_string(m_bpm) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Beat time in ns : " + std::to_string(m_beat_time) + " us";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, YELLOW);
-
-              y_pos += font_size;
-
-              transient = "Beat time in ns : " + std::to_string(m_beat_time) + " us";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, GREEN);
-
-
 
           EndDrawing();
 

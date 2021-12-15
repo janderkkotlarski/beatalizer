@@ -73,9 +73,6 @@ private:
   float m_time_gap
   { 0.0f };
 
-  float m_beat_time
-  { 0.0f };
-
   const float m_fps
   { 60.0f };
 
@@ -105,6 +102,8 @@ public:
   void update_cam();
 
   void update_bpm();
+
+  void update_time();
 
   void rotate(Vector3 &from, Vector3 &toward);
 
