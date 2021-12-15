@@ -5,7 +5,7 @@ form::form()
 }
 
 form::form(const float side)
-  : m_side(side)
+  : m_side_x(side), m_side_y(side), m_side_z(side)
 {
 }
 
@@ -14,7 +14,12 @@ form::form(const Vector3 &pos)
 {
 }
 
-void form::display_cube()
+void form::phasing(const float phase)
 {
-  DrawCube(m_pos, m_side, m_side, m_side, GREEN);
+
+}
+
+void form::display_cuboid()
+{
+  DrawCube(m_pos, m_side_x, m_side_y, m_side_z, GREEN);
 }

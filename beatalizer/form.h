@@ -9,7 +9,13 @@ private:
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
 
-  float m_side
+  float m_side_x
+  { 1.0f };
+
+  float m_side_y
+  { 1.0f };
+
+  float m_side_z
   { 1.0f };
 
 public:
@@ -19,7 +25,9 @@ public:
 
   form(const Vector3 &pos);
 
-  void display_cube();
+  void phasing(const float phase);
+
+  void display_cuboid();
 };
 
 #endif // FORM_H
