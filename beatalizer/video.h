@@ -70,6 +70,9 @@ private:
   float m_micros_per_beat
   { m_million*m_minute/m_bpm };
 
+  float m_time_gap
+  { 0.0f };
+
   float m_beat_time
   { 0.0f };
 

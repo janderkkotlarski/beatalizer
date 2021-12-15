@@ -139,6 +139,8 @@ void video::run()
 
       form cube(2.5f);
 
+      timer phase;
+
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
@@ -164,7 +166,13 @@ void video::run()
 
               m_micros_gap = m_micros_now - m_micros_then;
 
-              m_beat_time += float(int(m_micros_gap));
+              m_time_gap = float(int(m_micros_gap));
+
+              phase.add_time(m_time_gap, m_micros_per_beat);
+
+              cube.phasing(phase.get_phase());
+
+              m_beat_time += m_time_gap;
 
               const float half_sinus
               { sin(PI*(m_beat_time/m_micros_per_beat)) };
@@ -178,9 +186,9 @@ void video::run()
 
               BeginMode3D(m_camera);
               {
-                  DrawCube((Vector3){4.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
+                  // DrawCube((Vector3){4.0f, half_sinus, cosinus}, 4.0f, 4.0f, 4.0f*(1.0f + 0.25f*double_sinus), RED);
 
-                  cube.display_cube();
+                  cube.display_cuboid();
               }
               EndMode3D();
 

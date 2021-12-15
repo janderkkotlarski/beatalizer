@@ -9,6 +9,9 @@ private:
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
 
+  const float m_side
+  { 1.0f };
+
   float m_side_x
   { 1.0f };
 
