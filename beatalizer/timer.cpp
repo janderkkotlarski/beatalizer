@@ -1,7 +1,5 @@
 #include "timer.h"
 
-#include <cmath>
-
 timer::timer()
 {
 

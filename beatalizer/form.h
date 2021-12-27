@@ -1,11 +1,19 @@
 #ifndef FORM_H
 #define FORM_H
 
+#include <cmath>
+
 #include "raylib.h"
 
 class form
 {
-private:
+private:  
+  const float m_tau
+  { 2.0f*M_PI };
+
+  Color m_color
+  { 255, 255, 255, 255};
+
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
 
@@ -21,12 +29,15 @@ private:
   float m_side_z
   { 1.0f };
 
+  const float m_phase_offset
+  { 0.0f };
+
 public:
   form();
 
-  form(const float side);
+  form(const float phase_offset);
 
-  form(const Vector3 &pos);
+  void set_color(const Color color);
 
   void phasing(const float phase);
 

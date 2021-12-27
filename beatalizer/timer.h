@@ -13,8 +13,6 @@ private:
   float m_16_beat_phase
   { 0.0f };
 
-
-
 public:
   timer();
 

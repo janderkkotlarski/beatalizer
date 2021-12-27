@@ -2,6 +2,7 @@
 
 #include <string>
 #include <cmath>
+#include <vector>
 
 #include "timer.h"
 #include "form.h"
@@ -54,6 +55,8 @@ void video::update_cam()
   m_camera.position = Vector3Scale(m_front_norm, m_dist);    // Camera position
   m_camera.target = m_anchor;      // Camera looking at point
   m_camera.up = m_up_norm;          // Camera up vector (rotation towards target)
+
+  UpdateCamera(&m_camera);
 }
 
 void video::rotate(Vector3 &from, Vector3 &toward)
@@ -147,7 +150,15 @@ void video::run()
       const int font_size
       { 2*x_pos };
 
-      form cube(2.5f);
+      std::vector <form> cubes;
+
+      const int cube_amount
+      { 1024 };
+
+      for (int count { 0 }; count < cube_amount; ++count)
+      {
+        cubes.push_back(form{float(count)/float(cube_amount)});
+      }
 
       timer phase;
 
@@ -160,13 +171,8 @@ void video::run()
           update_cam();
           update_bpm();
 
-          UpdateCamera(&m_camera);                  // Update camera
-          //----------------------------------------------------------------------------------
 
 
-
-          // Draw
-          //----------------------------------------------------------------------------------
           BeginDrawing();
 
               ClearBackground(BLACK);
@@ -175,11 +181,17 @@ void video::run()
 
               phase.add_time(m_time_gap, m_micros_per_beat);
 
-              cube.phasing(phase.get_phase());
+              for (form &cuber: cubes)
+              {
+                cuber.phasing(phase.get_phase());
+              }
 
               BeginMode3D(m_camera);
               {
-                  cube.display_cuboid();
+                  for (form &cuber: cubes)
+                  {
+                    cuber.display_cuboid();
+                  }
               }
               EndMode3D();
 
@@ -188,7 +200,7 @@ void video::run()
 
               std::string transient;
 
-              transient = "Period in ns : " + std::to_string(m_bpm) + " us";
+              transient = "Period in ns : " + std::to_string(cubes.size()) + " us";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();
