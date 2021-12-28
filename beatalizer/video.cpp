@@ -152,12 +152,9 @@ void video::run()
 
       std::vector <form> cubes;
 
-      const int cube_amount
-      { 32 };
-
-      for (int count { 0 }; count < cube_amount; ++count)
+      for (int count { 0 }; count < m_cube_amount; ++count)
       {
-        cubes.push_back(form{float(count)/float(cube_amount)});
+        cubes.push_back(form{float(count)/float(m_cube_amount)});
       }
 
       timer phase;

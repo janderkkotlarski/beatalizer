@@ -54,6 +54,10 @@ public:
   void phasing(const float phase);
 
   void display_cuboid();
+
+  float distance_value(const float pos);
 };
+
+
 
 #endif // FORM_H
