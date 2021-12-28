@@ -153,7 +153,7 @@ void video::run()
       std::vector <form> cubes;
 
       const int cube_amount
-      { 1024 };
+      { 32 };
 
       for (int count { 0 }; count < cube_amount; ++count)
       {

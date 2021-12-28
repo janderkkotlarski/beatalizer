@@ -14,8 +14,20 @@ private:
   Color m_color
   { 255, 255, 255, 255};
 
+  int m_red
+  { 0 };
+
+  int m_green
+  { 0 };
+
+  int m_blue
+  { 0 };
+
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
+
+  const float m_radius
+  { 2.0f };
 
   const float m_side
   { 1.0f };
@@ -37,7 +49,7 @@ public:
 
   form(const float phase_offset);
 
-  void set_color(const Color color);
+  void set_color();
 
   void phasing(const float phase);
 
