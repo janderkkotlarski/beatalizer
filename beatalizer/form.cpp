@@ -1,6 +1,6 @@
 #include "form.h"
 
-
+#include "functions.h"
 
 form::form()
 {
@@ -14,13 +14,11 @@ form::form(const float phase_offset)
 
 void form::set_color()
 {
-  m_red = 255.0f*m_pos.x/m_radius;
-  m_green = 255.0f*m_pos.y/m_radius;
-  m_blue = 255.0f*m_pos.z/m_radius;
-
-
-  unsigned char beta
-  { static_cast<unsigned char>(m_red) };
+  m_color =
+  { unchar(255.0f*m_pos.x/m_radius),
+    unchar(255.0f*m_pos.y/m_radius),
+    unchar(255.0f*m_pos.z/m_radius),
+    255};
 }
 
 void form::phasing(const float phase)

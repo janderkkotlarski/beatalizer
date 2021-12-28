@@ -184,6 +184,7 @@ void video::run()
               for (form &cuber: cubes)
               {
                 cuber.phasing(phase.get_phase());
+                cuber.set_color();
               }
 
               BeginMode3D(m_camera);
