@@ -92,10 +92,10 @@ private:
   { 5 };
 
   const int m_cube_division
-  { 64 };
+  { 1024 };
 
   const int m_cube_amount
-  { 64 };
+  { z1024 };
 
 public:
   video();
