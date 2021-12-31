@@ -7,21 +7,21 @@ timer::timer()
 
 void timer::phase_reset() noexcept
 {
-  m_16_beat_phase = 0.0f;
+  m_beat_phase = 0.0f;
 }
 
 float timer::get_phase()
 noexcept
 {
-  return m_16_beat_phase;
+  return m_beat_phase;
 }
 
 void timer::add_time(const float time, const float beat_length)
 {
-  m_16_beat_phase += m_tau*time/(16.0f*beat_length);
+  m_beat_phase += m_tau*time/(m_beat_mult*beat_length);
 
-  if (m_16_beat_phase > m_tau)
-  { m_16_beat_phase -= m_tau; }
+  if (m_beat_phase > m_tau)
+  { m_beat_phase -= m_tau; }
 }
 
 uint64_t micros()

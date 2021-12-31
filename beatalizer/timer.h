@@ -10,8 +10,11 @@ private:
   const float m_tau
   { 2.0f*M_PI };
 
-  float m_16_beat_phase
+  float m_beat_phase
   { 0.0f };
+
+  const float m_beat_mult
+  { 64.0f };
 
 public:
   timer();

@@ -65,7 +65,7 @@ private:
   { 0.1f };
 
   float m_bpm
-  { 30.0f };
+  { 120.0f };
 
   float m_micros_per_beat
   { m_million*m_minute/m_bpm };
@@ -91,8 +91,11 @@ private:
   const int m_frame_skip
   { 5 };
 
+  const int m_cube_division
+  { 64 };
+
   const int m_cube_amount
-  { 128 };
+  { 64 };
 
 public:
   video();

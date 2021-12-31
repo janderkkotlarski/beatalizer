@@ -154,7 +154,7 @@ void video::run()
 
       for (int count { 0 }; count < m_cube_amount; ++count)
       {
-        cubes.push_back(form{float(count)/float(m_cube_amount)});
+        cubes.push_back(form{float(count)/float(m_cube_division)});
       }
 
       timer phase;

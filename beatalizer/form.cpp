@@ -27,11 +27,11 @@ void form::phasing(const float phase)
   { phase + m_phase_offset };
 
   const float radius
-  { m_radius*0.25f*(3.0f + static_cast<float>(sin(4.0f*phase_actual))) };
+  { m_radius*0.25f*(3.0f + static_cast<float>(cos(0.0f*phase_actual))) };
 
-  m_pos.x = radius*m_side*cos(phase_actual)*sin(0.8f*sin(4.0f*phase_actual));
-  m_pos.y = radius*m_side*sin(phase_actual)*cos(2.5f*cos(2.0f*phase_actual));
-  m_pos.z = radius*m_side*cos(phase_actual)*cos(1.1f*sin(8.0f*phase_actual));
+  m_pos.x = radius*m_side*cos(phase_actual)*sin(0.0f*sin(0.0f*phase_actual));
+  m_pos.y = radius*m_side*sin(phase_actual)*cos(0.0f*cos(0.0f*phase_actual));
+  m_pos.z = radius*m_side*cos(phase_actual)*cos(0.0f*sin(0.0f*phase_actual));
 
   const float sine_phase
   { 0.25f*m_side*float(fabs(sin(2.0f*phase_actual))) };
