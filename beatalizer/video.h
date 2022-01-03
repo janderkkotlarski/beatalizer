@@ -95,7 +95,7 @@ private:
   { 1024 };
 
   const int m_cube_amount
-  { z1024 };
+  { 1024 };
 
 public:
   video();
