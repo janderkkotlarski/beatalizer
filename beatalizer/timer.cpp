@@ -26,7 +26,7 @@ void timer::add_time(const float time, const float beat_length)
 
 uint64_t micros()
 {
-    uint64_t ns = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::
+    uint64_t ms = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::
                   now().time_since_epoch()).count();
-    return ns;
+    return ms;
 }
