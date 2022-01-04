@@ -2,6 +2,7 @@
 #define FORM_H
 
 #include <cmath>
+#include <vector>
 
 #include "raylib.h"
 
@@ -51,6 +52,8 @@ public:
 
   void set_color();
 
+  void set_side(const float side);
+
   void phasing(const float phase);
 
   void display_cuboid();
@@ -58,6 +61,6 @@ public:
   float distance_value(const float pos);
 };
 
-
+std::vector <form> form_sine_wave(const int number, const float side, const float phase_step);
 
 #endif // FORM_H

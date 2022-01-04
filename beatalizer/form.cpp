@@ -21,24 +21,31 @@ void form::set_color()
     255};
 }
 
+void form::set_side(const float side)
+{
+  m_side_x = side;
+  m_side_y = side;
+  m_side_z = side;
+}
+
 void form::phasing(const float phase)
 {
   const float phase_actual
   { phase + m_phase_offset };
 
   const float radius
-  { m_radius*0.5f*(4.0f + 0.0f*static_cast<float>(cos(8.0f*phase_actual))) };
+  { m_radius*0.5f*(4.0f + 0.25f*static_cast<float>(cos(32.0f*phase_actual))) };
 
-  m_pos.x = radius*m_side*cos(phase_actual)*sin(0.0f*sin(1.0f*phase_actual));
+  m_pos.x = radius*m_side*cos(phase_actual)*sin(0.1f*sin(32.0f*phase_actual));
   m_pos.y = radius*m_side*sin(phase_actual)*cos(0.0f*cos(1.0f*phase_actual));
-  m_pos.z = radius*m_side*cos(phase_actual)*cos(0.0f*sin(1.0f*phase_actual));
+  m_pos.z = radius*m_side*cos(phase_actual)*cos(0.1f*sin(32.0f*phase_actual));
 
-  const float sine_phase
-  { 0.25f*m_side*float(fabs(sin(2.0f*phase_actual))) };
+  // const float sine_phase
+  // { 0.25f*m_side*float(fabs(sin(2.0f*phase_actual))) };
 
-  m_side_x = sine_phase;
-  m_side_y = sine_phase;
-  m_side_z = sine_phase;
+  // m_side_x = sine_phase;
+  // m_side_y = sine_phase;
+  // m_side_z = sine_phase;
 }
 
 void form::display_cuboid()
@@ -50,4 +57,24 @@ void form::display_cuboid()
 float form::distance_value(const float pos)
 {
   return 255.0f*0.25f*(3.0f + cos(4.0f*m_tau*pos/m_radius));
+}
+
+std::vector <form> form_sine_wave(const int number, const float side, const float phase_step)
+{
+  std::vector <form> cubes;
+
+
+  const float tau_div
+  { float(M_PI)/float(number) };
+
+  for (int count { 1 }; count < number; ++count)
+  {
+    cubes.push_back(form(float(count)*phase_step));
+
+    // cubes[count].set_side(side);
+
+    cubes[count - 1].set_side(side*sin(float(count)*tau_div));
+  }
+
+  return cubes;
 }

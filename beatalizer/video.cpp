@@ -4,7 +4,6 @@
 #include <cmath>
 #include <vector>
 
-#include "timer.h"
 #include "form.h"
 
 
@@ -150,14 +149,8 @@ void video::run()
       const int font_size
       { 2*x_pos };
 
-      std::vector <form> cubes;
-
-      for (int count { 0 }; count < m_cube_amount; ++count)
-      {
-        cubes.push_back(form{float(count)/float(m_cube_division)});
-      }
-
-      timer phase;
+      std::vector <form> cubes
+      { form_sine_wave(m_cube_amount, 0.25f, m_phase_step) };
 
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
@@ -176,11 +169,11 @@ void video::run()
 
               update_time();
 
-              phase.add_time(m_time_gap, m_micros_per_beat);
+              m_phase.add_time(m_time_gap, m_micros_per_beat);
 
               for (form &cuber: cubes)
               {
-                cuber.phasing(phase.get_phase());
+                cuber.phasing(m_phase.get_phase());
                 cuber.set_color();
               }
 
