@@ -55,6 +55,7 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
+        coordinates.cpp \
         form.cpp \
         functions.cpp \
         main.cpp \
@@ -62,6 +63,7 @@ SOURCES += \
         video.cpp
 
 HEADERS += \
+        coordinates.h \
         form.h \
         functions.h \
         timer.h \

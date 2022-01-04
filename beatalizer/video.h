@@ -97,7 +97,7 @@ private:
   { 128 };
 
   const int m_cube_amount
-  { 32 };
+  { 512 };
 
   const int m_phase_divider
   { 16 };

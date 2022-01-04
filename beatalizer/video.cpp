@@ -152,6 +152,11 @@ void video::run()
       std::vector <form> cubes
       { form_sine_wave(m_cube_amount, 0.25f, m_phase_step) };
 
+      coordinates coords;
+
+      const Vector3 rot
+      { coords.get_unit_rot() };
+
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
@@ -160,8 +165,6 @@ void video::run()
           rotate_cam();
           update_cam();
           update_bpm();
-
-
 
           BeginDrawing();
 
@@ -173,7 +176,7 @@ void video::run()
 
               for (form &cuber: cubes)
               {
-                cuber.phasing(m_phase.get_phase());
+                // cuber.phasing(m_phase.get_phase());
                 cuber.set_color();
               }
 
@@ -191,7 +194,7 @@ void video::run()
 
               std::string transient;
 
-              transient = "Period in ns : " + std::to_string(cubes.size()) + " us";
+              transient = "Rotate around : [" + std::to_string(rot.x) + ", " + std::to_string(rot.y) + ", " + std::to_string(rot.z) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();

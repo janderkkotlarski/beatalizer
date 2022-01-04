@@ -6,6 +6,8 @@
 
 #include "raylib.h"
 
+#include "coordinates.h"
+
 class form
 {
 private:  
@@ -26,6 +28,8 @@ private:
 
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
+
+  coordinates m_coords;
 
   const float m_radius
   { 2.0f };

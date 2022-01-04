@@ -4,12 +4,18 @@
 
 form::form()
 {
+  m_coords.random_pos();
 
+  m_pos = m_coords.get_pos();
 }
 
 form::form(const float phase_offset)
   : m_phase_offset(m_tau*phase_offset)
 {
+
+  m_coords.random_pos();
+
+  m_pos = m_coords.get_pos();
 }
 
 void form::set_color()
