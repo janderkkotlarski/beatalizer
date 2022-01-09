@@ -24,40 +24,21 @@ Vector3 coordinates::get_unit_rot()
   return m_unit_rot;
 }
 
-void coordinates::random_pos_time()
-{
-  const int number
-  { int(micros()) };
-
-  const float frac_1000
-  { float(number % 1000)/1000.0f };
-
-  const float frac_10000
-  { float(number % 10000)/10000.0f };
-
-  m_unit_pos.x = cos(frac_1000);
-
-  m_unit_pos.y = sin(frac_1000)*cos(frac_10000);
-
-  m_unit_pos.z = sin(frac_1000)*sin(frac_10000);
-
-}
-
 void coordinates::random_pos_gold(auronacci &gold)
 {
-  const float distri
-  { 2.0f*gold.get_fraction() - 1.0f };
+  const float pos_z
+  { 10.0f*gold.get_fraction() - 1.0f };
 
-  const float irtsid
-  { sqrt(1.0f - distri*distri) };
+  const float pos_xy
+  { sqrt(1.0f - pos_z*pos_z) };
 
   const float phi
   { 2.0f*m_pi*gold.get_fraction() };
 
-  m_unit_pos.x = irtsid*cos(phi);
+  m_unit_pos.x = pos_xy*cos(phi);
 
-  m_unit_pos.y = irtsid*sin(phi);
+  m_unit_pos.y = pos_xy*sin(phi);
 
-  m_unit_pos.z = distri;
+  m_unit_pos.z = pos_z;
 }
 

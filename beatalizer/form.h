@@ -35,7 +35,7 @@ private:
   { 4.0f };
 
   const float m_side
-  { 0.1f };
+  { 0.03f };
 
   float m_side_x
   { m_side };
@@ -50,10 +50,6 @@ private:
   { 0.0f };
 
 public:
-  form();
-
-  form(const float phase_offset);
-
   form(auronacci &gold);
 
   form(auronacci &gold, const float phase_offset);

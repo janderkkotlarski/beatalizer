@@ -39,8 +39,6 @@ public:
 
   Vector3 get_unit_rot();
 
-  void random_pos_time();
-
   void random_pos_gold(auronacci &gold);
 };
 

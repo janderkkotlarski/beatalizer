@@ -2,22 +2,6 @@
 
 #include "functions.h"
 
-form::form()
-{
-  m_coords.random_pos_time();
-
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
-}
-
-form::form(const float phase_offset)
-  : m_phase_offset(m_tau*phase_offset)
-{
-
-  m_coords.random_pos_time();
-
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
-}
-
 form::form(auronacci &gold)
 {
   m_coords.random_pos_gold(gold);
