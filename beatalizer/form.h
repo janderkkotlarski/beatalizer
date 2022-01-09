@@ -32,19 +32,19 @@ private:
   coordinates m_coords;
 
   const float m_radius
-  { 2.0f };
+  { 4.0f };
 
   const float m_side
-  { 1.0f };
+  { 0.1f };
 
   float m_side_x
-  { 1.0f };
+  { m_side };
 
   float m_side_y
-  { 1.0f };
+  { m_side };
 
   float m_side_z
-  { 1.0f };
+  { m_side };
 
   const float m_phase_offset
   { 0.0f };

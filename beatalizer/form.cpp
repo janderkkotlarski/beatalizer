@@ -6,7 +6,7 @@ form::form()
 {
   m_coords.random_pos_time();
 
-  m_pos = m_coords.get_pos();
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 form::form(const float phase_offset)
@@ -15,14 +15,14 @@ form::form(const float phase_offset)
 
   m_coords.random_pos_time();
 
-  m_pos = m_coords.get_pos();
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 form::form(auronacci &gold)
 {
   m_coords.random_pos_gold(gold);
 
-  m_pos = m_coords.get_pos();
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 form::form(auronacci &gold, const float phase_offset)
@@ -31,7 +31,7 @@ form::form(auronacci &gold, const float phase_offset)
 
   m_coords.random_pos_gold(gold);
 
-  m_pos = m_coords.get_pos();
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 void form::set_color()
@@ -95,7 +95,7 @@ std::vector <form> form_sine_wave(const int number, const float side, const floa
 
     // cubes[count].set_side(side);
 
-    cubes[count - 1].set_side(side*sin(float(count)*tau_div));
+    // cubes[count - 1].set_side(side*sin(float(count)*tau_div));
   }
 
   return cubes;

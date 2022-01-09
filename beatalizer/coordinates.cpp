@@ -45,17 +45,19 @@ void coordinates::random_pos_time()
 
 void coordinates::random_pos_gold(auronacci &gold)
 {
+  const float distri
+  { 2.0f*gold.get_fraction() - 1.0f };
 
-  const float theta
-  { m_pi*gold.get_fraction() };
+  const float irtsid
+  { sqrt(1.0f - distri*distri) };
 
   const float phi
   { 2.0f*m_pi*gold.get_fraction() };
 
-  m_unit_pos.x = sin(theta)*cos(phi);
+  m_unit_pos.x = irtsid*cos(phi);
 
-  m_unit_pos.y = sin(theta)*sin(phi);
+  m_unit_pos.y = irtsid*sin(phi);
 
-  m_unit_pos.z = cos(theta);
+  m_unit_pos.z = distri;
 }
 

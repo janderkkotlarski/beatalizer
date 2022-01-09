@@ -147,7 +147,7 @@ void video::run()
       { 2*x_pos };
 
       std::vector <form> cubes
-      { form_sine_wave(m_cube_amount, 0.25f, m_phase_step, m_gold) };
+      { form_sine_wave(m_cube_amount, 0.01f, m_phase_step, m_gold) };
 
       coordinates coords;
 
