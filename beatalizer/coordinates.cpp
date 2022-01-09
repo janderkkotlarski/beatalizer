@@ -52,10 +52,10 @@ void coordinates::random_pos_gold(auronacci &gold)
   const float phi
   { 2.0f*m_pi*gold.get_fraction() };
 
-  m_unit_pos.x = cos(theta)*cos(phi);
+  m_unit_pos.x = sin(theta)*cos(phi);
 
-  m_unit_pos.y = cos(theta)*sin(phi);
+  m_unit_pos.y = sin(theta)*sin(phi);
 
-  m_unit_pos.z = sin(theta);
+  m_unit_pos.z = cos(theta);
 }
 
