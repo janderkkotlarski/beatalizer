@@ -1,12 +1,19 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
+#include <cmath>
+
 #include "raylib.h"
 #include "raymath.h"
+
+#include "auronacci.h"
 
 class coordinates
 {
 private:
+  const float m_pi
+  { float(M_PI) };
+
   Vector3 m_unit_x
   { 1.0f, 0.0f, 0.0f };
 
@@ -32,7 +39,9 @@ public:
 
   Vector3 get_unit_rot();
 
-  void random_pos();
+  void random_pos_time();
+
+  void random_pos_gold(auronacci &gold);
 };
 
 #endif // COORDINATES_H

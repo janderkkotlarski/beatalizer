@@ -55,6 +55,7 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
+        auronacci.cpp \
         coordinates.cpp \
         form.cpp \
         functions.cpp \
@@ -63,6 +64,7 @@ SOURCES += \
         video.cpp
 
 HEADERS += \
+        auronacci.h \
         coordinates.h \
         form.h \
         functions.h \

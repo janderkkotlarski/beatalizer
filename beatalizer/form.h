@@ -54,6 +54,10 @@ public:
 
   form(const float phase_offset);
 
+  form(auronacci &gold);
+
+  form(auronacci &gold, const float phase_offset);
+
   void set_color();
 
   void set_side(const float side);
@@ -65,6 +69,6 @@ public:
   float distance_value(const float pos);
 };
 
-std::vector <form> form_sine_wave(const int number, const float side, const float phase_step);
+std::vector <form> form_sine_wave(const int number, const float side, const float phase_step, auronacci &gold);
 
 #endif // FORM_H

@@ -6,7 +6,6 @@
 
 #include "form.h"
 
-
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
@@ -135,8 +134,6 @@ void video::update_time()
 
 void video::run()
 {
-  // Initialization
-      //--------------------------------------------------------------------------------------
       SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
       InitWindow(m_screen_width, m_screen_height, "Beatalizer");
@@ -150,7 +147,7 @@ void video::run()
       { 2*x_pos };
 
       std::vector <form> cubes
-      { form_sine_wave(m_cube_amount, 0.25f, m_phase_step) };
+      { form_sine_wave(m_cube_amount, 0.25f, m_phase_step, m_gold) };
 
       coordinates coords;
 

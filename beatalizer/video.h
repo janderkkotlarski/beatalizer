@@ -7,10 +7,14 @@
 #include "raylib.h"
 
 #include "timer.h"
+#include "auronacci.h"
 
 class video
 {
 private:
+
+  auronacci m_gold;
+
   int m_screen_width
   { 800 };
 

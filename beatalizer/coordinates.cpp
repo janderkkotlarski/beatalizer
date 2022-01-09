@@ -1,6 +1,6 @@
 #include "coordinates.h"
 
-#include <cmath>
+
 
 #include "timer.h"
 
@@ -24,7 +24,7 @@ Vector3 coordinates::get_unit_rot()
   return m_unit_rot;
 }
 
-void coordinates::random_pos()
+void coordinates::random_pos_time()
 {
   const int number
   { int(micros()) };
@@ -42,3 +42,20 @@ void coordinates::random_pos()
   m_unit_pos.z = sin(frac_1000)*sin(frac_10000);
 
 }
+
+void coordinates::random_pos_gold(auronacci &gold)
+{
+
+  const float theta
+  { m_pi*gold.get_fraction() };
+
+  const float phi
+  { 2.0f*m_pi*gold.get_fraction() };
+
+  m_unit_pos.x = cos(theta)*cos(phi);
+
+  m_unit_pos.y = cos(theta)*sin(phi);
+
+  m_unit_pos.z = sin(theta);
+}
+

@@ -4,7 +4,7 @@
 
 form::form()
 {
-  m_coords.random_pos();
+  m_coords.random_pos_time();
 
   m_pos = m_coords.get_pos();
 }
@@ -13,7 +13,23 @@ form::form(const float phase_offset)
   : m_phase_offset(m_tau*phase_offset)
 {
 
-  m_coords.random_pos();
+  m_coords.random_pos_time();
+
+  m_pos = m_coords.get_pos();
+}
+
+form::form(auronacci &gold)
+{
+  m_coords.random_pos_gold(gold);
+
+  m_pos = m_coords.get_pos();
+}
+
+form::form(auronacci &gold, const float phase_offset)
+  : m_phase_offset(m_tau*phase_offset)
+{
+
+  m_coords.random_pos_gold(gold);
 
   m_pos = m_coords.get_pos();
 }
@@ -65,7 +81,7 @@ float form::distance_value(const float pos)
   return 255.0f*0.25f*(3.0f + cos(4.0f*m_tau*pos/m_radius));
 }
 
-std::vector <form> form_sine_wave(const int number, const float side, const float phase_step)
+std::vector <form> form_sine_wave(const int number, const float side, const float phase_step, auronacci &gold)
 {
   std::vector <form> cubes;
 
@@ -75,7 +91,7 @@ std::vector <form> form_sine_wave(const int number, const float side, const floa
 
   for (int count { 1 }; count < number; ++count)
   {
-    cubes.push_back(form(float(count)*phase_step));
+    cubes.push_back(form(gold, float(count)*phase_step));
 
     // cubes[count].set_side(side);
 
