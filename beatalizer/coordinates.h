@@ -1,8 +1,6 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
-#include <cmath>
-
 #include "raylib.h"
 #include "raymath.h"
 
@@ -11,9 +9,6 @@
 class coordinates
 {
 private:
-  const float m_pi
-  { float(M_PI) };
-
   Vector3 m_unit_x
   { 1.0f, 0.0f, 0.0f };
 
@@ -41,5 +36,7 @@ public:
 
   void random_pos_gold(auronacci &gold);
 };
+
+Vector3 random_pos_auro(auronacci &gold);
 
 #endif // COORDINATES_H
