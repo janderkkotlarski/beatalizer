@@ -9,14 +9,14 @@ coordinates::coordinates()
 
 }
 
-Vector3 coordinates::get_pos()
+Vector3 coordinates::get_unit_pos()
 {
-  Vector3 pos
-  { Vector3Scale(m_unit_x, m_unit_pos.x) };
+  return m_unit_pos;
+}
 
-  pos = Vector3Add(pos, Vector3Scale(m_unit_y, m_unit_pos.y));
-
-  return Vector3Add(pos, Vector3Scale(m_unit_z, m_unit_pos.z));
+Vector3 coordinates::get_unit_dir()
+{
+  return m_unit_dir;
 }
 
 Vector3 coordinates::get_unit_rot()

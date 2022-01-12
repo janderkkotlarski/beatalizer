@@ -35,7 +35,7 @@ private:
   { 4.0f };
 
   const float m_side
-  { 0.03f };
+  { 0.05f };
 
   float m_side_x
   { m_side };
@@ -65,6 +65,6 @@ public:
   float distance_value(const float pos);
 };
 
-std::vector <form> form_sine_wave(const int number, const float side, const float phase_step, auronacci &gold);
+std::vector <form> form_random_sphere(const int number, const float side, const float phase_step, auronacci &gold);
 
 #endif // FORM_H

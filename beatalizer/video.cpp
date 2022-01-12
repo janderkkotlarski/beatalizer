@@ -147,7 +147,7 @@ void video::run()
       { 2*x_pos };
 
       std::vector <form> cubes
-      { form_sine_wave(m_cube_amount, 0.01f, m_phase_step, m_gold) };
+      { form_random_sphere(m_cube_amount, 0.1f, m_phase_step, m_gold) };
 
       coordinates coords;
 
@@ -173,7 +173,7 @@ void video::run()
 
               for (form &cuber: cubes)
               {
-                // cuber.phasing(m_phase.get_phase());
+                cuber.phasing(m_phase.get_phase());
                 cuber.set_color();
               }
 

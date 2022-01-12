@@ -30,7 +30,9 @@ private:
 public:
   coordinates();
 
-  Vector3 get_pos();
+  Vector3 get_unit_pos();
+
+  Vector3 get_unit_dir();
 
   Vector3 get_unit_rot();
 

@@ -6,7 +6,7 @@ form::form(auronacci &gold)
 {
   m_coords.random_pos_gold(gold);
 
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
+  m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
 }
 
 form::form(auronacci &gold, const float phase_offset)
@@ -15,7 +15,7 @@ form::form(auronacci &gold, const float phase_offset)
 
   m_coords.random_pos_gold(gold);
 
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
+  m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
 }
 
 void form::set_color()
@@ -36,8 +36,11 @@ void form::set_side(const float side)
 
 void form::phasing(const float phase)
 {
+
   const float phase_actual
   { phase + m_phase_offset };
+
+  /*
 
   const float radius
   { m_radius*0.5f*(4.0f + 0.25f*static_cast<float>(cos(32.0f*phase_actual))) };
@@ -45,6 +48,7 @@ void form::phasing(const float phase)
   m_pos.x = radius*m_side*cos(phase_actual)*sin(0.1f*sin(32.0f*phase_actual));
   m_pos.y = radius*m_side*sin(phase_actual)*cos(0.0f*cos(1.0f*phase_actual));
   m_pos.z = radius*m_side*cos(phase_actual)*cos(0.1f*sin(32.0f*phase_actual));
+  */
 
   // const float sine_phase
   // { 0.25f*m_side*float(fabs(sin(2.0f*phase_actual))) };
@@ -52,6 +56,9 @@ void form::phasing(const float phase)
   // m_side_x = sine_phase;
   // m_side_y = sine_phase;
   // m_side_z = sine_phase;
+
+  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
+                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
 }
 
 void form::display_cuboid()
@@ -65,7 +72,7 @@ float form::distance_value(const float pos)
   return 255.0f*0.25f*(3.0f + cos(4.0f*m_tau*pos/m_radius));
 }
 
-std::vector <form> form_sine_wave(const int number, const float side, const float phase_step, auronacci &gold)
+std::vector <form> form_random_sphere(const int number, const float side, const float phase_step, auronacci &gold)
 {
   std::vector <form> cubes;
 
