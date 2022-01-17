@@ -27,13 +27,13 @@ CONFIG(release, debug|release) {
   QMAKE_LFLAGS += -pg
 }
 
-INCLUDEPATH += C:/raylib/raylib/src/externa/glfw
+INCLUDEPATH += C:/raylib/raylib/src/external/glfw
 INCLUDEPATH += C:/raylib/raylib/src
 INCLUDEPATH += C:/raylib/MinGW/bin
 INCLUDEPATH += C:/raylib/raylib
 INCLUDEPATH += C:/raylib
 
-INCLUDEPATH += C:\raylib\raylib\src\externa\glfw
+INCLUDEPATH += C:\raylib\raylib\src\external\glfw
 INCLUDEPATH += C:\raylib\raylib\src
 INCLUDEPATH += C:\raylib\MinGW\bin
 INCLUDEPATH += C:\raylib\raylib
@@ -42,13 +42,13 @@ INCLUDEPATH += C:\raylib\
 LIBS += -lraylib -Iexternal -lopengl32 -lgdi32 -lwinmm
 LIBS += -static -lpthread
 
-LIBS += -LC:/raylib/raylib/src/externa/glfw
+LIBS += -LC:/raylib/raylib/src/external/glfw
 LIBS += -LC:/raylib/raylib/src
 LIBS += -LC:/raylib/MinGW/bin
 LIBS += -LC:/raylib/raylib
 LIBS += -LC:/raylib
 
-LIBS += -LC:\raylib\raylib\src\externa\glfw
+LIBS += -LC:\raylib\raylib\src\external\glfw
 LIBS += -LC:\raylib\raylib\src
 LIBS += -LC:\raylib\MinGW\bin
 LIBS += -LC:\raylib\raylib

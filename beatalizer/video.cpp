@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <iostream>
 
 #include "form.h"
 
@@ -147,7 +148,10 @@ void video::run()
       { 2*x_pos };
 
       std::vector <form> cubes
-      { form_random_sphere(m_cube_amount, 0.1f, m_phase_step, m_gold) };
+      { form_random_arc(8, 0.1f, m_phase_step, m_gold) };
+      // { form_random_sphere(m_cube_amount, 0.1f, m_phase_step, m_gold) };
+
+      std::cout << cubes.size() << std::endl;
 
       coordinates coords;
 
@@ -163,6 +167,8 @@ void video::run()
           update_cam();
           update_bpm();
 
+
+
           BeginDrawing();
 
               ClearBackground(BLACK);
@@ -176,6 +182,8 @@ void video::run()
                 cuber.phasing(m_phase.get_phase());
                 cuber.set_color();
               }
+
+              std::cout << "reached" << std::endl;
 
               BeginMode3D(m_camera);
               {

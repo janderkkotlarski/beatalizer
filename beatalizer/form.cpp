@@ -34,6 +34,11 @@ void form::set_side(const float side)
   m_side_z = side;
 }
 
+void form::set_phase_offset(const float phase_offset)
+{
+  m_phase_offset = phase_offset;
+}
+
 void form::phasing(const float phase)
 {
 
@@ -57,8 +62,8 @@ void form::phasing(const float phase)
   // m_side_y = sine_phase;
   // m_side_z = sine_phase;
 
-  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
-                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
+  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(4.0f*phase_actual)),
+                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(4.0f*phase_actual)));
 }
 
 void form::display_cuboid()
@@ -90,4 +95,21 @@ std::vector <form> form_random_sphere(const int number, const float side, const 
   }
 
   return cubes;
+}
+
+std::vector <form> form_random_arc(const int number, const float side, const float phase_step, auronacci &gold)
+{
+  std::vector <form> cubes;
+
+  const float tau_div
+  { float(M_PI)/float(number) };
+
+  cubes.push_back(form(gold));
+
+  for (int count { 1 }; count < number; ++count)
+  {
+    cubes.push_back(cubes[0]);
+
+    cubes[count].set_phase_offset(float(count)*phase_step);
+  }
 }
