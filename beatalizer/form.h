@@ -60,7 +60,7 @@ public:
 
   void set_phase_offset(const float phase_offset);
 
-  void phasing(const float phase);
+  void orbit(const float phase);
 
   void display_cuboid();
 
@@ -69,6 +69,6 @@ public:
 
 std::vector <form> form_random_sphere(const int number, const float side, const float phase_step, auronacci &gold);
 
-std::vector <form> form_random_arc(const int number, const float side, const float phase_step, auronacci &gold);
+std::vector <form> form_random_arc(const int number, const float side, auronacci &gold);
 
 #endif // FORM_H

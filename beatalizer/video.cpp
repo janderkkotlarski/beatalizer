@@ -148,10 +148,8 @@ void video::run()
       { 2*x_pos };
 
       std::vector <form> cubes
-      { form_random_arc(8, 0.1f, m_phase_step, m_gold) };
+      { form_random_arc(32, 0.2f, m_gold) };
       // { form_random_sphere(m_cube_amount, 0.1f, m_phase_step, m_gold) };
-
-      std::cout << cubes.size() << std::endl;
 
       coordinates coords;
 
@@ -167,8 +165,6 @@ void video::run()
           update_cam();
           update_bpm();
 
-
-
           BeginDrawing();
 
               ClearBackground(BLACK);
@@ -179,11 +175,9 @@ void video::run()
 
               for (form &cuber: cubes)
               {
-                cuber.phasing(m_phase.get_phase());
+                cuber.orbit(m_phase.get_phase());
                 cuber.set_color();
               }
-
-              std::cout << "reached" << std::endl;
 
               BeginMode3D(m_camera);
               {

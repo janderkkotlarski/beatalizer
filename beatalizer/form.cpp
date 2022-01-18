@@ -41,31 +41,14 @@ void form::set_phase_offset(const float phase_offset)
   m_phase_offset = phase_offset;
 }
 
-void form::phasing(const float phase)
+void form::orbit(const float phase)
 {
 
   const float phase_actual
   { phase + m_phase_offset };
 
-  /*
-
-  const float radius
-  { m_radius*0.5f*(4.0f + 0.25f*static_cast<float>(cos(32.0f*phase_actual))) };
-
-  m_pos.x = radius*m_side*cos(phase_actual)*sin(0.1f*sin(32.0f*phase_actual));
-  m_pos.y = radius*m_side*sin(phase_actual)*cos(0.0f*cos(1.0f*phase_actual));
-  m_pos.z = radius*m_side*cos(phase_actual)*cos(0.1f*sin(32.0f*phase_actual));
-  */
-
-  // const float sine_phase
-  // { 0.25f*m_side*float(fabs(sin(2.0f*phase_actual))) };
-
-  // m_side_x = sine_phase;
-  // m_side_y = sine_phase;
-  // m_side_z = sine_phase;
-
-  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(4.0f*phase_actual)),
-                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(4.0f*phase_actual)));
+  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
+                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
 }
 
 void form::display_cuboid()
@@ -99,27 +82,31 @@ std::vector <form> form_random_sphere(const int number, const float side, const 
   return cubes;
 }
 
-std::vector <form> form_random_arc(const int number, const float side, const float phase_step, auronacci &gold)
+std::vector <form> form_random_arc(const int number, const float side, auronacci &gold)
 {
+  const float scale
+  { 8.0f };
+
   std::vector <form> cubes;
 
-  const float tau_div
-  { float(M_PI)/float(number) };
+  const float divided
+  { 1.0f/64.0f };
 
-  std::cout << cubes.size() << std::endl;
+  const float tau
+  { float(2.0*M_PI) };
 
-  cubes.push_back(form(gold));
+  cubes.push_back(form(gold, 0.0f));
 
-  std::cout << cubes.size() << std::endl;
+  cubes[0].set_side(side);
 
   for (int count { 1 }; count < number; ++count)
   {
     cubes.push_back(cubes[0]);
 
-    std::cout << cubes.size() << std::endl;
+    cubes[count].set_phase_offset(tau*divided*float(count));
 
-    cubes[count].set_phase_offset(float(count)*phase_step);
-
-    std::cout << cubes.size() << std::endl;
+    cubes[count].set_side(side);
   }
+
+  return cubes;
 }
