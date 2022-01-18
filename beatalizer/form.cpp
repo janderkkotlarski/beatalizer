@@ -1,5 +1,7 @@
 #include "form.h"
 
+#include <iostream>
+
 #include "functions.h"
 
 form::form(auronacci &gold)
@@ -104,12 +106,20 @@ std::vector <form> form_random_arc(const int number, const float side, const flo
   const float tau_div
   { float(M_PI)/float(number) };
 
+  std::cout << cubes.size() << std::endl;
+
   cubes.push_back(form(gold));
+
+  std::cout << cubes.size() << std::endl;
 
   for (int count { 1 }; count < number; ++count)
   {
     cubes.push_back(cubes[0]);
 
+    std::cout << cubes.size() << std::endl;
+
     cubes[count].set_phase_offset(float(count)*phase_step);
+
+    std::cout << cubes.size() << std::endl;
   }
 }
