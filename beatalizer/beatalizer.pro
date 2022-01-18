@@ -59,6 +59,7 @@ SOURCES += \
         coordinates.cpp \
         form.cpp \
         functions.cpp \
+        group.cpp \
         main.cpp \
         timer.cpp \
         video.cpp
@@ -68,5 +69,6 @@ HEADERS += \
         coordinates.h \
         form.h \
         functions.h \
+        group.h \
         timer.h \
         video.h

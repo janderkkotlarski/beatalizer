@@ -8,6 +8,7 @@
 
 #include "timer.h"
 #include "auronacci.h"
+#include "group.h"
 
 class video
 {
@@ -54,9 +55,6 @@ private:
 
   const float m_million
   { 1000000.0f };
-
-  const float m_2pow10
-  { 1024.0f };
 
   const float m_minute
   { 60.0f };
