@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <string>
+
 #include "auronacci.h"
 
 enum class frequ;
@@ -13,8 +15,18 @@ enum class dimension;
 
 enum class coloring;
 
-unsigned char unchar(float input);
+int half_int(const int number);
 
-float frequify_all(auronacci &gold);
+unsigned char unchar(const float input);
+
+int frequ_size();
+
+frequ frequify_all(auronacci &gold);
+
+frequ frequify_low(auronacci &gold);
+
+frequ frequify_high(auronacci &gold);
+
+std::string frequ2string(const frequ &freq);
 
 #endif // FUNCTIONS_H

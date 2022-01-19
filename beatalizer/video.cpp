@@ -7,6 +7,7 @@
 
 #include "form.h"
 #include "group.h"
+#include "functions.h"
 
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
@@ -136,6 +137,16 @@ void video::update_time()
 
 void video::run()
 {
+  for (int count { 0 }; count < 100 ; ++count)
+  {
+    // std::cout << frequ2string(frequify_all(m_gold));
+
+    // std::cout << frequ2string(frequify_low(m_gold));
+
+    std::cout << frequ2string(frequify_high(m_gold));
+  }
+      std::cout << std::endl;
+
       SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
       InitWindow(m_screen_width, m_screen_height, "Beatalizer");
