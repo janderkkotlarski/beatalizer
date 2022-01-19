@@ -31,7 +31,7 @@ int half_int(const int number)
   if (number % 2 == 1)
   { return (number + 1) / 2; }
 
-  return number % 2;
+  return number / 2;
 }
 
 unsigned char unchar(const float input)
@@ -62,6 +62,23 @@ frequ frequify_low(auronacci &gold)
 
   const int selector
   { int(low_freq*gold.get_fraction()) };
+
+  return frequ(selector);
+}
+
+frequ frequify_mid(auronacci &gold)
+{
+  const int half_freq
+  { half_int(frequ_size()) - 1 };
+
+  const int quart_freq
+  { half_int(half_freq) };
+
+  const float low_freq
+  { float(half_int(frequ_size())) };
+
+  const int selector
+  { quart_freq + int(low_freq*gold.get_fraction()) };
 
   return frequ(selector);
 }

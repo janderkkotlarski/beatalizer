@@ -25,6 +25,8 @@ frequ frequify_all(auronacci &gold);
 
 frequ frequify_low(auronacci &gold);
 
+frequ frequify_mid(auronacci &gold);
+
 frequ frequify_high(auronacci &gold);
 
 std::string frequ2string(const frequ &freq);

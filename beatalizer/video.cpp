@@ -143,7 +143,9 @@ void video::run()
 
     // std::cout << frequ2string(frequify_low(m_gold));
 
-    std::cout << frequ2string(frequify_high(m_gold));
+    std::cout << frequ2string(frequify_mid(m_gold));
+
+    // std::cout << frequ2string(frequify_high(m_gold));
   }
       std::cout << std::endl;
 
