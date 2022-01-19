@@ -34,6 +34,9 @@ private:
   const float m_radius
   { 4.0f };
 
+  float m_distance
+  { m_radius };
+
   const float m_side
   { 0.05f };
 
@@ -59,6 +62,8 @@ public:
   void set_side(const float side);
 
   void set_phase_offset(const float phase_offset);
+
+  void set_distance();
 
   void orbit(const float phase);
 

@@ -36,6 +36,11 @@ void form::set_side(const float side)
   m_side_z = side;
 }
 
+void form::set_distance()
+{
+  m_distance = m_radius;
+}
+
 void form::set_phase_offset(const float phase_offset)
 {
   m_phase_offset = phase_offset;
@@ -47,8 +52,11 @@ void form::orbit(const float phase)
   const float phase_actual
   { phase + m_phase_offset };
 
-  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
-                     Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
+  // m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
+  //                   Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
+
+  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_distance*cos(phase_actual)),
+                     Vector3Scale(m_coords.get_unit_dir(), m_distance*sin(phase_actual)));
 }
 
 void form::display_cuboid()

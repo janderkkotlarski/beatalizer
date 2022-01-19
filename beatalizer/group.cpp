@@ -14,7 +14,6 @@ void group::update(const float phase)
   }
 }
 
-
 void group::display()
 {
   for (form &cube: m_cubes)
