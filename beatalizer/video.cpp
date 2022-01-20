@@ -164,9 +164,10 @@ void video::run()
       group kubes
       { m_gold };
 
-      std::vector <form> cubes
-      { form_random_arc(32, 0.2f, m_gold) };
-      // { form_random_sphere(m_cube_amount, 0.1f, m_phase_step, m_gold) };
+      std::vector <group> cube_groups;
+
+      for (int count { 0 }; count < m_group_amount; ++count)
+      { cube_groups.push_back(group(m_gold)); }
 
       coordinates coords;
 
@@ -190,22 +191,17 @@ void video::run()
 
               m_phase.add_time(m_time_gap, m_micros_per_beat);
 
-              kubes.update(m_phase.get_phase());
+              // kubes.update(m_phase.get_phase());
 
-              for (form &cuber: cubes)
-              {
-                cuber.orbit(m_phase.get_phase());
-                cuber.set_color();
-              }
+              for (group &cubes: cube_groups)
+              { cubes.update(m_phase.get_phase()); }
 
               BeginMode3D(m_camera);
               {
-                  kubes.display();
+                  // kubes.display();
 
-                  for (form &cuber: cubes)
-                  {
-                    cuber.display_cuboid();
-                  }
+                  for (group &cubes: cube_groups)
+                  { cubes.display(); }
               }
               EndMode3D();
 

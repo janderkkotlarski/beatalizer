@@ -95,6 +95,9 @@ private:
   const int m_frame_skip
   { 5 };
 
+  const int m_group_amount
+  { 8 };
+
   const int m_cube_division
   { 128 };
 
