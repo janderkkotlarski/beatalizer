@@ -5,7 +5,7 @@
 
 #include "auronacci.h"
 
-enum class frequ;
+enum class period;
 
 enum class trigon;
 
@@ -19,16 +19,16 @@ int half_int(const int number);
 
 unsigned char unchar(const float input);
 
-int frequ_size();
+int period_size();
 
-frequ frequify_all(auronacci &gold);
+period periodic_all(auronacci &gold);
 
-frequ frequify_low(auronacci &gold);
+period periodic_low(auronacci &gold);
 
-frequ frequify_mid(auronacci &gold);
+period periodic_mid(auronacci &gold);
 
-frequ frequify_high(auronacci &gold);
+period periodic_high(auronacci &gold);
 
-std::string frequ2string(const frequ &freq);
+std::string period2string(const period &peri);
 
 #endif // FUNCTIONS_H

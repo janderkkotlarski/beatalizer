@@ -1,9 +1,9 @@
 #include "functions.h"
 
-enum class frequ
+enum class period
 {
-  f__64, f__32, f__16, f__8, f__4, f__2,
-  f_1, f_2, f_4, f_8, f_16, f_32, f_64, elements
+  p__64, p__32, p__16, p__8, p__4, p__2,
+  p_1, p_2, p_4, p_8, p_16, p_32, p_64, elements
 };
 
 enum class trigon
@@ -39,108 +39,108 @@ unsigned char unchar(const float input)
   return static_cast<unsigned char>(input);
 }
 
-int frequ_size()
+int period_size()
 {
-  return int(frequ::elements);
+  return int(period::elements);
 }
 
-frequ frequify_all(auronacci &gold)
+period periodic_all(auronacci &gold)
 {
-  const float all_freq
-  { float(frequ_size()) };
+  const float all_peri
+  { float(period_size()) };
 
   const int selector
-  { int(all_freq*gold.get_fraction()) };
+  { int(all_peri*gold.get_fraction()) };
 
-  return frequ(selector);
+  return period(selector);
 }
 
-frequ frequify_low(auronacci &gold)
+period periodic_low(auronacci &gold)
 {
-  const float low_freq
-  { float(half_int(frequ_size())) };
+  const float low_peri
+  { float(half_int(period_size())) };
 
   const int selector
-  { int(low_freq*gold.get_fraction()) };
+  { int(low_peri*gold.get_fraction()) };
 
-  return frequ(selector);
+  return period(selector);
 }
 
-frequ frequify_mid(auronacci &gold)
+period periodic_mid(auronacci &gold)
 {
-  const int half_freq
-  { half_int(frequ_size()) - 1 };
+  const int half_peri
+  { half_int(period_size()) - 1 };
 
-  const int quart_freq
-  { half_int(half_freq) };
+  const int quart_peri
+  { half_int(half_peri) };
 
-  const float low_freq
-  { float(half_int(frequ_size())) };
+  const float low_peri
+  { float(half_int(period_size())) };
 
   const int selector
-  { quart_freq + int(low_freq*gold.get_fraction()) };
+  { quart_peri + int(low_peri*gold.get_fraction()) };
 
-  return frequ(selector);
+  return period(selector);
 }
 
-frequ frequify_high(auronacci &gold)
+period periodic_high(auronacci &gold)
 {
-  const int half_freq
-  { half_int(frequ_size()) - 1 };
+  const int half_peri
+  { half_int(period_size()) - 1 };
 
-  const float low_freq
-  { float(half_int(frequ_size())) };
+  const float low_peri
+  { float(half_int(period_size())) };
 
   const int selector
-  { half_freq + int(low_freq*gold.get_fraction()) };
+  { half_peri + int(low_peri*gold.get_fraction()) };
 
-  return frequ(selector);
+  return period(selector);
 }
 
-std::string frequ2string(const frequ &freq)
+std::string period2string(const period &peri)
 {
-  switch (freq)
+  switch (peri)
   {
-    case frequ::f__64:
+    case period::p__64:
       return "[1/64]";
       break;
-    case frequ::f__32:
+    case period::p__32:
       return "[1/32]";
       break;
-    case frequ::f__16:
+    case period::p__16:
       return "[1/16]";
       break;
-    case frequ::f__8:
+    case period::p__8:
       return "[1/8]";
       break;
-    case frequ::f__4:
+    case period::p__4:
       return "[1/4]";
       break;
-    case frequ::f__2:
+    case period::p__2:
       return "[1/2]";
       break;
-    case frequ::f_1:
+    case period::p_1:
       return "[1]";
       break;
-    case frequ::f_2:
+    case period::p_2:
       return "[2]";
       break;
-    case frequ::f_4:
+    case period::p_4:
       return "[4]";
       break;
-    case frequ::f_8:
+    case period::p_8:
       return "[8]";
       break;
-    case frequ::f_16:
+    case period::p_16:
       return "[16]";
       break;
-    case frequ::f_32:
+    case period::p_32:
       return "[32]";
       break;
-    case frequ::f_64:
+    case period::p_64:
       return "[64]";
       break;
-    case frequ::elements:
+    case period::elements:
       return "[elements]";
       break;
   }
