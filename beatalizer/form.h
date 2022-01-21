@@ -52,6 +52,9 @@ private:
   float m_phase_offset
   { 0.0f };
 
+  float m_phase_actual
+  { 0.0f };
+
 public:
   form(auronacci &gold);
 
@@ -64,6 +67,8 @@ public:
   void set_phase_offset(const float phase_offset);
 
   void set_distance();
+
+  void rephase();
 
   void orbit(const float phase);
 

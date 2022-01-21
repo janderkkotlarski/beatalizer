@@ -35,11 +35,16 @@ void form::set_side(const float side)
   m_side_z = side;
 }
 
+void form::set_phase_offset(const float phase_offset)
+{ m_phase_offset = phase_offset; }
+
 void form::set_distance()
 { m_distance = m_radius; }
 
-void form::set_phase_offset(const float phase_offset)
-{ m_phase_offset = phase_offset; }
+void form::rephase()
+{
+
+}
 
 void form::orbit(const float phase)
 {

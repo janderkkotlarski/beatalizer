@@ -35,14 +35,10 @@ int half_int(const int number)
 }
 
 unsigned char unchar(const float input)
-{
-  return static_cast<unsigned char>(input);
-}
+{ return static_cast<unsigned char>(input); }
 
 int period_size()
-{
-  return int(period::elements);
-}
+{ return int(period::elements); }
 
 period periodic_all(auronacci &gold)
 {

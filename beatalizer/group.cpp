@@ -7,6 +7,8 @@ group::group(auronacci &gold)
 
 void group::update(const float phase)
 {
+
+
   for (form &cube: m_cubes)
   {
     cube.orbit(phase);
