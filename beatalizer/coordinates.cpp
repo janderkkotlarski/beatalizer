@@ -6,32 +6,23 @@
 
 coordinates::coordinates()
 {
-
 }
 
 Vector3 coordinates::get_unit_pos()
-{
-  return m_unit_pos;
-}
+{ return m_unit_pos; }
 
 Vector3 coordinates::get_unit_dir()
-{
-  return m_unit_dir;
-}
+{ return m_unit_dir; }
 
 Vector3 coordinates::get_unit_rot()
-{
-  return m_unit_rot;
-}
+{ return m_unit_rot; }
 
 void coordinates::random_pos_gold(auronacci &gold)
 {
   m_unit_pos = random_pos_auro(gold);
-
   m_unit_dir = random_pos_auro(gold);
 
   m_unit_rot = Vector3Normalize(Vector3CrossProduct(m_unit_pos, m_unit_dir));
-
   m_unit_dir = Vector3Normalize(Vector3CrossProduct(m_unit_rot, m_unit_pos));
 }
 
@@ -49,9 +40,7 @@ Vector3 random_pos_auro(auronacci &gold)
   { 2.0f*float(M_PI)*gold.get_fraction() };
 
   unit_pos.x = pos_xy*cos(phi);
-
   unit_pos.y = pos_xy*sin(phi);
-
   unit_pos.z = pos_z;
 
   return unit_pos;

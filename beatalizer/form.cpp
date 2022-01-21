@@ -14,7 +14,6 @@ form::form(auronacci &gold)
 form::form(auronacci &gold, const float phase_offset)
   : m_phase_offset(m_tau*phase_offset)
 {
-
   m_coords.random_pos_gold(gold);
 
   m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
@@ -37,32 +36,22 @@ void form::set_side(const float side)
 }
 
 void form::set_distance()
-{
-  m_distance = m_radius;
-}
+{ m_distance = m_radius; }
 
 void form::set_phase_offset(const float phase_offset)
-{
-  m_phase_offset = phase_offset;
-}
+{ m_phase_offset = phase_offset; }
 
 void form::orbit(const float phase)
 {
-
   const float phase_actual
   { phase + m_phase_offset };
-
-  // m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_radius*cos(phase_actual)),
-  //                   Vector3Scale(m_coords.get_unit_dir(), m_radius*sin(phase_actual)));
 
   m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_distance*cos(phase_actual)),
                      Vector3Scale(m_coords.get_unit_dir(), m_distance*sin(phase_actual)));
 }
 
 void form::display_cuboid()
-{
-  DrawCube(m_pos, m_side_x, m_side_y, m_side_z, m_color);
-}
+{ DrawCube(m_pos, m_side_x, m_side_y, m_side_z, m_color); }
 
 
 float form::distance_value(const float pos)
@@ -74,18 +63,11 @@ std::vector <form> form_random_sphere(const int number, const float side, const 
 {
   std::vector <form> cubes;
 
-
   const float tau_div
   { float(M_PI)/float(number) };
 
   for (int count { 1 }; count < number; ++count)
-  {
-    cubes.push_back(form(gold, float(count)*phase_step));
-
-    // cubes[count].set_side(side);
-
-    // cubes[count - 1].set_side(side*sin(float(count)*tau_div));
-  }
+  { cubes.push_back(form(gold, float(count)*phase_step)); }
 
   return cubes;
 }

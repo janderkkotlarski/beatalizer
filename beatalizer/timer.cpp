@@ -2,19 +2,14 @@
 
 timer::timer()
 {
-
 }
 
 void timer::phase_reset() noexcept
-{
-  m_beat_phase = 0.0f;
-}
+{ m_beat_phase = 0.0f; }
 
 float timer::get_phase()
 noexcept
-{
-  return m_beat_phase;
-}
+{ return m_beat_phase; }
 
 void timer::add_time(const float time, const float beat_length)
 {

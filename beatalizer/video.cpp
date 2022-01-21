@@ -21,12 +21,10 @@
 
 video::video()
 {
-
 }
 
 void video::initialize()
 {
-
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
   InitWindow(m_screen_width, m_screen_height, "beatalizer");
 
@@ -47,9 +45,7 @@ void video::initialize()
 }
 
 void video::rebeat()
-{
-  m_micros_per_beat = m_million*m_minute/m_bpm;
-}
+{ m_micros_per_beat = m_million*m_minute/m_bpm; }
 
 void video::update_cam()
 {
@@ -129,7 +125,6 @@ void video::update_time()
 {
   m_micros_then = m_micros_now;
   m_micros_now = micros();
-
   m_micros_gap = m_micros_now - m_micros_then;
 
   m_time_gap = float(int(m_micros_gap));
@@ -225,6 +220,4 @@ void video::run()
 
 float to_seconds(const int period)
 noexcept
-{
-  return static_cast<float>(period)/1000000000.0f;
-}
+{ return static_cast<float>(period)/1000000000.0f; }
