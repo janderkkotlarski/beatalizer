@@ -6,7 +6,9 @@
 
 form::form(auronacci &gold)
 {
-  m_coords.random_pos_gold(gold);
+  m_coords.random_pos_gold(gold);  
+  m_coords.random_dir_gold(gold);
+  m_coords.perpendicular();
 
   m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
 }
@@ -15,6 +17,8 @@ form::form(auronacci &gold, const float phase_offset)
   : m_phase_offset(m_tau*phase_offset)
 {
   m_coords.random_pos_gold(gold);
+  m_coords.random_dir_gold(gold);
+  m_coords.perpendicular();
 
   m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
 }
@@ -41,9 +45,16 @@ void form::set_phase_offset(const float phase_offset)
 void form::set_distance()
 { m_distance = m_radius; }
 
-void form::rephase()
+void form::set_dir(const Vector3 &dir)
 {
+  m_coords.set_unit_dir(dir);
+  m_coords.perpendicular();
+}
 
+void form::rephase(auronacci &gold)
+{
+  // m_coords.random_dir_gold(gold);
+  m_coords.perpendicular();
 }
 
 void form::orbit(const float phase)

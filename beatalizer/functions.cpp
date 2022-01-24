@@ -1,11 +1,5 @@
 #include "functions.h"
 
-enum class period
-{
-  p__64, p__32, p__16, p__8, p__4, p__2,
-  p_1, p_2, p_4, p_8, p_16, p_32, p_64, elements
-};
-
 enum class trigon
 {
   sine, cosine
@@ -91,6 +85,57 @@ period periodic_high(auronacci &gold)
   { half_peri + int(low_peri*gold.get_fraction()) };
 
   return period(selector);
+}
+
+float period2float(const period &peri)
+{
+  switch (peri)
+  {
+    case period::p__64:
+      return 1.0f/64.0f;
+      break;
+    case period::p__32:
+      return 1.0f/32.0f;
+      break;
+    case period::p__16:
+      return 1.0f/16.0f;
+      break;
+    case period::p__8:
+      return 1.0f/8.0f;
+      break;
+    case period::p__4:
+      return 1.0f/4.0f;
+      break;
+    case period::p__2:
+      return 1.0f/2.0f;
+      break;
+    case period::p_1:
+      return 1.0f;
+      break;
+    case period::p_2:
+      return 2.0f;
+      break;
+    case period::p_4:
+      return 4.0f;
+      break;
+    case period::p_8:
+      return 8.0f;
+      break;
+    case period::p_16:
+      return 16.0f;
+      break;
+    case period::p_32:
+      return 32.0f;
+      break;
+    case period::p_64:
+      return 64.0f;
+      break;
+    case period::elements:
+      return 0.0f;
+      break;
+  }
+
+  return 0.0f;
 }
 
 std::string period2string(const period &peri)

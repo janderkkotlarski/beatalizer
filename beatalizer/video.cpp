@@ -189,7 +189,7 @@ void video::run()
               // kubes.update(m_phase.get_phase());
 
               for (group &cubes: cube_groups)
-              { cubes.update(m_phase.get_phase()); }
+              { cubes.update(m_phase.get_phase(), m_gold); }
 
               BeginMode3D(m_camera);
               {

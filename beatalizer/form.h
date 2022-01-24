@@ -68,7 +68,9 @@ public:
 
   void set_distance();
 
-  void rephase();
+  void set_dir(const Vector3 &dir);
+
+  void rephase(auronacci &gold);
 
   void orbit(const float phase);
 

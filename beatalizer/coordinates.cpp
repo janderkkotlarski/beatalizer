@@ -17,11 +17,17 @@ Vector3 coordinates::get_unit_dir()
 Vector3 coordinates::get_unit_rot()
 { return m_unit_rot; }
 
-void coordinates::random_pos_gold(auronacci &gold)
-{
-  m_unit_pos = random_pos_auro(gold);
-  m_unit_dir = random_pos_auro(gold);
+void coordinates::set_unit_dir(const Vector3 &dir)
+{ m_unit_dir = dir; }
 
+void coordinates::random_pos_gold(auronacci &gold)
+{ m_unit_pos = random_pos_auro(gold); }
+
+void coordinates::random_dir_gold(auronacci &gold)
+{ m_unit_dir = random_pos_auro(gold); }
+
+void coordinates::perpendicular()
+{
   m_unit_rot = Vector3Normalize(Vector3CrossProduct(m_unit_pos, m_unit_dir));
   m_unit_dir = Vector3Normalize(Vector3CrossProduct(m_unit_rot, m_unit_pos));
 }
@@ -43,5 +49,5 @@ Vector3 random_pos_auro(auronacci &gold)
   unit_pos.y = pos_xy*sin(phi);
   unit_pos.z = pos_z;
 
-  return unit_pos;
+  return Vector3Normalize(unit_pos);
 }

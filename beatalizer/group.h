@@ -15,13 +15,22 @@ private:
   const float m_side
   { 0.2f };
 
-  period m_peri;
+  period m_peri
+  { period::p_1 };
+
+  float m_phase_left
+  { 0.0f };
+
+  float m_phase_previous
+  { 0.0f };
 
   std::vector <form> m_cubes;
 public:
   group(auronacci &gold);
 
-  void update(const float phase);
+  void update(const float phase, auronacci &gold);
+
+  void rephase(auronacci &gold);
 
   void display();
 };
