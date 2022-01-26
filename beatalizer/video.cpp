@@ -138,7 +138,7 @@ void video::run()
 
     // std::cout << frequ2string(frequify_low(m_gold));
 
-    std::cout << period2string(periodic_mid(m_gold));
+    // std::cout << period2string(periodic_mid(m_gold));
 
     // std::cout << frequ2string(frequify_high(m_gold));
   }
@@ -150,6 +150,8 @@ void video::run()
 
       GetFontDefault();
 
+      m_phase.phase_reset();
+
       const int x_pos
       { int(float(GetScreenHeight())/100.0f) };
 
@@ -157,13 +159,10 @@ void video::run()
       { 2*x_pos };
 
       form cube;
-
-      cube.set_side(0.05f);
+      cube.set_side(0.2f);
 
       form kube(m_gold);
-
       kube.set_side(0.5f);
-
       kube.set_color();
 
 
@@ -203,7 +202,6 @@ void video::run()
               BeginMode3D(m_camera);
               {
                 cube.display_cuboid();
-
                 kube.display_cuboid();
 
                   // kubes.display();
@@ -218,8 +216,39 @@ void video::run()
 
               std::string transient;
 
-              // transient = "Rotate around : [" + std::to_string(rot.x) + ", " + std::to_string(rot.y) + ", " + std::to_string(rot.z) + "]";
-              // DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+              transient = "Time gap : [" + std::to_string(m_time_gap) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Micros   : [" + std::to_string(m_micros_per_beat) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Fraction : [" + std::to_string(m_time_gap/m_micros_per_beat) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Fraction : [" + std::to_string(m_phase.get_phase_fraction()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Tau phase: [" + std::to_string(m_phase.get_phase()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Tau      : [" + std::to_string(m_phase.get_tau()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Tau fraction: [" + std::to_string(m_phase.get_tau_phase_fraction()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
 
           EndDrawing();
 

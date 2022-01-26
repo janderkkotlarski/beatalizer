@@ -13,6 +13,12 @@ private:
   float m_beat_phase
   { 0.0f };
 
+  float m_phase_fraction
+  { 0.0f };
+
+  float m_tau_phase_fraction
+  { 0.0f };
+
   const float m_beat_mult
   { 64.0f };
 
@@ -22,6 +28,12 @@ public:
   void phase_reset() noexcept;
 
   float get_phase() noexcept;
+
+  float get_phase_fraction() noexcept;
+
+  float get_tau() noexcept;
+
+  float get_tau_phase_fraction() noexcept;
 
   void add_time(const float time, const float beat_length);
 };
