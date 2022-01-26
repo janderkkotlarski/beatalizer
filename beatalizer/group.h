@@ -5,6 +5,8 @@
 
 #include "form.h"
 #include "functions.h"
+#include "auronacci.h"
+#include "period.h"
 
 class group
 {

@@ -61,6 +61,7 @@ SOURCES += \
         functions.cpp \
         group.cpp \
         main.cpp \
+        period.cpp \
         timer.cpp \
         video.cpp
 
@@ -70,5 +71,6 @@ HEADERS += \
         form.h \
         functions.h \
         group.h \
+        period.h \
         timer.h \
         video.h
