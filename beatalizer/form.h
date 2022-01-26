@@ -7,6 +7,7 @@
 #include "raylib.h"
 
 #include "coordinates.h"
+#include "period.h"
 
 class form
 {
@@ -56,11 +57,15 @@ private:
   { 0.0f };
 
 public:
+  form();
+
   form(auronacci &gold);
 
   form(auronacci &gold, const float phase_offset);
 
   void set_color();
+
+  void set_color(const Color &color);
 
   void set_side(const float side);
 
@@ -69,8 +74,6 @@ public:
   void set_distance();
 
   void set_dir(const Vector3 &dir);
-
-  void rephase(auronacci &gold);
 
   void orbit(const float phase);
 

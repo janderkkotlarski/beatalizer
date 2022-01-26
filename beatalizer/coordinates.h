@@ -18,25 +18,27 @@ private:
   Vector3 m_unit_z
   { 0.0f, 0.0f, 1.0f };
 
-  Vector3 m_unit_pos
+  Vector3 m_pos
   { 1.0f, 0.0f, 0.0f };
 
-  Vector3 m_unit_dir
+  Vector3 m_dir
   { 0.0f, 1.0f, 0.0f };
 
-  Vector3 m_unit_rot
-  { Vector3CrossProduct(m_unit_pos, m_unit_dir) };
+  Vector3 m_rot
+  { Vector3CrossProduct(m_pos, m_dir) };
 
 public:
   coordinates();
 
-  Vector3 get_unit_pos();
+  Vector3 get_pos();
 
-  Vector3 get_unit_dir();
+  Vector3 get_dir();
 
-  Vector3 get_unit_rot();
+  Vector3 get_rot();
 
-  void set_unit_dir(const Vector3 &dir);
+  void set_pos(const Vector3 &pos);
+
+  void set_dir(const Vector3 &dir);
 
   void random_pos_gold(auronacci &gold);
 

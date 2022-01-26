@@ -4,13 +4,18 @@
 
 #include "functions.h"
 
+form::form()
+{
+  m_coords.set_pos( Vector3{0.0f, 0.0f, 0.0f} );
+}
+
 form::form(auronacci &gold)
 {
   m_coords.random_pos_gold(gold);  
   m_coords.random_dir_gold(gold);
   m_coords.perpendicular();
 
-  m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 form::form(auronacci &gold, const float phase_offset)
@@ -20,7 +25,7 @@ form::form(auronacci &gold, const float phase_offset)
   m_coords.random_dir_gold(gold);
   m_coords.perpendicular();
 
-  m_pos = Vector3Scale(m_coords.get_unit_pos(), m_radius);
+  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 }
 
 void form::set_color()
@@ -31,6 +36,9 @@ void form::set_color()
     unchar(distance_value(m_pos.z)),
     255};
 }
+
+void form::set_color(const Color &color)
+{ m_color = color; }
 
 void form::set_side(const float side)
 {
@@ -47,13 +55,7 @@ void form::set_distance()
 
 void form::set_dir(const Vector3 &dir)
 {
-  m_coords.set_unit_dir(dir);
-  m_coords.perpendicular();
-}
-
-void form::rephase(auronacci &gold)
-{
-  // m_coords.random_dir_gold(gold);
+  m_coords.set_dir(dir);
   m_coords.perpendicular();
 }
 
@@ -62,8 +64,8 @@ void form::orbit(const float phase)
   const float phase_actual
   { phase + m_phase_offset };
 
-  m_pos = Vector3Add(Vector3Scale(m_coords.get_unit_pos(), m_distance*cos(phase_actual)),
-                     Vector3Scale(m_coords.get_unit_dir(), m_distance*sin(phase_actual)));
+  m_pos = Vector3Add(Vector3Scale(m_coords.get_pos(), m_distance*cos(phase_actual)),
+                     Vector3Scale(m_coords.get_dir(), m_distance*sin(phase_actual)));
 }
 
 void form::display_cuboid()

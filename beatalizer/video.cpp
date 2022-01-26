@@ -156,18 +156,24 @@ void video::run()
       const int font_size
       { 2*x_pos };
 
-      group kubes
-      { m_gold };
+      form cube;
 
-      std::vector <group> cube_groups;
+      cube.set_side(0.05f);
 
-      for (int count { 0 }; count < m_group_amount; ++count)
-      { cube_groups.push_back(group(m_gold)); }
+      form kube(m_gold);
 
-      coordinates coords;
+      kube.set_side(0.5f);
 
-      const Vector3 rot
-      { coords.get_unit_rot() };
+      kube.set_color();
+
+
+      // group kubes
+      // { m_gold };
+
+      // std::vector <group> cube_groups;
+
+      // for (int count { 0 }; count < m_group_amount; ++count)
+      // { cube_groups.push_back(group(m_gold)); }
 
       // Main game loop
       while (!WindowShouldClose())                // Detect window close button or ESC key
@@ -186,17 +192,24 @@ void video::run()
 
               m_phase.add_time(m_time_gap, m_micros_per_beat);
 
+              kube.orbit(m_phase.get_phase());
+              kube.set_color();
+
               // kubes.update(m_phase.get_phase());
 
-              for (group &cubes: cube_groups)
-              { cubes.update(m_phase.get_phase(), m_gold); }
+              // for (group &cubes: cube_groups)
+              // { cubes.update(m_phase.get_phase(), m_gold); }
 
               BeginMode3D(m_camera);
               {
+                cube.display_cuboid();
+
+                kube.display_cuboid();
+
                   // kubes.display();
 
-                  for (group &cubes: cube_groups)
-                  { cubes.display(); }
+                  // for (group &cubes: cube_groups)
+                  // { cubes.display(); }
               }
               EndMode3D();
 
@@ -205,8 +218,8 @@ void video::run()
 
               std::string transient;
 
-              transient = "Rotate around : [" + std::to_string(rot.x) + ", " + std::to_string(rot.y) + ", " + std::to_string(rot.z) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+              // transient = "Rotate around : [" + std::to_string(rot.x) + ", " + std::to_string(rot.y) + ", " + std::to_string(rot.z) + "]";
+              // DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();
 

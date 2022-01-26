@@ -8,28 +8,31 @@ coordinates::coordinates()
 {
 }
 
-Vector3 coordinates::get_unit_pos()
-{ return m_unit_pos; }
+Vector3 coordinates::get_pos()
+{ return m_pos; }
 
-Vector3 coordinates::get_unit_dir()
-{ return m_unit_dir; }
+Vector3 coordinates::get_dir()
+{ return m_dir; }
 
-Vector3 coordinates::get_unit_rot()
-{ return m_unit_rot; }
+Vector3 coordinates::get_rot()
+{ return m_rot; }
 
-void coordinates::set_unit_dir(const Vector3 &dir)
-{ m_unit_dir = dir; }
+void coordinates::set_pos(const Vector3 &dir)
+{ m_dir = dir; }
+
+void coordinates::set_dir(const Vector3 &dir)
+{ m_dir = dir; }
 
 void coordinates::random_pos_gold(auronacci &gold)
-{ m_unit_pos = random_pos_auro(gold); }
+{ m_pos = random_pos_auro(gold); }
 
 void coordinates::random_dir_gold(auronacci &gold)
-{ m_unit_dir = random_pos_auro(gold); }
+{ m_dir = random_pos_auro(gold); }
 
 void coordinates::perpendicular()
 {
-  m_unit_rot = Vector3Normalize(Vector3CrossProduct(m_unit_pos, m_unit_dir));
-  m_unit_dir = Vector3Normalize(Vector3CrossProduct(m_unit_rot, m_unit_pos));
+  m_rot = Vector3Normalize(Vector3CrossProduct(m_pos, m_dir));
+  m_dir = Vector3Normalize(Vector3CrossProduct(m_rot, m_pos));
 }
 
 Vector3 random_pos_auro(auronacci &gold)
