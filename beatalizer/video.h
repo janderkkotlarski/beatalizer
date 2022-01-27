@@ -104,13 +104,10 @@ private:
   const int m_cube_amount
   { 256 };
 
-  const int m_phase_divider
-  { 16 };
-
-  const float m_phase_step
-  { 1.0f/float(m_phase_divider*m_cube_division) };
-
   timer m_phase;
+
+  int m_counter
+  { 0 };
 
 public:
   video();

@@ -123,11 +123,16 @@ void video::update_bpm()
 
 void video::update_time()
 {
-  m_micros_then = m_micros_now;
-  m_micros_now = micros();
-  m_micros_gap = m_micros_now - m_micros_then;
+  if (m_counter < 100)
+  {
+    m_micros_then = m_micros_now;
+    m_micros_now = micros();
+    m_micros_gap = m_micros_now - m_micros_then;
 
-  m_time_gap = float(int(m_micros_gap));
+    m_time_gap = float(int(m_micros_gap));
+
+    ++m_counter;
+  }
 }
 
 void video::run()
@@ -152,6 +157,8 @@ void video::run()
 
       m_phase.phase_reset();
 
+      timer phase;
+
       const int x_pos
       { int(float(GetScreenHeight())/100.0f) };
 
@@ -175,6 +182,8 @@ void video::run()
       // { cube_groups.push_back(group(m_gold)); }
 
       // Main game loop
+      update_time();
+
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
           // Update
@@ -190,6 +199,7 @@ void video::run()
               update_time();
 
               m_phase.add_time(m_time_gap, m_micros_per_beat);
+              // phase.add_time(m_time_gap, m_micros_per_beat);
 
               kube.orbit(m_phase.get_phase());
               kube.set_color();
@@ -236,7 +246,7 @@ void video::run()
 
               y_pos += font_size;
 
-              transient = "Tau phase: [" + std::to_string(m_phase.get_phase()) + "]";
+              transient = "Tau phase: [" + std::to_string(phase.get_phase()) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
@@ -247,6 +257,11 @@ void video::run()
               y_pos += font_size;
 
               transient = "Tau fraction: [" + std::to_string(m_phase.get_tau_phase_fraction()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+              y_pos += font_size;
+
+              transient = "Counter    : [" + std::to_string(m_counter) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
 

@@ -1,7 +1,6 @@
 #include "timer.h"
 
 timer::timer()
-  : m_beat_phase(0.0f)
 {
 }
 
@@ -28,7 +27,7 @@ void timer::add_time(const float time, const float beat_length)
 {
   m_phase_fraction = time/beat_length;
 
-  m_tau_phase_fraction = m_tau*time/beat_length;
+  m_tau_phase_fraction = m_tau*m_phase_fraction;
 
   m_beat_phase += m_tau_phase_fraction;
 
