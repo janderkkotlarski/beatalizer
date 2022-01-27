@@ -1,5 +1,9 @@
 #include "functions.h"
 
+#include <cmath>
+
+#include "raymath.h"
+
 enum class trigon
 {
   sine, cosine
@@ -31,6 +35,9 @@ int half_int(const int number)
 unsigned char unchar(const float input)
 { return static_cast<unsigned char>(input); }
 
-
-
-
+Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
+                  const float dist, const float phase)
+{
+  return Vector3Add(Vector3Scale(pos, dist*cos(phase)),
+                    Vector3Scale(dir, dist*sin(phase)));
+}

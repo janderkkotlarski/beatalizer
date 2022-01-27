@@ -6,7 +6,7 @@
 
 form::form()
 {
-  m_coords.set_pos( Vector3{0.0f, 0.0f, 0.0f} );
+  m_coords.set_pos(Vector3{ 0.0f, 0.0f, 0.0f });
 }
 
 form::form(auronacci &gold)
@@ -59,14 +59,34 @@ void form::set_dir(const Vector3 &dir)
   m_coords.perpendicular();
 }
 
-void form::orbit(const float phase)
+void form::set_period(auronacci &gold)
 {
-  const float phase_actual
-  { phase + m_phase_offset };
+  m_period_countdown = period::p_4;
 
-  m_pos = Vector3Add(Vector3Scale(m_coords.get_pos(), m_distance*cos(phase_actual)),
-                     Vector3Scale(m_coords.get_dir(), m_distance*sin(phase_actual)));
+  m_coords.set_pos(m_pos_next);
+  m_coords.random_dir_gold(gold);
+  m_coords.perpendicular();
+
+  const float countdown_phase
+  { m_tau*period2float(m_period_countdown) };
+
+  m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, countdown_phase);
+
+  m_countdown += period2float(m_period_countdown);
 }
+
+void form::rephase(const float phase, auronacci &gold)
+{
+  m_phase_actual = phase + m_phase_offset;
+
+  m_countdown -= phase;
+
+  if (m_countdown <= 0.0f)
+  { set_period(gold); }
+}
+
+void form::orbit()
+{ m_pos = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, m_phase_actual/period2float(m_period_orbit)); }
 
 void form::display_cuboid()
 { DrawCube(m_pos, m_side_x, m_side_y, m_side_z, m_color); }

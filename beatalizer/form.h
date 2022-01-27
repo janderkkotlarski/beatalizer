@@ -30,6 +30,9 @@ private:
   Vector3 m_pos
   { 0.0f, 0.0f, 0.0f };
 
+  Vector3 m_pos_next
+  { 0.0f, 0.0f, 0.0f };
+
   coordinates m_coords;
 
   const float m_radius
@@ -56,6 +59,15 @@ private:
   float m_phase_actual
   { 0.0f };
 
+  period m_period_countdown
+  { period::p_4 };
+
+  float m_countdown
+  { 0.0f };
+
+  period m_period_orbit
+  { period::p_16 };
+
 public:
   form();
 
@@ -75,7 +87,11 @@ public:
 
   void set_dir(const Vector3 &dir);
 
-  void orbit(const float phase);
+  void set_period(auronacci &gold);
+
+  void rephase(const float phase, auronacci &gold);
+
+  void orbit();
 
   void display_cuboid();
 

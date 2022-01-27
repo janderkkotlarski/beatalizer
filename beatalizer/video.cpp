@@ -123,16 +123,13 @@ void video::update_bpm()
 
 void video::update_time()
 {
-  if (m_counter < 100)
-  {
-    m_micros_then = m_micros_now;
-    m_micros_now = micros();
-    m_micros_gap = m_micros_now - m_micros_then;
+  m_micros_then = m_micros_now;
+  m_micros_now = micros();
+  m_micros_gap = m_micros_now - m_micros_then;
 
-    m_time_gap = float(int(m_micros_gap));
+  m_time_gap = float(int(m_micros_gap));
 
-    ++m_counter;
-  }
+  ++m_counter;
 }
 
 void video::run()
@@ -201,7 +198,8 @@ void video::run()
               m_phase.add_time(m_time_gap, m_micros_per_beat);
               // phase.add_time(m_time_gap, m_micros_per_beat);
 
-              kube.orbit(m_phase.get_phase());
+              kube.rephase(m_phase.get_phase(), m_gold);
+              kube.orbit();
               kube.set_color();
 
               // kubes.update(m_phase.get_phase());

@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "raylib.h"
+
 #include "auronacci.h"
 
 enum class trigon;
@@ -17,6 +19,7 @@ int half_int(const int number);
 
 unsigned char unchar(const float input);
 
-
+Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
+               const float dist, const float phase);
 
 #endif // FUNCTIONS_H
