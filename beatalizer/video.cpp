@@ -259,7 +259,7 @@ void video::run()
 
               y_pos += font_size;
 
-              transient = "Counter    : [" + std::to_string(m_counter) + "]";
+              transient = "Countdown  : [" + std::to_string(kube.get_countdown()) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
 

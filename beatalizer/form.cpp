@@ -37,6 +37,9 @@ void form::set_color()
     255};
 }
 
+float form::get_countdown() noexcept
+{ return m_countdown; }
+
 void form::set_color(const Color &color)
 { m_color = color; }
 
@@ -79,7 +82,7 @@ void form::rephase(const float phase, auronacci &gold)
 {
   m_phase_actual = phase + m_phase_offset;
 
-  m_countdown -= phase;
+  m_countdown -= phase/m_tau;
 
   if (m_countdown <= 0.0f)
   { set_period(gold); }

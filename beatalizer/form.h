@@ -75,6 +75,8 @@ public:
 
   form(auronacci &gold, const float phase_offset);
 
+  float get_countdown() noexcept;
+
   void set_color();
 
   void set_color(const Color &color);
