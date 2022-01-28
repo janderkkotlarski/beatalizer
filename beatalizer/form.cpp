@@ -28,6 +28,8 @@ form::form(auronacci &gold, const float phase_offset)
   m_coords.perpendicular();
 
   m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
+
+  set_next_pos();
 }
 
 void form::set_color()
