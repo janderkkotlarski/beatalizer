@@ -17,8 +17,8 @@ Vector3 coordinates::get_dir()
 Vector3 coordinates::get_rot()
 { return m_rot; }
 
-void coordinates::set_pos(const Vector3 &dir)
-{ m_dir = dir; }
+void coordinates::set_pos(const Vector3 &pos)
+{ m_pos = pos; }
 
 void coordinates::set_dir(const Vector3 &dir)
 { m_dir = dir; }

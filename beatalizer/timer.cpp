@@ -5,11 +5,11 @@ timer::timer()
 }
 
 void timer::phase_reset() noexcept
-{ m_beat_phase = 0.0f; }
+{ m_tau_beat_phase = 0.0f; }
 
 float timer::get_phase()
 noexcept
-{ return m_beat_phase; }
+{ return m_tau_beat_phase; }
 
 float timer::get_phase_fraction()
 noexcept
@@ -23,13 +23,16 @@ float timer::get_tau_phase_fraction()
 noexcept
 { return m_tau_phase_fraction; }
 
+void timer::set_phase(const float phase)
+{ m_tau_beat_phase = phase; }
+
 void timer::add_time(const float time, const float beat_length)
 {
   m_phase_fraction = time/beat_length;
 
   m_tau_phase_fraction = m_tau*m_phase_fraction;
 
-  m_beat_phase += m_tau_phase_fraction;
+  m_tau_beat_phase += m_tau_phase_fraction;
 
   // if (m_beat_phase > m_tau)
   // { m_beat_phase -= m_tau; }

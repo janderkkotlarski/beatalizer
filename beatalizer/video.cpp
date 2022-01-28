@@ -152,9 +152,7 @@ void video::run()
 
       GetFontDefault();
 
-      m_phase.phase_reset();
-
-      timer phase;
+      m_clock.phase_reset();
 
       const int x_pos
       { int(float(GetScreenHeight())/100.0f) };
@@ -195,10 +193,9 @@ void video::run()
 
               update_time();
 
-              m_phase.add_time(m_time_gap, m_micros_per_beat);
-              // phase.add_time(m_time_gap, m_micros_per_beat);
+              m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-              kube.rephase(m_phase.get_phase(), m_gold);
+              kube.rephaser(m_clock, m_gold);
               kube.orbit();
               kube.set_color();
 
@@ -239,22 +236,17 @@ void video::run()
 
               y_pos += font_size;
 
-              transient = "Fraction : [" + std::to_string(m_phase.get_phase_fraction()) + "]";
+              transient = "Fraction : [" + std::to_string(m_clock.get_phase_fraction()) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
 
-              transient = "Tau phase: [" + std::to_string(phase.get_phase()) + "]";
+              transient = "Tau      : [" + std::to_string(m_clock.get_tau()) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
 
-              transient = "Tau      : [" + std::to_string(m_phase.get_tau()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Tau fraction: [" + std::to_string(m_phase.get_tau_phase_fraction()) + "]";
+              transient = "Tau fraction: [" + std::to_string(m_clock.get_tau_phase_fraction()) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;

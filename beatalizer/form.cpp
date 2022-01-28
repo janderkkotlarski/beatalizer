@@ -62,9 +62,9 @@ void form::set_dir(const Vector3 &dir)
   m_coords.perpendicular();
 }
 
-void form::set_period(auronacci &gold)
+void form::set_period(timer &clock, auronacci &gold)
 {
-  m_period_countdown = period::p_4;
+  m_period_countdown = period::p_8;
 
   m_coords.set_pos(m_pos_next);
   m_coords.random_dir_gold(gold);
@@ -75,17 +75,21 @@ void form::set_period(auronacci &gold)
 
   m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, countdown_phase);
 
+  clock.set_phase(m_tau*m_countdown);
+
   m_countdown += period2float(m_period_countdown);
+
+
 }
 
-void form::rephase(const float phase, auronacci &gold)
+void form::rephaser(timer &clock, auronacci &gold)
 {
-  m_phase_actual = phase + m_phase_offset;
+  m_phase_actual = clock.get_phase() + m_phase_offset;
 
-  m_countdown -= phase/m_tau;
+  m_countdown -= clock.get_phase_fraction();
 
   if (m_countdown <= 0.0f)
-  { set_period(gold); }
+  { set_period(clock, gold); }
 }
 
 void form::orbit()

@@ -10,7 +10,7 @@ private:
   const float m_tau
   { 2.0f*M_PI };
 
-  float m_beat_phase
+  float m_tau_beat_phase
   { 0.0f };
 
   float m_phase_fraction
@@ -34,6 +34,8 @@ public:
   float get_tau() noexcept;
 
   float get_tau_phase_fraction() noexcept;
+
+  void set_phase(const float phase);
 
   void add_time(const float time, const float beat_length);
 };

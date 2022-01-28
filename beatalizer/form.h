@@ -8,6 +8,7 @@
 
 #include "coordinates.h"
 #include "period.h"
+#include "timer.h"
 
 class form
 {
@@ -89,9 +90,9 @@ public:
 
   void set_dir(const Vector3 &dir);
 
-  void set_period(auronacci &gold);
+  void set_period(timer &clock, auronacci &gold);
 
-  void rephase(const float phase, auronacci &gold);
+  void rephaser(timer &clock, auronacci &gold);
 
   void orbit();
 

@@ -104,7 +104,7 @@ private:
   const int m_cube_amount
   { 256 };
 
-  timer m_phase;
+  timer m_clock;
 
   int m_counter
   { 0 };
