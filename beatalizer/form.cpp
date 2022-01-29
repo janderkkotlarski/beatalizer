@@ -71,7 +71,7 @@ void form::set_next_pos()
   const float countdown_phase
   { m_tau*period2float(m_period_countdown) };
 
-  m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, countdown_phase);
+  m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), 1.0f, countdown_phase);
 }
 
 void form::set_period(timer &clock, auronacci &gold)
@@ -86,9 +86,7 @@ void form::set_period(timer &clock, auronacci &gold)
 
   clock.set_phase(m_tau*m_countdown);
 
-  m_countdown += period2float(m_period_countdown);
-
-
+  m_countdown += period2float(m_period_countdown);  
 }
 
 void form::rephaser(timer &clock, auronacci &gold)
