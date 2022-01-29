@@ -61,7 +61,7 @@ private:
   { 0.0f };
 
   period m_period_countdown
-  { period::p_4 };
+  { period::p_1 };
 
   float m_countdown
   { 0.0f };
@@ -77,6 +77,10 @@ public:
   form(auronacci &gold, const float phase_offset);
 
   float get_countdown() noexcept;
+
+  Vector3 get_pos() noexcept;
+
+  Vector3 get_pos_next() noexcept;
 
   void set_color();
 

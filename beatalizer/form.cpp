@@ -54,6 +54,12 @@ void form::set_side(const float side)
   m_side_z = side;
 }
 
+Vector3 form::get_pos() noexcept
+{ return m_coords.get_pos(); }
+
+Vector3 form::get_pos_next() noexcept
+{ return m_pos_next; }
+
 void form::set_phase_offset(const float phase_offset)
 { m_phase_offset = phase_offset; }
 
@@ -71,7 +77,10 @@ void form::set_next_pos()
   const float countdown_phase
   { m_tau*period2float(m_period_countdown) };
 
-  m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), 1.0f, countdown_phase);
+  const float orbit_phase
+  { period2float(m_period_orbit) };
+
+  m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), 1.0f, countdown_phase/orbit_phase);
 }
 
 void form::set_period(timer &clock, auronacci &gold)
@@ -96,7 +105,10 @@ void form::rephaser(timer &clock, auronacci &gold)
   m_countdown -= clock.get_phase_fraction();
 
   if (m_countdown <= 0.0f)
-  { set_period(clock, gold); }
+  {
+    set_period(clock, gold);
+
+  }
 }
 
 void form::orbit()

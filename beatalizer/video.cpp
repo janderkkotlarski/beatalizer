@@ -221,39 +221,19 @@ void video::run()
 
               std::string transient;
 
-              transient = "Time gap : [" + std::to_string(m_time_gap) + "]";
+              transient = "Pos now  : [" + std::to_string(kube.get_pos().x) + "]["
+                                         + std::to_string(kube.get_pos().y) + "]["
+                                         + std::to_string(kube.get_pos().z) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
 
-              transient = "Micros   : [" + std::to_string(m_micros_per_beat) + "]";
+              transient = "Pos next : [" + std::to_string(kube.get_pos_next().x) + "]["
+                                         + std::to_string(kube.get_pos_next().y) + "]["
+                                         + std::to_string(kube.get_pos_next().z) + "]";
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
-
-              transient = "Fraction : [" + std::to_string(m_time_gap/m_micros_per_beat) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Fraction : [" + std::to_string(m_clock.get_phase_fraction()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Tau      : [" + std::to_string(m_clock.get_tau()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Tau fraction: [" + std::to_string(m_clock.get_tau_phase_fraction()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Countdown  : [" + std::to_string(kube.get_countdown()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
 
           EndDrawing();
 
