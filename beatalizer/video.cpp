@@ -179,6 +179,9 @@ void video::run()
       // Main game loop
       update_time();
 
+      int count
+      { 0 };
+
       while (!WindowShouldClose())                // Detect window close button or ESC key
       {
           // Update
@@ -193,10 +196,20 @@ void video::run()
 
               update_time();
 
-              m_clock.add_time(m_time_gap, m_micros_per_beat);
+              // while (m)
+              if ((kube.get_jump() <= 0.2f) ||
+                  count < 4)
+              {
+                m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-              kube.rephaser(m_clock, m_gold);
-              kube.orbit();
+                kube.rephaser(m_clock, m_gold);
+                kube.orbit();
+
+              }
+
+              if (kube.get_jump() > 0.2f)
+              { ++count; }
+
               kube.set_color();
 
               // kubes.update(m_phase.get_phase());
@@ -234,6 +247,9 @@ void video::run()
               DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
               y_pos += font_size;
+
+              transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
+              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
 
           EndDrawing();
 

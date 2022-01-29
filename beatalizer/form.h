@@ -34,7 +34,16 @@ private:
   Vector3 m_pos_next
   { 0.0f, 0.0f, 0.0f };
 
+  Vector3 m_pos_delta
+  { 0.0f, 0.0f, 0.0f };
+
   coordinates m_coords;
+
+  Vector3 m_previous
+  { 0.0f, 0.0f, 0.0f };
+
+  Vector3 m_jump
+  { 0.0f, 0.0f, 0.0f };
 
   const float m_radius
   { 4.0f };
@@ -81,6 +90,12 @@ public:
   Vector3 get_pos() noexcept;
 
   Vector3 get_pos_next() noexcept;
+
+  Vector3 get_pos_delta() noexcept;
+
+  float get_jump() noexcept;
+
+
 
   void set_color();
 

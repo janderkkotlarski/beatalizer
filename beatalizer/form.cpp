@@ -7,6 +7,8 @@
 form::form()
 {
   m_coords.set_pos(Vector3{ 0.0f, 0.0f, 0.0f });
+
+  orbit();
 }
 
 form::form(auronacci &gold)
@@ -18,6 +20,8 @@ form::form(auronacci &gold)
   m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 
   set_next_pos();
+
+  orbit();
 }
 
 form::form(auronacci &gold, const float phase_offset)
@@ -30,7 +34,24 @@ form::form(auronacci &gold, const float phase_offset)
   m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 
   set_next_pos();
+
+  orbit();
 }
+
+float form::get_countdown() noexcept
+{ return m_countdown; }
+
+Vector3 form::get_pos() noexcept
+{ return m_coords.get_pos(); }
+
+Vector3 form::get_pos_next() noexcept
+{ return m_pos_next; }
+
+Vector3 form::get_pos_delta() noexcept
+{ return m_pos_delta; }
+
+float form::get_jump() noexcept
+{ return Vector3Length(m_jump); }
 
 void form::set_color()
 {
@@ -38,11 +59,9 @@ void form::set_color()
   { unchar(distance_value(m_pos.x)),
     unchar(distance_value(m_pos.y)),
     unchar(distance_value(m_pos.z)),
-    255};
+    255
+  };
 }
-
-float form::get_countdown() noexcept
-{ return m_countdown; }
 
 void form::set_color(const Color &color)
 { m_color = color; }
@@ -53,12 +72,6 @@ void form::set_side(const float side)
   m_side_y = side;
   m_side_z = side;
 }
-
-Vector3 form::get_pos() noexcept
-{ return m_coords.get_pos(); }
-
-Vector3 form::get_pos_next() noexcept
-{ return m_pos_next; }
 
 void form::set_phase_offset(const float phase_offset)
 { m_phase_offset = phase_offset; }
@@ -93,6 +106,8 @@ void form::set_period(timer &clock, auronacci &gold)
 
   set_next_pos();
 
+  m_pos_delta = Vector3Add(m_pos_next, Vector3Negate(m_coords.get_pos()));
+
   clock.set_phase(m_tau*m_countdown);
 
   m_countdown += period2float(m_period_countdown);  
@@ -112,7 +127,13 @@ void form::rephaser(timer &clock, auronacci &gold)
 }
 
 void form::orbit()
-{ m_pos = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, m_phase_actual/period2float(m_period_orbit)); }
+{
+  m_previous = m_pos;
+
+  m_pos = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), m_distance, m_phase_actual/period2float(m_period_orbit));
+
+  m_jump = Vector3Add(m_pos, Vector3Negate(m_previous));
+}
 
 void form::display_cuboid()
 { DrawCube(m_pos, m_side_x, m_side_y, m_side_z, m_color); }
