@@ -30,7 +30,7 @@ void group::update(const float phase, auronacci &gold)
   for (form &cube: m_cubes)
   {
     // cube.rephaser(phase, gold);
-    cube.orbit();
+    cube.orbiting();
     cube.set_color();
   }
 

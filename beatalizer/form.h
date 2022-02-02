@@ -81,23 +81,23 @@ private:
   float m_side_z
   { m_side };
 
-  float m_phase_offset
-  { 0.0f };
-
-  float m_phase_actual
-  { 0.0f };
-
   period m_period_countdown
   { period::p_1 };
-
-  float m_countdown
-  { 0.0f };
 
   period m_period_arc
   { period::p_4 };
 
   period m_period_orbit
   { period::p_16 };
+
+  float m_phase_offset
+  { 0.0f };
+
+  float m_phase_actual
+  { 0.0f };
+
+  float m_phase_arc
+  { 0.0f };
 
 public:
   form();
@@ -122,7 +122,7 @@ public:
 
   float get_jump() noexcept;
 
-
+  void set_period_phase();
 
   void set_color();
 
@@ -139,11 +139,6 @@ public:
   void set_next_pos();
 
   void set_period(timer &clock, auronacci &gold);
-
-  void rephaser(timer &clock, auronacci &gold);
-
-
-  void orbit();
 
   void display_cuboid();
 
