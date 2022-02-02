@@ -24,8 +24,6 @@ form::form(auronacci &gold)
 
   set_period_phase();
 
-  // set_next_pos();
-
   orbiting();
 }
 
@@ -39,8 +37,6 @@ form::form(auronacci &gold, const float phase_offset)
   m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
 
   set_period_phase();
-
-  // set_next_pos();
 
   orbiting();
 }
@@ -57,20 +53,6 @@ void form::orbiting()
 
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
 }
-
-
-
-Vector3 form::get_pos() noexcept
-{ return m_coords.get_pos(); }
-
-Vector3 form::get_pos_next() noexcept
-{ return m_pos_next; }
-
-Vector3 form::get_pos_delta() noexcept
-{ return m_pos_delta; }
-
-float form::get_jump() noexcept
-{ return Vector3Length(m_jump); }
 
 void form::set_period_phase()
 { m_phase_arc = m_tau*period2float(m_period_arc); }

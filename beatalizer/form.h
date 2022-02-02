@@ -112,16 +112,6 @@ public:
 
   void orbiting();
 
-  float get_countdown() noexcept;
-
-  Vector3 get_pos() noexcept;
-
-  Vector3 get_pos_next() noexcept;
-
-  Vector3 get_pos_delta() noexcept;
-
-  float get_jump() noexcept;
-
   void set_period_phase();
 
   void set_color();

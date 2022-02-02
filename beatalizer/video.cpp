@@ -209,6 +209,8 @@ void video::run()
       }
       EndMode3D();
 
+      /*
+
       int y_pos
       { x_pos };
 
@@ -230,6 +232,7 @@ void video::run()
 
       transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
       DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+      */
     }
 
     EndDrawing();
