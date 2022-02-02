@@ -106,10 +106,14 @@ void form::set_dir(const Vector3 &dir)
 
 void form::set_next_pos()
 {
+  m_coords.set_pos(m_pos_next);
+
   const float next_phase
   { m_phase_arc/period2float(m_period_orbit) };
 
   m_pos_next = orbit_pos(m_coords.get_pos(), m_coords.get_dir(), 1.0f, next_phase);
+
+
 }
 
 void form::set_period(timer &clock, auronacci &gold)
@@ -134,7 +138,7 @@ void form::phasing(timer &clock)
     m_phase_offset -= m_phase_arc;
 
     set_period_phase();
-
+    set_next_pos();
 
   }
 }
