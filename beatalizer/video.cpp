@@ -134,122 +134,111 @@ void video::update_time()
 
 void video::run()
 {
-  for (int count { 0 }; count < 100 ; ++count)
+  SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
+
+  InitWindow(m_screen_width, m_screen_height, "Beatalizer");
+
+  GetFontDefault();
+
+  m_clock.phase_reset();
+
+  const int x_pos
+  { int(float(GetScreenHeight())/100.0f) };
+
+  const int font_size
+  { 2*x_pos };
+
+  form cube;
+  cube.set_side(0.2f);
+
+  form kube(m_gold);
+  kube.set_side(0.5f);
+  kube.set_color();
+
+
+  // group kubes
+  // { m_gold };
+
+  // std::vector <group> cube_groups;
+
+  // for (int count { 0 }; count < m_group_amount; ++count)
+  // { cube_groups.push_back(group(m_gold)); }
+
+  // Main game loop
+  update_time();
+
+  int count
+  { 0 };
+
+  while (!WindowShouldClose())                // Detect window close button or ESC key
   {
-    // std::cout << frequ2string(frequify_all(m_gold));
+    // Update
+    //----------------------------------------------------------------------------------
+    rotate_cam();
+    update_cam();
+    update_bpm();
 
-    // std::cout << frequ2string(frequify_low(m_gold));
+    BeginDrawing();
+    {
+      ClearBackground(BLACK);
 
-    // std::cout << period2string(periodic_mid(m_gold));
-
-    // std::cout << frequ2string(frequify_high(m_gold));
-  }
-      std::cout << std::endl;
-
-      SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
-
-      InitWindow(m_screen_width, m_screen_height, "Beatalizer");
-
-      GetFontDefault();
-
-      m_clock.phase_reset();
-
-      const int x_pos
-      { int(float(GetScreenHeight())/100.0f) };
-
-      const int font_size
-      { 2*x_pos };
-
-      form cube;
-      cube.set_side(0.2f);
-
-      form kube(m_gold);
-      kube.set_side(0.5f);
-      kube.set_color();
-
-
-      // group kubes
-      // { m_gold };
-
-      // std::vector <group> cube_groups;
-
-      // for (int count { 0 }; count < m_group_amount; ++count)
-      // { cube_groups.push_back(group(m_gold)); }
-
-      // Main game loop
       update_time();
 
-      int count
-      { 0 };
+      m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-      while (!WindowShouldClose())                // Detect window close button or ESC key
+      // kube.rephaser(m_clock, m_gold);
+      kube.phasing(m_clock);
+      kube.orbiting();
+
+      kube.set_color();
+
+      // kubes.update(m_phase.get_phase());
+
+      // for (group &cubes: cube_groups)
+      // { cubes.update(m_phase.get_phase(), m_gold); }
+
+      BeginMode3D(m_camera);
       {
-          // Update
-          //----------------------------------------------------------------------------------
-          rotate_cam();
-          update_cam();
-          update_bpm();
+        cube.display_cuboid();
+        kube.display_cuboid();
 
-          BeginDrawing();
+        // kubes.display();
 
-              ClearBackground(BLACK);
-
-              update_time();
-
-              m_clock.add_time(m_time_gap, m_micros_per_beat);
-
-              // kube.rephaser(m_clock, m_gold);
-              kube.phasing(m_clock);
-              kube.orbiting();
-
-              kube.set_color();
-
-              // kubes.update(m_phase.get_phase());
-
-              // for (group &cubes: cube_groups)
-              // { cubes.update(m_phase.get_phase(), m_gold); }
-
-              BeginMode3D(m_camera);
-              {
-                cube.display_cuboid();
-                kube.display_cuboid();
-
-                  // kubes.display();
-
-                  // for (group &cubes: cube_groups)
-                  // { cubes.display(); }
-              }
-              EndMode3D();
-
-              int y_pos
-              { x_pos };
-
-              std::string transient;
-
-              transient = "Pos now  : [" + std::to_string(kube.get_pos().x) + "]["
-                                         + std::to_string(kube.get_pos().y) + "]["
-                                         + std::to_string(kube.get_pos().z) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Pos next : [" + std::to_string(kube.get_pos_next().x) + "]["
-                                         + std::to_string(kube.get_pos_next().y) + "]["
-                                         + std::to_string(kube.get_pos_next().z) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-              y_pos += font_size;
-
-              transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
-              DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-          EndDrawing();
-
-          ++m_frame_counter;
-          m_frame_counter %= m_frame_skip;
+        // for (group &cubes: cube_groups)
+        // { cubes.display(); }
       }
+      EndMode3D();
 
-      CloseWindow();              // Close window and OpenGL context
+      int y_pos
+      { x_pos };
+
+      std::string transient;
+
+      transient = "Pos now  : [" + std::to_string(kube.get_pos().x) + "]["
+                                 + std::to_string(kube.get_pos().y) + "]["
+                                 + std::to_string(kube.get_pos().z) + "]";
+      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+      y_pos += font_size;
+
+      transient = "Pos next : [" + std::to_string(kube.get_pos_next().x) + "]["
+                                 + std::to_string(kube.get_pos_next().y) + "]["
+                                 + std::to_string(kube.get_pos_next().z) + "]";
+      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+      y_pos += font_size;
+
+      transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
+      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+    }
+
+    EndDrawing();
+
+    ++m_frame_counter;
+    m_frame_counter %= m_frame_skip;
+  }
+
+  CloseWindow();              // Close window and OpenGL context
 }
 
 
