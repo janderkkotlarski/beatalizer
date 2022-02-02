@@ -82,7 +82,7 @@ private:
   { m_side };
 
   period m_period_step
-  { period::p_8 };
+  { period::p_2 };
 
   period m_period_arc
   { period::p_4 };
