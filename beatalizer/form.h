@@ -81,8 +81,8 @@ private:
   float m_side_z
   { m_side };
 
-  period m_period_countdown
-  { period::p_1 };
+  period m_period_step
+  { period::p_8 };
 
   period m_period_arc
   { period::p_4 };
@@ -106,7 +106,7 @@ public:
 
   form(auronacci &gold, const float phase_offset);
 
-  void phasing(timer &clock);
+  void phasing(timer &clock, auronacci &gold);
 
   void move();
 
@@ -136,7 +136,7 @@ public:
 
   void set_dir(const Vector3 &dir);
 
-  void set_next_pos();
+  void set_next_pos(auronacci &gold);
 
   void set_period(timer &clock, auronacci &gold);
 

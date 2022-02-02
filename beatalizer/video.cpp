@@ -187,7 +187,7 @@ void video::run()
       m_clock.add_time(m_time_gap, m_micros_per_beat);
 
       // kube.rephaser(m_clock, m_gold);
-      kube.phasing(m_clock);
+      kube.phasing(m_clock, m_gold);
       kube.orbiting();
 
       kube.set_color();

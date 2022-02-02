@@ -107,7 +107,7 @@ void form::set_dir(const Vector3 &dir)
   m_coords.perpendicular();
 }
 
-void form::set_next_pos()
+void form::set_next_pos(auronacci &gold)
 {
   const float next_phase
   { m_phase_arc/period2float(m_period_orbit) };
@@ -115,33 +115,42 @@ void form::set_next_pos()
   const Vector3 radial_x
   { Vector3Normalize(orbit_pos(m_radial_x, m_radial_y, 1.0f, next_phase)) };
 
-  const Vector3 radial_y
+  Vector3 radial_y
   { Vector3Normalize(orbit_pos(m_radial_y, Vector3Negate(m_radial_x), 1.0f, next_phase)) };
 
   m_radial_x = radial_x;
   m_radial_y = radial_y;
+
+  const float step_phase
+  { m_tau*gold.get_fraction() };
+
+  radial_y = Vector3Normalize(orbit_pos(m_radial_y, m_radial_z, 1.0f, step_phase));
+
+  const Vector3 radial_z
+  { Vector3Normalize(orbit_pos(m_radial_z, Vector3Negate(m_radial_y), 1.0f, step_phase)) };
+
+  m_radial_y = radial_y;
+  m_radial_z = radial_z;
 }
 
 void form::set_period(timer &clock, auronacci &gold)
 {
-  m_period_countdown = period::p_8;
-
   m_coords.set_pos(m_pos_next);
   m_coords.random_dir_gold(gold);
   m_coords.perpendicular();
 
-  set_next_pos();
+  set_next_pos(gold);
 
   m_pos_delta = Vector3Add(m_pos_next, Vector3Negate(m_coords.get_pos()));
 }
 
-void form::phasing(timer &clock)
+void form::phasing(timer &clock, auronacci &gold)
 {
   m_phase_actual = clock.get_phase() + m_phase_offset;
 
   if (m_phase_actual > m_phase_arc)
   {
-    set_next_pos();
+    set_next_pos(gold);
 
     m_phase_offset -= m_phase_arc;
 
