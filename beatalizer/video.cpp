@@ -196,19 +196,11 @@ void video::run()
 
               update_time();
 
-              // while (m)
-              if ((kube.get_jump() <= 0.2f) ||
-                  count < 4)
-              {
-                m_clock.add_time(m_time_gap, m_micros_per_beat);
+              m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-                kube.rephaser(m_clock, m_gold);
-                kube.orbit();
-
-              }
-
-              if (kube.get_jump() > 0.2f)
-              { ++count; }
+              // kube.rephaser(m_clock, m_gold);
+              kube.phasing(m_clock);
+              kube.orbiting();
 
               kube.set_color();
 

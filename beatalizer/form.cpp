@@ -1,6 +1,7 @@
 #include "form.h"
 
 #include <iostream>
+#include <cassert>
 
 #include "functions.h"
 
@@ -36,6 +37,16 @@ form::form(auronacci &gold, const float phase_offset)
   set_next_pos();
 
   orbit();
+}
+
+void form::move()
+{
+  orbiting();
+}
+
+void form::orbiting()
+{
+  m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, m_phase_actual/period2float(m_period_arc));
 }
 
 float form::get_countdown() noexcept
@@ -113,6 +124,11 @@ void form::set_period(timer &clock, auronacci &gold)
   m_countdown += period2float(m_period_countdown);  
 }
 
+void form::phasing(timer &clock)
+{
+  m_phase_actual = clock.get_phase() + m_phase_offset;
+}
+
 void form::rephaser(timer &clock, auronacci &gold)
 {
   m_phase_actual = clock.get_phase() + m_phase_offset;
@@ -136,7 +152,7 @@ void form::orbit()
 }
 
 void form::display_cuboid()
-{ DrawCube(m_pos, m_side_x, m_side_y, m_side_z, m_color); }
+{ DrawCube(m_position_now, m_side_x, m_side_y, m_side_z, m_color); }
 
 
 float form::distance_value(const float pos)

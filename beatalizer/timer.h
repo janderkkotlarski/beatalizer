@@ -4,11 +4,19 @@
 #include <chrono>
 #include <cmath>
 
+#include "period.h"
+
 class timer
 {
 private:
   const float m_tau
   { 2.0f*M_PI };
+
+  const period m_period_max
+  { period::p_64 };
+
+  const period m_period_min
+  { period::p__64 };
 
   float m_tau_beat_phase
   { 0.0f };

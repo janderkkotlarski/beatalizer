@@ -28,22 +28,40 @@ private:
   int m_blue
   { 0 };
 
-  Vector3 m_pos
+  const Vector3 m_null_vector
   { 0.0f, 0.0f, 0.0f };
+
+  Vector3 m_radial_x
+  { 1.0f, 0.0f, 0.0f };
+
+  Vector3 m_radial_y
+  { 0.0f, 1.0f, 0.0f };
+
+  Vector3 m_radial_z
+  { 0.0f, 0.0f, 1.0f };
+
+  Vector3 m_position_now
+  { m_null_vector };
+
+  Vector3 m_position_stop
+  { m_null_vector };
+
+  Vector3 m_pos
+  { m_null_vector };
 
   Vector3 m_pos_next
-  { 0.0f, 0.0f, 0.0f };
+  { m_null_vector };
 
   Vector3 m_pos_delta
-  { 0.0f, 0.0f, 0.0f };
+  { m_null_vector };
 
   coordinates m_coords;
 
   Vector3 m_previous
-  { 0.0f, 0.0f, 0.0f };
+  { m_null_vector };
 
   Vector3 m_jump
-  { 0.0f, 0.0f, 0.0f };
+  { m_null_vector };
 
   const float m_radius
   { 4.0f };
@@ -75,6 +93,9 @@ private:
   float m_countdown
   { 0.0f };
 
+  period m_period_arc
+  { period::p_4 };
+
   period m_period_orbit
   { period::p_16 };
 
@@ -84,6 +105,12 @@ public:
   form(auronacci &gold);
 
   form(auronacci &gold, const float phase_offset);
+
+  void phasing(timer &clock);
+
+  void move();
+
+  void orbiting();
 
   float get_countdown() noexcept;
 
@@ -114,6 +141,7 @@ public:
   void set_period(timer &clock, auronacci &gold);
 
   void rephaser(timer &clock, auronacci &gold);
+
 
   void orbit();
 

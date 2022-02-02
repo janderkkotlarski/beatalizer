@@ -23,6 +23,8 @@ private:
   float m_phase_left
   { 0.0f };
 
+
+
   float m_phase_previous
   { 0.0f };
 
