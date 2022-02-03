@@ -91,28 +91,15 @@ void form::set_dir(const Vector3 &dir)
 
 void form::set_next_pos(auronacci &gold)
 {
-  const float next_phase
+  const float arc_phase
   { m_phase_arc/period2float(m_period_orbit) };
 
-  const Vector3 radial_x
-  { Vector3Normalize(orbit_pos(m_radial_x, m_radial_y, 1.0f, next_phase)) };
-
-  Vector3 radial_y
-  { Vector3Normalize(orbit_pos(m_radial_y, Vector3Negate(m_radial_x), 1.0f, next_phase)) };
-
-  m_radial_x = radial_x;
-  m_radial_y = radial_y;
+  orbit_jump(m_radial_x, m_radial_y, arc_phase);
 
   const float step_phase
   { m_tau*gold.get_fraction() };
 
-  radial_y = Vector3Normalize(orbit_pos(m_radial_y, m_radial_z, 1.0f, step_phase));
-
-  const Vector3 radial_z
-  { Vector3Normalize(orbit_pos(m_radial_z, Vector3Negate(m_radial_y), 1.0f, step_phase)) };
-
-  m_radial_y = radial_y;
-  m_radial_z = radial_z;
+  orbit_jump(m_radial_y, m_radial_z, step_phase);
 }
 
 void form::set_period(timer &clock, auronacci &gold)

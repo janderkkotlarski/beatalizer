@@ -20,6 +20,8 @@ int half_int(const int number);
 unsigned char unchar(const float input);
 
 Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
-               const float dist, const float phase);
+                  const float dist, const float phase);
+
+void orbit_jump(Vector3 &pos, Vector3 &dir, const float phase);
 
 #endif // FUNCTIONS_H
