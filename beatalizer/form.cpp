@@ -40,6 +40,9 @@ void form::orbiting()
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
 }
 
+float form::get_tau() noexcept
+{ return m_tau; }
+
 float form::get_phase_offset() noexcept
 { return m_phase_offset; }
 

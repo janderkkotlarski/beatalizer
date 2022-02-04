@@ -92,6 +92,8 @@ public:
 
   void orbiting();
 
+  float get_tau() noexcept;
+
   float get_phase_offset() noexcept;
 
   void set_period_phase(auronacci &gold);

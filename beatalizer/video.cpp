@@ -208,17 +208,17 @@ void video::run()
       }
       EndMode3D();
 
-      /*
+
 
       int y_pos
       { x_pos };
 
       std::string transient;
 
-      transient = "Pos now  : [" + std::to_string(kube.get_pos().x) + "]["
-                                 + std::to_string(kube.get_pos().y) + "]["
-                                 + std::to_string(kube.get_pos().z) + "]";
+      transient = "Phase offset: [" + std::to_string(kube.get_phase_offset()/kube.get_tau()) + "]";
       DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+      /*
 
       y_pos += font_size;
 
