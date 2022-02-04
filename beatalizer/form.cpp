@@ -7,42 +7,28 @@
 
 form::form()
 {
-  m_coords.set_pos(Vector3{ 0.0f, 0.0f, 0.0f });
-
-  set_period_phase();
-
-  // orbiting();
 }
 
 form::form(auronacci &gold)
 {
-  m_coords.random_pos_gold(gold);  
-  m_coords.random_dir_gold(gold);
-  m_coords.perpendicular();
-
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
-
-  set_period_phase();
-
-  orbiting();
+  initialize(gold);
 }
 
 form::form(auronacci &gold, const float phase_offset)
   : m_phase_offset(m_tau*phase_offset)
 {
-  m_coords.random_pos_gold(gold);
-  m_coords.random_dir_gold(gold);
-  m_coords.perpendicular();
-
-  m_pos = Vector3Scale(m_coords.get_pos(), m_radius);
-
-  set_period_phase();
-
-  orbiting();
+  initialize(gold);
 }
 
-void form::move()
+void form::initialize(auronacci &gold)
 {
+  m_radial_x = random_pos_auro(gold);
+  m_radial_y = random_pos_auro(gold);
+
+  normandicular(m_radial_x, m_radial_y, m_radial_z);
+
+  set_period_phase(gold);
+
   orbiting();
 }
 
@@ -54,15 +40,21 @@ void form::orbiting()
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
 }
 
-void form::set_period_phase()
-{ m_phase_arc = m_tau*period2float(m_period_arc); }
+float form::get_phase_offset() noexcept
+{ return m_phase_offset; }
+
+void form::set_period_phase(auronacci &gold)
+{
+  m_period_arc = periodic_mid_high(gold);
+  m_phase_arc = m_tau*period2float(m_period_arc);
+}
 
 void form::set_color()
 {
   m_color =
-  { unchar(distance_value(m_pos.x)),
-    unchar(distance_value(m_pos.y)),
-    unchar(distance_value(m_pos.z)),
+  { unchar(distance_value(m_position_now.x)),
+    unchar(distance_value(m_position_now.y)),
+    unchar(distance_value(m_position_now.z)),
     255
   };
 }
@@ -80,15 +72,6 @@ void form::set_side(const float side)
 void form::set_phase_offset(const float phase_offset)
 { m_phase_offset = phase_offset; }
 
-void form::set_distance()
-{ m_distance = m_radius; }
-
-void form::set_dir(const Vector3 &dir)
-{
-  m_coords.set_dir(dir);
-  m_coords.perpendicular();
-}
-
 void form::set_next_pos(auronacci &gold)
 {
   const float arc_phase
@@ -102,17 +85,6 @@ void form::set_next_pos(auronacci &gold)
   orbit_jump(m_radial_y, m_radial_z, step_phase);
 }
 
-void form::set_period(timer &clock, auronacci &gold)
-{
-  m_coords.set_pos(m_pos_next);
-  m_coords.random_dir_gold(gold);
-  m_coords.perpendicular();
-
-  set_next_pos(gold);
-
-  m_pos_delta = Vector3Add(m_pos_next, Vector3Negate(m_coords.get_pos()));
-}
-
 void form::phasing(timer &clock, auronacci &gold)
 {
   m_phase_actual = clock.get_phase() + m_phase_offset;
@@ -123,7 +95,7 @@ void form::phasing(timer &clock, auronacci &gold)
 
     m_phase_offset -= m_phase_arc;
 
-    set_period_phase();
+    set_period_phase(gold);
 
     m_phase_actual = clock.get_phase() + m_phase_offset;
   }

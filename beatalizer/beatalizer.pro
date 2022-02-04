@@ -56,10 +56,8 @@ LIBS += -LC:\raylib\
 
 SOURCES += \
         auronacci.cpp \
-        coordinates.cpp \
         form.cpp \
         functions.cpp \
-        group.cpp \
         main.cpp \
         period.cpp \
         timer.cpp \
@@ -67,10 +65,8 @@ SOURCES += \
 
 HEADERS += \
         auronacci.h \
-        coordinates.h \
         form.h \
         functions.h \
-        group.h \
         period.h \
         timer.h \
         video.h

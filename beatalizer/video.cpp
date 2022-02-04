@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "form.h"
-#include "group.h"
 #include "functions.h"
 
 #if defined(PLATFORM_DESKTOP)

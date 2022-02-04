@@ -43,26 +43,6 @@ private:
   Vector3 m_position_now
   { m_null_vector };
 
-  Vector3 m_position_stop
-  { m_null_vector };
-
-  Vector3 m_pos
-  { m_null_vector };
-
-  Vector3 m_pos_next
-  { m_null_vector };
-
-  Vector3 m_pos_delta
-  { m_null_vector };
-
-  coordinates m_coords;
-
-  Vector3 m_previous
-  { m_null_vector };
-
-  Vector3 m_jump
-  { m_null_vector };
-
   const float m_radius
   { 4.0f };
 
@@ -106,29 +86,24 @@ public:
 
   form(auronacci &gold, const float phase_offset);
 
-  void phasing(timer &clock, auronacci &gold);
+  void initialize(auronacci &gold);
 
-  void move();
+  void phasing(timer &clock, auronacci &gold);
 
   void orbiting();
 
-  void set_period_phase();
+  float get_phase_offset() noexcept;
+
+  void set_period_phase(auronacci &gold);
 
   void set_color();
-
   void set_color(const Color &color);
 
   void set_side(const float side);
 
   void set_phase_offset(const float phase_offset);
 
-  void set_distance();
-
-  void set_dir(const Vector3 &dir);
-
   void set_next_pos(auronacci &gold);
-
-  void set_period(timer &clock, auronacci &gold);
 
   void display_cuboid();
 

@@ -21,6 +21,8 @@ period periodic_mid(auronacci &gold);
 
 period periodic_high(auronacci &gold);
 
+period periodic_mid_high(auronacci &gold);
+
 float period2float(const period &peri);
 
 std::string period2string(const period &peri);

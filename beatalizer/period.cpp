@@ -58,6 +58,20 @@ period periodic_high(auronacci &gold)
   return period(selector);
 }
 
+period periodic_mid_high(auronacci &gold)
+{
+  const int half_peri
+  { half_int(period_size()) };
+
+  const float mid_peri
+  { 2.0f };
+
+  const int selector
+  { half_peri + int(mid_peri*gold.get_fraction()) };
+
+  return period(selector);
+}
+
 float period2float(const period &peri)
 {
   switch (peri)

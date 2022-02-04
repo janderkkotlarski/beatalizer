@@ -8,7 +8,6 @@
 
 #include "timer.h"
 #include "auronacci.h"
-#include "group.h"
 
 class video
 {

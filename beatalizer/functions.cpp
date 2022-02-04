@@ -35,6 +35,33 @@ int half_int(const int number)
 unsigned char unchar(const float input)
 { return static_cast<unsigned char>(input); }
 
+Vector3 random_pos_auro(auronacci &gold)
+{
+  Vector3 unit_pos;
+
+  const float pos_z
+  { 2.0f*gold.get_fraction() - 1.0f };
+
+  const float pos_xy
+  { sqrt(1.0f - pos_z*pos_z) };
+
+  const float phi
+  { 2.0f*float(M_PI)*gold.get_fraction() };
+
+  unit_pos.x = pos_xy*cos(phi);
+  unit_pos.y = pos_xy*sin(phi);
+  unit_pos.z = pos_z;
+
+  return Vector3Normalize(unit_pos);
+}
+
+void normandicular(Vector3 &pos_x, Vector3 &pos_y, Vector3 &pos_z)
+{
+  pos_x = Vector3Normalize(pos_x);
+  pos_z = Vector3Normalize(Vector3CrossProduct(pos_x, pos_y));
+  pos_y = Vector3Normalize(Vector3CrossProduct(pos_z, pos_x));
+}
+
 Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
                   const float dist, const float phase)
 {

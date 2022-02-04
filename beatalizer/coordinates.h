@@ -40,13 +40,7 @@ public:
 
   void set_dir(const Vector3 &dir);
 
-  void random_pos_gold(auronacci &gold);
-
-  void random_dir_gold(auronacci &gold);
-
   void perpendicular();
 };
-
-Vector3 random_pos_auro(auronacci &gold);
 
 #endif // COORDINATES_H

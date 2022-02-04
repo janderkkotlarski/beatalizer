@@ -19,6 +19,10 @@ int half_int(const int number);
 
 unsigned char unchar(const float input);
 
+Vector3 random_pos_auro(auronacci &gold);
+
+void normandicular(Vector3 &pos_x, Vector3 &pos_y, Vector3 &pos_z);
+
 Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
                   const float dist, const float phase);
 
