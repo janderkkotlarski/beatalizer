@@ -148,11 +148,18 @@ void video::run()
   { 2*x_pos };
 
   form cube;
+  cube.initialize(m_gold, cube);
   cube.set_side(0.2f);
 
   form kube(m_gold);
-  kube.set_side(0.5f);
+  kube.initialize(m_gold, kube);
   kube.set_color();
+
+  std::vector <form> kubes
+  { form_random_arc(8, m_gold) };
+
+  for (form &kub: kubes)
+  { kub.set_color(); }
 
 
   // group kubes
@@ -186,10 +193,16 @@ void video::run()
       m_clock.add_time(m_time_gap, m_micros_per_beat);
 
       // kube.rephaser(m_clock, m_gold);
-      kube.phasing(m_clock, m_gold);
+      kube.phasing(m_clock, m_gold, kube);
       kube.orbiting();
-
       kube.set_color();
+
+      for (form &kub: kubes)
+      {
+        kub.phasing(m_clock, m_gold, kubes[0]);
+        kub.orbiting();
+        kub.set_color();
+      }
 
       // kubes.update(m_phase.get_phase());
 
@@ -199,7 +212,10 @@ void video::run()
       BeginMode3D(m_camera);
       {
         cube.display_cuboid();
-        kube.display_cuboid();
+        // kube.display_cuboid();
+
+        for (form &kub: kubes)
+        { kub.display_cuboid(); }
 
         // kubes.display();
 

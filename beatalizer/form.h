@@ -16,6 +16,9 @@ private:
   const float m_tau
   { 2.0f*M_PI };
 
+  int m_identity
+  { 0 };
+
   Color m_color
   { 255, 255, 255, 255};
 
@@ -50,7 +53,7 @@ private:
   { m_radius };
 
   const float m_side
-  { 0.05f };
+  { 0.5f };
 
   float m_side_x
   { m_side };
@@ -79,6 +82,12 @@ private:
   float m_phase_arc
   { 0.0f };
 
+  float m_jump_arc
+  { 0.0f };
+
+  float m_jump_step
+  { 0.0f };
+
 public:
   form();
 
@@ -86,9 +95,9 @@ public:
 
   form(auronacci &gold, const float phase_offset);
 
-  void initialize(auronacci &gold);
+  void initialize(auronacci &gold, form &cube);
 
-  void phasing(timer &clock, auronacci &gold);
+  void phasing(timer &clock, auronacci &gold, form &cube);
 
   void orbiting();
 
@@ -96,7 +105,14 @@ public:
 
   float get_phase_offset() noexcept;
 
-  void set_period_phase(auronacci &gold);
+  period get_period_arc() noexcept;
+
+  float get_jump_arc() noexcept;
+  float get_jump_step() noexcept;
+
+  void set_identity(const int identity);
+
+  void set_period_phase(auronacci &gold, form &cube);
 
   void set_color();
   void set_color(const Color &color);
@@ -105,7 +121,7 @@ public:
 
   void set_phase_offset(const float phase_offset);
 
-  void set_next_pos(auronacci &gold);
+  void set_next_pos(auronacci &gold, form &cube);
 
   void display_cuboid();
 
@@ -114,6 +130,6 @@ public:
 
 std::vector <form> form_random_sphere(const int number, const float side, const float phase_step, auronacci &gold);
 
-std::vector <form> form_random_arc(const int number, const float side, auronacci &gold);
+std::vector <form> form_random_arc(const int number, auronacci &gold);
 
 #endif // FORM_H

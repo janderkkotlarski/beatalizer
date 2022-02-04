@@ -11,23 +11,21 @@ form::form()
 
 form::form(auronacci &gold)
 {
-  initialize(gold);
 }
 
 form::form(auronacci &gold, const float phase_offset)
-  : m_phase_offset(m_tau*phase_offset)
+  : m_phase_offset(-phase_offset)
 {
-  initialize(gold);
 }
 
-void form::initialize(auronacci &gold)
+void form::initialize(auronacci &gold, form &cube)
 {
   m_radial_x = random_pos_auro(gold);
   m_radial_y = random_pos_auro(gold);
 
   normandicular(m_radial_x, m_radial_y, m_radial_z);
 
-  set_period_phase(gold);
+  set_period_phase(gold, cube);
 
   orbiting();
 }
@@ -46,9 +44,25 @@ float form::get_tau() noexcept
 float form::get_phase_offset() noexcept
 { return m_phase_offset; }
 
-void form::set_period_phase(auronacci &gold)
+period form::get_period_arc() noexcept
+{ return m_period_arc; }
+
+float form::get_jump_arc() noexcept
+{ return m_jump_arc; }
+
+float form::get_jump_step() noexcept
+{ return m_jump_step; }
+
+void form::set_identity(const int identity)
+{ m_identity = identity; }
+
+void form::set_period_phase(auronacci &gold, form &cube)
 {
-  m_period_arc = periodic_mid_high(gold);
+  if (m_identity == 0)
+  { m_period_arc = periodic_mid_high(gold); }
+  else
+  { m_period_arc = cube.get_period_arc(); }
+
   m_phase_arc = m_tau*period2float(m_period_arc);
 }
 
@@ -75,30 +89,35 @@ void form::set_side(const float side)
 void form::set_phase_offset(const float phase_offset)
 { m_phase_offset = phase_offset; }
 
-void form::set_next_pos(auronacci &gold)
+void form::set_next_pos(auronacci &gold, form &cube)
 {
-  const float arc_phase
-  { m_phase_arc/period2float(m_period_orbit) };
 
-  orbit_jump(m_radial_x, m_radial_y, arc_phase);
+  if (m_identity == 0)
+  { m_jump_arc = m_phase_arc/period2float(m_period_orbit); }
+  else
+  { m_jump_arc = cube.get_jump_arc(); }
 
-  const float step_phase
-  { m_tau*gold.get_fraction() };
+  orbit_jump(m_radial_x, m_radial_y, m_jump_arc);
 
-  orbit_jump(m_radial_y, m_radial_z, step_phase);
+  if (m_identity == 0)
+  { m_jump_step = m_tau*gold.get_fraction(); }
+  else
+  { m_jump_step = cube.get_jump_step(); }
+
+  orbit_jump(m_radial_y, m_radial_z, m_jump_step);
 }
 
-void form::phasing(timer &clock, auronacci &gold)
+void form::phasing(timer &clock, auronacci &gold, form& cube)
 {
   m_phase_actual = clock.get_phase() + m_phase_offset;
 
   if (m_phase_actual > m_phase_arc)
   {
-    set_next_pos(gold);
+    set_next_pos(gold, cube);
 
     m_phase_offset -= m_phase_arc;
 
-    set_period_phase(gold);
+    set_period_phase(gold, cube);
 
     m_phase_actual = clock.get_phase() + m_phase_offset;
   }
@@ -126,30 +145,28 @@ std::vector <form> form_random_sphere(const int number, const float side, const 
   return cubes;
 }
 
-std::vector <form> form_random_arc(const int number, const float side, auronacci &gold)
+std::vector <form> form_random_arc(const int number, auronacci &gold)
 {
-  const float scale
-  { 8.0f };
-
-  std::vector <form> cubes;
-
-  const float divided
-  { 1.0f/64.0f };
-
   const float tau
   { float(2.0*M_PI) };
 
-  cubes.push_back(form(gold, 0.0f));
+  std::vector <form> cubes;
 
-  cubes[0].set_side(side);
+  cubes.push_back(form(gold));
+  // cubes[0].initialize(gold, cubes[0]);
+
+  const float beat_division
+  { 4.0f };
+
+  const float divided
+  { 1.0f/beat_division };
 
   for (int count { 1 }; count < number; ++count)
   {
     cubes.push_back(cubes[0]);
 
     cubes[count].set_phase_offset(tau*divided*float(count));
-
-    cubes[count].set_side(side);
+    cubes[count].set_identity(count);
   }
 
   return cubes;
