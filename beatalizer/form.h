@@ -103,6 +103,8 @@ public:
 
   float get_tau() noexcept;
 
+  int get_identity() noexcept;
+
   float get_phase_offset() noexcept;
 
   period get_period_arc() noexcept;

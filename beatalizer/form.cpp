@@ -41,6 +41,9 @@ void form::orbiting()
 float form::get_tau() noexcept
 { return m_tau; }
 
+int form::get_identity() noexcept
+{ return m_identity; }
+
 float form::get_phase_offset() noexcept
 { return m_phase_offset; }
 
@@ -153,7 +156,7 @@ std::vector <form> form_random_arc(const int number, auronacci &gold)
   std::vector <form> cubes;
 
   cubes.push_back(form(gold));
-  // cubes[0].initialize(gold, cubes[0]);
+  cubes[0].initialize(gold, cubes[0]);
 
   const float beat_division
   { 4.0f };
@@ -165,7 +168,7 @@ std::vector <form> form_random_arc(const int number, auronacci &gold)
   {
     cubes.push_back(cubes[0]);
 
-    cubes[count].set_phase_offset(tau*divided*float(count));
+    cubes[count].set_phase_offset(-tau*divided*float(count));
     cubes[count].set_identity(count);
   }
 
