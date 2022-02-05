@@ -156,7 +156,7 @@ void video::run()
   kube.set_color();
 
   const int amount
-  { 8 };
+  { 1024 };
 
   std::vector <form> kubes
   { form_random_arc(amount, m_gold) };

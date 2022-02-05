@@ -53,7 +53,7 @@ private:
   { m_radius };
 
   const float m_side
-  { 0.5f };
+  { 0.1f };
 
   float m_side_x
   { m_side };
