@@ -162,7 +162,7 @@ std::vector <form> form_random_arc(const int number, auronacci &gold)
   { float(number) };
 
   const float divided
-  { 1.0f/beat_division };
+  { 4.0f/beat_division };
 
   for (int count { 1 }; count < number; ++count)
   {

@@ -71,7 +71,7 @@ private:
   { period::p_4 };
 
   period m_period_orbit
-  { period::p_16 };
+  { period::p_32 };
 
   float m_phase_offset
   { 0.0f };

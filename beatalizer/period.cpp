@@ -61,7 +61,7 @@ period periodic_high(auronacci &gold)
 period periodic_mid_high(auronacci &gold)
 {
   const int half_peri
-  { half_int(period_size()) };
+  { half_int(period_size()) + 1 };
 
   const float mid_peri
   { 2.0f };
