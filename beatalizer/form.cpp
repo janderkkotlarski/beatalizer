@@ -159,7 +159,7 @@ std::vector <form> form_random_arc(const int number, auronacci &gold)
   cubes[0].initialize(gold, cubes[0]);
 
   const float beat_division
-  { 4.0f };
+  { float(number) };
 
   const float divided
   { 1.0f/beat_division };

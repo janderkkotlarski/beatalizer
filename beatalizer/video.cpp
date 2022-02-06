@@ -148,7 +148,6 @@ void video::run()
   { 2*x_pos };
 
   form cube;
-  cube.initialize(m_gold, cube);
   cube.set_side(0.2f);
 
   form kube(m_gold);
@@ -156,7 +155,7 @@ void video::run()
   kube.set_color();
 
   const int amount
-  { 1024 };
+  { 8 };
 
   std::vector <form> kubes
   { form_random_arc(amount, m_gold) };
@@ -206,11 +205,13 @@ void video::run()
         kub.orbiting();
         kub.set_color();
 
+        /*
         if (kub.get_identity() == 0)
         { kub.set_color(RED); }
 
         if (kub.get_identity() == amount - 1)
         { kub.set_color(BLUE); }
+        */
       }
 
       // kubes.update(m_phase.get_phase());
