@@ -53,7 +53,7 @@ private:
   { m_radius };
 
   const float m_side
-  { 0.1f };
+  { m_radius/16.0f };
 
   float m_side_x
   { m_side };
@@ -72,6 +72,12 @@ private:
 
   period m_period_orbit
   { period::p_32 };
+
+  const float m_phase_divide
+  { 8.0f };
+
+  float m_phase_offinit
+  { 0.0f };
 
   float m_phase_offset
   { 0.0f };
@@ -100,6 +106,8 @@ public:
   void phasing(timer &clock, auronacci &gold, form &cube);
 
   void orbiting();
+
+  void standing_waves(const float phase);
 
   float get_tau() noexcept;
 

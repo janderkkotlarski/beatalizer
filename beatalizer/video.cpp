@@ -203,6 +203,7 @@ void video::run()
       {
         kub.phasing(m_clock, m_gold, kubes[0]);
         kub.orbiting();
+        kub.standing_waves(m_clock.get_phase());
         kub.set_color();
 
         /*

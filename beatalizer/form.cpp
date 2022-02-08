@@ -14,7 +14,7 @@ form::form(auronacci &gold)
 }
 
 form::form(auronacci &gold, const float phase_offset)
-  : m_phase_offset(-phase_offset)
+  : m_phase_offinit(phase_offset), m_phase_offset(phase_offset)
 {
 }
 
@@ -36,6 +36,16 @@ void form::orbiting()
   { m_phase_actual/period2float(m_period_orbit) };
 
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
+}
+
+void form::standing_waves(const float phase)
+{
+  const float phase_slowed
+  { (phase + m_phase_offinit)/m_phase_divide };
+
+  m_side_x = m_side*sin(phase_slowed);
+  m_side_y = m_side*sin(phase_slowed);
+  m_side_z = m_side*sin(phase_slowed);
 }
 
 float form::get_tau() noexcept
@@ -75,8 +85,7 @@ void form::set_color()
   { unchar(distance_value(m_position_now.x)),
     unchar(distance_value(m_position_now.y)),
     unchar(distance_value(m_position_now.z)),
-    255
-  };
+    255 };
 }
 
 void form::set_color(const Color &color)
@@ -90,7 +99,11 @@ void form::set_side(const float side)
 }
 
 void form::set_phase_offset(const float phase_offset)
-{ m_phase_offset = phase_offset; }
+{
+  m_phase_offinit= phase_offset;
+  m_phase_offset = phase_offset;
+}
+
 
 void form::set_next_pos(auronacci &gold, form &cube)
 {
