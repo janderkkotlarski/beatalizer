@@ -35,13 +35,13 @@ public:
 
   void phase_reset() noexcept;
 
-  float get_phase() noexcept;
+  float get_phase() const noexcept;
 
-  float get_phase_fraction() noexcept;
+  float get_phase_fraction() const noexcept;
 
-  float get_tau() noexcept;
+  float get_tau() const noexcept;
 
-  float get_tau_phase_fraction() noexcept;
+  float get_tau_phase_fraction() const noexcept;
 
   void set_phase(const float phase);
 

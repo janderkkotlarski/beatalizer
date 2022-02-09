@@ -8,19 +8,19 @@ void timer::phase_reset() noexcept
 { m_tau_beat_phase = 0.0f; }
 
 float timer::get_phase()
-noexcept
+const noexcept
 { return m_tau_beat_phase; }
 
 float timer::get_phase_fraction()
-noexcept
+const noexcept
 { return m_phase_fraction; }
 
 float timer::get_tau()
-noexcept
+const noexcept
 { return m_tau; }
 
 float timer::get_tau_phase_fraction()
-noexcept
+const noexcept
 { return m_tau_phase_fraction; }
 
 void timer::set_phase(const float phase)

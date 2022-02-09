@@ -207,21 +207,13 @@ void video::run()
 
       for (form &kub: kubes)
       {
-
-
         kub.phasing(phase, m_gold, kubes[0]);
         kub.orbiting();
         kub.standing_waves(phase);
         kub.set_color();
-
-        /*
-        if (kub.get_identity() == 0)
-        { kub.set_color(RED); }
-
-        if (kub.get_identity() == amount - 1)
-        { kub.set_color(BLUE); }
-        */
       }
+
+      cubes.update(m_clock, m_gold);
 
       // kubes.update(m_phase.get_phase());
 
@@ -235,6 +227,8 @@ void video::run()
 
         for (form &kub: kubes)
         { kub.display_cuboid(); }
+
+        cubes.display();
 
         // kubes.display();
 

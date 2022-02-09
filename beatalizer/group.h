@@ -14,6 +14,12 @@ private:
   std::vector <form> m_cubes;
 public:
   group(auronacci &gold);
+
+  void set_color();
+
+  void update(const timer &clock, auronacci &gold);
+
+  void display();
 };
 
 std::vector <group> grouping(auronacci &gold);
