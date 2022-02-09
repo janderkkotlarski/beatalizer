@@ -79,6 +79,12 @@ private:
   const float m_phase_divide
   { 8.0f };
 
+  const float m_phase_divr
+  { 5.5f };
+
+  const float m_phase_divz
+  { 2.5f };
+
   float m_phase_offinit
   { 0.0f };
 
@@ -109,6 +115,10 @@ public:
   void phasing(auronacci &gold, form &cube);
 
   void orbiting();
+
+  void transverse();
+
+  void longiverse();
 
   void standing_waves();
 

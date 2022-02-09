@@ -36,8 +36,28 @@ void form::orbiting()
   { m_phase_actual/period2float(m_period_orbit) };
 
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
+}
 
-  // m_position_now *= 1.0f + 0.25f*
+void form::transverse()
+{
+  const float phase_slowed
+  { (m_phase + m_phase_offinit)/m_phase_divr };
+
+  const float transwave
+  { 1.0f + 0.1f*sin(phase_slowed) };
+
+  m_position_now = Vector3Scale(m_position_now, transwave);
+}
+
+void form::longiverse()
+{
+  const float phase_slowed
+  { (m_phase + m_phase_offinit)/m_phase_divz };
+
+  const float twiddle
+  { 0.03f*sin(phase_slowed) };
+
+  m_position_now = orbit_pos(m_position_now, Vector3Scale(m_radial_z, m_distance), 1.0f, twiddle);
 }
 
 void form::standing_waves()

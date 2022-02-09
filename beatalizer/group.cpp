@@ -19,6 +19,8 @@ void group::update(const float phase, auronacci &gold)
     cube.set_phase(phase);
     cube.phasing(gold, m_cubes[0]);
     cube.orbiting();
+    cube.transverse();
+    cube.longiverse();
     cube.standing_waves();
     cube.set_color();
   }
