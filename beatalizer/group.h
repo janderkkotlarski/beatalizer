@@ -9,7 +9,7 @@ class group
 {
 private:
   const int m_amount
-  { 8 };
+  { 16 };
 
   std::vector <form> m_cubes;
 public:

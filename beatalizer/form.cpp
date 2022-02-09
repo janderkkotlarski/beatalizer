@@ -36,12 +36,14 @@ void form::orbiting()
   { m_phase_actual/period2float(m_period_orbit) };
 
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
+
+  // m_position_now *= 1.0f + 0.25f*
 }
 
-void form::standing_waves(const float phase)
+void form::standing_waves()
 {
   const float phase_slowed
-  { (phase + m_phase_offinit)/m_phase_divide };
+  { (m_phase + m_phase_offinit)/m_phase_divide };
 
   m_side_x = m_side*sin(phase_slowed);
   m_side_y = m_side*sin(phase_slowed);
@@ -79,6 +81,9 @@ void form::set_period_phase(auronacci &gold, form &cube)
   m_phase_arc = m_tau*period2float(m_period_arc);
 }
 
+void form::set_phase(const float phase)
+{ m_phase = phase; }
+
 void form::set_color()
 {
   m_color =
@@ -104,7 +109,6 @@ void form::set_phase_offset(const float phase_offset)
   m_phase_offset = phase_offset;
 }
 
-
 void form::set_next_pos(auronacci &gold, form &cube)
 {
 
@@ -123,9 +127,9 @@ void form::set_next_pos(auronacci &gold, form &cube)
   orbit_jump(m_radial_y, m_radial_z, m_jump_step);
 }
 
-void form::phasing(const float phase, auronacci &gold, form& cube)
+void form::phasing(auronacci &gold, form& cube)
 {
-  m_phase_actual = phase + m_phase_offset;
+  m_phase_actual = m_phase + m_phase_offset;
 
   if (m_phase_actual > m_phase_arc)
   {
@@ -135,7 +139,7 @@ void form::phasing(const float phase, auronacci &gold, form& cube)
 
     set_period_phase(gold, cube);
 
-    m_phase_actual = phase + m_phase_offset;
+    m_phase_actual = m_phase + m_phase_offset;
   }
 }
 

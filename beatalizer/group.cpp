@@ -19,9 +19,10 @@ void group::update(const timer &clock, auronacci &gold)
 
   for (form &cube: m_cubes)
   {
-    cube.phasing(phase, gold, m_cubes[0]);
+    cube.set_phase(phase);
+    cube.phasing(gold, m_cubes[0]);
     cube.orbiting();
-    cube.standing_waves(phase);
+    cube.standing_waves();
     cube.set_color();
   }
 }
@@ -35,7 +36,7 @@ void group::display()
 std::vector <group> grouping(auronacci &gold)
 {
   const int amount
-  { 16 };
+  { 32 };
 
   std::vector <group> groups;
 

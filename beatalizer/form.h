@@ -73,6 +73,9 @@ private:
   period m_period_orbit
   { period::p_32 };
 
+  float m_phase
+  { 0.0f };
+
   const float m_phase_divide
   { 8.0f };
 
@@ -103,11 +106,11 @@ public:
 
   void initialize(auronacci &gold, form &cube);
 
-  void phasing(const float phase, auronacci &gold, form &cube);
+  void phasing(auronacci &gold, form &cube);
 
   void orbiting();
 
-  void standing_waves(const float phase);
+  void standing_waves();
 
   float get_tau() noexcept;
 
@@ -123,6 +126,8 @@ public:
   void set_identity(const int identity);
 
   void set_period_phase(auronacci &gold, form &cube);
+
+  void set_phase(const float phase);
 
   void set_color();
   void set_color(const Color &color);
