@@ -123,9 +123,9 @@ void form::set_next_pos(auronacci &gold, form &cube)
   orbit_jump(m_radial_y, m_radial_z, m_jump_step);
 }
 
-void form::phasing(timer &clock, auronacci &gold, form& cube)
+void form::phasing(const float phase, auronacci &gold, form& cube)
 {
-  m_phase_actual = clock.get_phase() + m_phase_offset;
+  m_phase_actual = phase + m_phase_offset;
 
   if (m_phase_actual > m_phase_arc)
   {
@@ -135,7 +135,7 @@ void form::phasing(timer &clock, auronacci &gold, form& cube)
 
     set_period_phase(gold, cube);
 
-    m_phase_actual = clock.get_phase() + m_phase_offset;
+    m_phase_actual = phase + m_phase_offset;
   }
 }
 

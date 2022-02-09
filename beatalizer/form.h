@@ -103,7 +103,7 @@ public:
 
   void initialize(auronacci &gold, form &cube);
 
-  void phasing(timer &clock, auronacci &gold, form &cube);
+  void phasing(const float phase, auronacci &gold, form &cube);
 
   void orbiting();
 

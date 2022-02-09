@@ -194,16 +194,21 @@ void video::run()
 
       m_clock.add_time(m_time_gap, m_micros_per_beat);
 
+      const float phase
+      { m_clock.get_phase() };
+
       // kube.rephaser(m_clock, m_gold);
-      kube.phasing(m_clock, m_gold, kube);
+      kube.phasing(phase, m_gold, kube);
       kube.orbiting();
       kube.set_color();
 
       for (form &kub: kubes)
       {
-        kub.phasing(m_clock, m_gold, kubes[0]);
+
+
+        kub.phasing(phase, m_gold, kubes[0]);
         kub.orbiting();
-        kub.standing_waves(m_clock.get_phase());
+        kub.standing_waves(phase);
         kub.set_color();
 
         /*

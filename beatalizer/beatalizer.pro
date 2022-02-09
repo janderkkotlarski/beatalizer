@@ -58,6 +58,7 @@ SOURCES += \
         auronacci.cpp \
         form.cpp \
         functions.cpp \
+        group.cpp \
         main.cpp \
         period.cpp \
         timer.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
         auronacci.h \
         form.h \
         functions.h \
+        group.h \
         period.h \
         timer.h \
         video.h
