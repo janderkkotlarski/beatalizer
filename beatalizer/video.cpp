@@ -148,32 +148,8 @@ void video::run()
   const int font_size
   { 2*x_pos };
 
-  form cube;
-  cube.set_side(0.2f);
-
-  form kube(m_gold);
-  kube.initialize(m_gold, kube);
-  kube.set_color();
-
-  const int amount
-  { 8 };
-
-  group cubes(m_gold);
-
-  std::vector <form> kubes
-  { form_random_arc(amount, m_gold) };
-
-  for (form &kub: kubes)
-  { kub.set_color(); }
-
-
-  // group kubes
-  // { m_gold };
-
-  // std::vector <group> cube_groups;
-
-  // for (int count { 0 }; count < m_group_amount; ++count)
-  // { cube_groups.push_back(group(m_gold)); }
+  std::vector <group> cube_groups
+  { grouping(m_gold) };
 
   // Main game loop
   update_time();
@@ -197,57 +173,23 @@ void video::run()
 
       m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-      const float phase
-      { m_clock.get_phase() };
-
-      // kube.rephaser(m_clock, m_gold);
-      kube.phasing(phase, m_gold, kube);
-      kube.orbiting();
-      kube.set_color();
-
-      for (form &kub: kubes)
-      {
-        kub.phasing(phase, m_gold, kubes[0]);
-        kub.orbiting();
-        kub.standing_waves(phase);
-        kub.set_color();
-      }
-
-      cubes.update(m_clock, m_gold);
-
-      // kubes.update(m_phase.get_phase());
-
-      // for (group &cubes: cube_groups)
-      // { cubes.update(m_phase.get_phase(), m_gold); }
+      update(cube_groups, m_clock, m_gold);
 
       BeginMode3D(m_camera);
       {
-        cube.display_cuboid();
-        // kube.display_cuboid();
-
-        for (form &kub: kubes)
-        { kub.display_cuboid(); }
-
-        cubes.display();
-
-        // kubes.display();
-
-        // for (group &cubes: cube_groups)
-        // { cubes.display(); }
+        display(cube_groups);
       }
       EndMode3D();
-
-
 
       int y_pos
       { x_pos };
 
       std::string transient;
 
+      /*
+
       transient = "Phase offset: [" + std::to_string(kube.get_phase_offset()/kube.get_tau()) + "]";
       DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-      /*
 
       y_pos += font_size;
 

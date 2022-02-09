@@ -24,4 +24,8 @@ public:
 
 std::vector <group> grouping(auronacci &gold);
 
+void update(std::vector <group> &cube_groups, const timer &clock, auronacci &gold);
+
+void display(std::vector <group> &cube_groups);
+
 #endif // GROUP_H

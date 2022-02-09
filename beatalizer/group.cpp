@@ -35,7 +35,7 @@ void group::display()
 std::vector <group> grouping(auronacci &gold)
 {
   const int amount
-  { 8 };
+  { 16 };
 
   std::vector <group> groups;
 
@@ -43,4 +43,16 @@ std::vector <group> grouping(auronacci &gold)
   { groups.push_back(group(gold)); }
 
   return groups;
+}
+
+void update(std::vector <group> &cube_groups, const timer &clock, auronacci &gold)
+{
+  for (group &cubes: cube_groups)
+  { cubes.update(clock, gold); }
+}
+
+void display(std::vector <group> &cube_groups)
+{
+  for (group &cubes: cube_groups)
+  { cubes.display(); }
 }
