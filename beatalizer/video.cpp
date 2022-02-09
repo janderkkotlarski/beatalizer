@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "form.h"
+#include "group.h"
 #include "functions.h"
 
 #if defined(PLATFORM_DESKTOP)
@@ -156,6 +157,8 @@ void video::run()
 
   const int amount
   { 8 };
+
+  group cubes(m_gold);
 
   std::vector <form> kubes
   { form_random_arc(amount, m_gold) };
