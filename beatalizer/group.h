@@ -17,14 +17,14 @@ public:
 
   void set_color();
 
-  void update(const timer &clock, auronacci &gold);
+  void update(const float phase, auronacci &gold);
 
   void display();
 };
 
 std::vector <group> grouping(auronacci &gold);
 
-void update(std::vector <group> &cube_groups, const timer &clock, auronacci &gold);
+void update(std::vector <group> &cube_groups, const float phase, auronacci &gold);
 
 void display(std::vector <group> &cube_groups);
 

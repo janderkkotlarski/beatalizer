@@ -173,7 +173,7 @@ void video::run()
 
       m_clock.add_time(m_time_gap, m_micros_per_beat);
 
-      update(cube_groups, m_clock, m_gold);
+      update(cube_groups, m_clock.get_phase(), m_gold);
 
       BeginMode3D(m_camera);
       {

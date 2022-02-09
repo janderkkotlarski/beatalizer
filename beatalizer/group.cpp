@@ -12,11 +12,8 @@ void group::set_color()
   { cube.set_color(); }
 }
 
-void group::update(const timer &clock, auronacci &gold)
+void group::update(const float phase, auronacci &gold)
 {
-  const float phase
-  { clock.get_phase() };
-
   for (form &cube: m_cubes)
   {
     cube.set_phase(phase);
@@ -46,10 +43,10 @@ std::vector <group> grouping(auronacci &gold)
   return groups;
 }
 
-void update(std::vector <group> &cube_groups, const timer &clock, auronacci &gold)
+void update(std::vector <group> &cube_groups, const float phase, auronacci &gold)
 {
   for (group &cubes: cube_groups)
-  { cubes.update(clock, gold); }
+  { cubes.update(phase, gold); }
 }
 
 void display(std::vector <group> &cube_groups)
