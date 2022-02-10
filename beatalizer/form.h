@@ -80,10 +80,10 @@ private:
   { 8.0f };
 
   const float m_phase_divr
-  { 5.5f };
+  { 4.0f*sqrt(2.0f) };
 
   const float m_phase_divz
-  { 2.5f };
+  { 2.0f*sqrt(sqrt(2.0f)) };
 
   float m_phase_offinit
   { 0.0f };
