@@ -204,7 +204,7 @@ void form::phasing(auronacci &gold, form& cube)
   }
 
   if (m_period_jump)
-  { m_phase_actual += m_tau*period2float(period::p_1); }
+  { m_phase_actual += 2.0f*m_tau*period2float(period::p_1); }
 }
 
 void form::display_cuboid()
