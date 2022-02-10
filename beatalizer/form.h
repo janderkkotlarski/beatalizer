@@ -80,10 +80,10 @@ private:
   { 8.0f };
 
   const float m_phase_divr
-  { 4.0f*sqrt(2.0f) };
+  { 4.0f };
 
   const float m_phase_divz
-  { 2.0f*sqrt(sqrt(2.0f)) };
+  { 2.0f };
 
   float m_phase_offinit
   { 0.0f };
@@ -116,9 +116,11 @@ public:
 
   void orbiting();
 
-  void transverse();
-
   void longiverse();
+
+  void transradial();
+
+  void transcircal();
 
   void standing_waves();
 
