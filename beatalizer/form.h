@@ -118,6 +118,8 @@ public:
 
   void longiverse();
 
+  void orbitrans();
+
   void transradial();
 
   void transcircal();

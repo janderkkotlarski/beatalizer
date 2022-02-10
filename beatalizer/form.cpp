@@ -55,6 +55,23 @@ void form::longiverse()
   m_position_now = orbit_pos(m_radial_x, m_radial_y, m_distance, next_phase);
 }
 
+void form::orbitrans()
+{
+  const float next_phase
+  { m_phase_actual/period2float(m_period_orbit) };
+
+  const Vector3 zenith
+  { orbit_pos(m_radial_y, Vector3Negate(m_radial_x), m_distance, next_phase) };
+
+  const float phase_slowed
+  { (m_phase + m_phase_offinit)/m_phase_divz };
+
+  const float twiddle
+  { 0.04f*sin(phase_slowed) };
+
+  m_position_now = orbit_pos(m_position_now, zenith, 1.0f, twiddle);
+}
+
 void form::transradial()
 {
   const float phase_slowed
