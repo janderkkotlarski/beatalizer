@@ -12,6 +12,12 @@ void group::set_color()
   { cube.set_color(); }
 }
 
+void group::set_period_jump(const float period_jump)
+{
+  for (form &cube: m_cubes)
+  { cube.set_period_jump(period_jump); }
+}
+
 void group::update(const float phase, auronacci &gold)
 {
   for (form &cube: m_cubes)
@@ -22,7 +28,7 @@ void group::update(const float phase, auronacci &gold)
     // cube.longiverse();
     // cube.transradial();
     // cube.transcircal();
-    cube.orbitrans();
+    // cube.orbitrans();
     cube.standing_waves();
     cube.set_color();
   }
@@ -42,7 +48,20 @@ std::vector <group> grouping(auronacci &gold)
   std::vector <group> groups;
 
   for (int count{ 0 }; count < amount; ++count)
-  { groups.push_back(group(gold)); }
+  {
+    groups.push_back(group(gold));
+
+    // const bool period_jump
+    // { bool(gold.get_number() % 2) };
+
+    bool period_jump
+    { false };
+
+    if (count % 2 == 0)
+    { period_jump = true; }
+
+    groups[count].set_period_jump(period_jump);
+  }
 
   return groups;
 }

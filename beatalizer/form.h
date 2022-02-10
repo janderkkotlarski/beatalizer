@@ -73,17 +73,23 @@ private:
   period m_period_orbit
   { period::p_32 };
 
-  float m_phase
-  { 0.0f };
-
-  const float m_phase_divide
+  const float m_phase_8
   { 8.0f };
 
-  const float m_phase_divr
+  const float m_phase_4
   { 4.0f };
 
-  const float m_phase_divz
+  const float m_phase_2
   { 2.0f };
+
+  const float m_phase_1
+  { 1.0f };
+
+  bool m_period_jump
+  { false };
+
+  float m_phase
+  { 0.0f };
 
   float m_phase_offinit
   { 0.0f };
@@ -140,6 +146,8 @@ public:
   void set_identity(const int identity);
 
   void set_period_phase(auronacci &gold, form &cube);
+
+  void set_period_jump(const bool period_jump);
 
   void set_phase(const float phase);
 

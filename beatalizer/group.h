@@ -17,6 +17,8 @@ public:
 
   void set_color();
 
+  void set_period_jump(const float period_jump);
+
   void update(const float phase, auronacci &gold);
 
   void display();
