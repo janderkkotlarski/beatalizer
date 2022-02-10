@@ -47,7 +47,7 @@ void form::longiverse()
   { phase_mult*(m_phase + m_phase_offinit) };
 
   const float phase_scale
-  { m_tau/1.0f };
+  { m_tau/4.0f };
 
   const float next_phase
   { (m_phase_actual + phase_scale*cos(phase_slowed))/period2float(m_period_orbit) };
