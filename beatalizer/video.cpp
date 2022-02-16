@@ -42,6 +42,15 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "viewPos");
 }
 
+void video::upkeep()
+{
+  if (IsKeyPressed(KEY_SPACE))
+  { m_repeat = false; }
+
+  if (IsKeyPressed(KEY_DELETE))
+  { m_windeath = true; }
+}
+
 void video::rebeat()
 { m_micros_per_beat = m_million*m_minute/m_bpm; }
 
@@ -68,6 +77,8 @@ void video::rotate(Vector3 &from, Vector3 &toward)
 
   toward = Vector3Normalize(new_toward);
 }
+
+
 
 void video::rotate_cam()
 {
@@ -158,14 +169,7 @@ void video::run()
 
     while (m_repeat && !m_windeath)
     {
-      if (IsKeyPressed(KEY_SPACE))
-      { m_repeat = false; }
-
-      if (IsKeyPressed(KEY_DELETE))
-      { m_windeath = true; }
-
-      // Update
-      //----------------------------------------------------------------------------------
+      upkeep();
       rotate_cam();
       update_cam();
       update_bpm();

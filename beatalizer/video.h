@@ -119,6 +119,8 @@ public:
 
   void initialize();
 
+  void upkeep();
+
   void rebeat();
 
   void update_cam();
