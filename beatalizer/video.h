@@ -27,6 +27,12 @@ private:
   int m_font_size
   { 0 };
 
+  bool m_windeath
+  { false };
+
+  bool m_repeat
+  { true };
+
   const Vector3 m_anchor
   { 0.0f, 0.0f, 0.0f };
 

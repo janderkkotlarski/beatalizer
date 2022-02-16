@@ -191,8 +191,7 @@ void form::phasing(auronacci &gold, form& cube)
 {
   m_phase_actual = m_phase + m_phase_offset;
 
-  if (m_phase_actual > m_phase_arc
-      && false)
+  if (m_phase_actual > m_phase_arc)
   {
     set_next_pos(gold, cube);
 

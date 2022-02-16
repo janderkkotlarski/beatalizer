@@ -27,8 +27,8 @@ void group::update(const float phase, auronacci &gold)
     cube.orbiting();
     // cube.longiverse();
     cube.transradial();
-    // cube.transcircal();
-    // cube.orbitrans();
+    cube.transcircal();
+    cube.orbitrans();
     cube.standing_waves();
     cube.set_color();
   }
@@ -57,8 +57,8 @@ std::vector <group> grouping(auronacci &gold)
     bool period_jump
     { false };
 
-    if (count % 2 == 0)
-    { period_jump = true; }
+    // if (count % 2 == 0)
+    // { period_jump = true; }
 
     groups[count].set_period_jump(period_jump);
   }

@@ -29,8 +29,6 @@ void video::initialize()
   InitWindow(m_screen_width, m_screen_height, "beatalizer");
 
   SetTargetFPS(m_fps);
-
-
   update_cam();
   m_camera.fovy = 45.0f;                                // Camera field-of-view Y
   m_camera.type = CAMERA_PERSPECTIVE;                  // Camera mode type
@@ -140,76 +138,86 @@ void video::run()
 
   GetFontDefault();
 
-  m_clock.phase_reset();
-
-  const int x_pos
-  { int(float(GetScreenHeight())/100.0f) };
-
-  const int font_size
-  { 2*x_pos };
-
-  std::vector <group> cube_groups
-  { grouping(m_gold) };
-
-  // Main game loop
-  update_time();
-
-  int count
-  { 0 };
-
-  while (!WindowShouldClose())                // Detect window close button or ESC key
+  while (!m_windeath)                // Detect window close button or ESC key
   {
-    // Update
-    //----------------------------------------------------------------------------------
-    rotate_cam();
-    update_cam();
-    update_bpm();
+    m_clock.phase_reset();
 
-    BeginDrawing();
+    const int x_pos
+    { int(float(GetScreenHeight())/100.0f) };
+
+    const int font_size
+    { 2*x_pos };
+
+    std::vector <group> cube_groups
+    { grouping(m_gold) };
+
+    // Main game loop
+    update_time();
+
+    m_repeat = true;
+
+    while (m_repeat && !m_windeath)
     {
-      ClearBackground(BLACK);
+      if (IsKeyPressed(KEY_SPACE))
+      { m_repeat = false; }
 
-      update_time();
+      if (IsKeyPressed(KEY_DELETE))
+      { m_windeath = true; }
 
-      m_clock.add_time(m_time_gap, m_micros_per_beat);
+      // Update
+      //----------------------------------------------------------------------------------
+      rotate_cam();
+      update_cam();
+      update_bpm();
 
-      update(cube_groups, m_clock.get_phase(), m_gold);
-
-      BeginMode3D(m_camera);
+      BeginDrawing();
       {
-        display(cube_groups);
+        ClearBackground(BLACK);
+
+        update_time();
+
+        m_clock.add_time(m_time_gap, m_micros_per_beat);
+
+        update(cube_groups, m_clock.get_phase(), m_gold);
+
+        BeginMode3D(m_camera);
+        {
+          display(cube_groups);
+        }
+        EndMode3D();
+
+        int y_pos
+        { x_pos };
+
+        std::string transient;
+
+        /*
+
+        transient = "Phase offset: [" + std::to_string(kube.get_phase_offset()/kube.get_tau()) + "]";
+        DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+        y_pos += font_size;
+
+        transient = "Pos next : [" + std::to_string(kube.get_pos_next().x) + "]["
+                                   + std::to_string(kube.get_pos_next().y) + "]["
+                                   + std::to_string(kube.get_pos_next().z) + "]";
+        DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+
+        y_pos += font_size;
+
+        transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
+        DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
+        */
       }
-      EndMode3D();
 
-      int y_pos
-      { x_pos };
+      EndDrawing();
 
-      std::string transient;
-
-      /*
-
-      transient = "Phase offset: [" + std::to_string(kube.get_phase_offset()/kube.get_tau()) + "]";
-      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-      y_pos += font_size;
-
-      transient = "Pos next : [" + std::to_string(kube.get_pos_next().x) + "]["
-                                 + std::to_string(kube.get_pos_next().y) + "]["
-                                 + std::to_string(kube.get_pos_next().z) + "]";
-      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-
-      y_pos += font_size;
-
-      transient = "Jump : [" + std::to_string(kube.get_jump()) + "]";
-      DrawText(transient.c_str(), x_pos, y_pos, font_size, RED);
-      */
+      ++m_frame_counter;
+      m_frame_counter %= m_frame_skip;
     }
-
-    EndDrawing();
-
-    ++m_frame_counter;
-    m_frame_counter %= m_frame_skip;
   }
+
+
 
   CloseWindow();              // Close window and OpenGL context
 }
