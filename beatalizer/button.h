@@ -30,6 +30,6 @@ public:
   button(const boardkey board);
 };
 
-
+KeyboardKey board2key(const boardkey board) noexcept;
 
 #endif // BUTTON_H

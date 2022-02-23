@@ -8,6 +8,7 @@
 
 #include "timer.h"
 #include "auronacci.h"
+#include "button.h"
 
 class video
 {

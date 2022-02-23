@@ -149,6 +149,8 @@ void video::run()
 
   GetFontDefault();
 
+  button nope(boardkey::restart);
+
   while (!m_windeath)                // Detect window close button or ESC key
   {
     m_clock.phase_reset();
