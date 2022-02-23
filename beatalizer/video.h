@@ -16,10 +16,7 @@ private:
 
   auronacci m_gold;
 
-  int m_screen_width
-  { 800 };
-
-  int m_screen_height
+  int m_screen_side
   { 800 };
 
   int m_x_pos

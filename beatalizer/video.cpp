@@ -26,7 +26,7 @@ video::video()
 void video::initialize()
 {
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-  InitWindow(m_screen_width, m_screen_height, "beatalizer");
+  InitWindow(m_screen_side, m_screen_side, "beatalizer");
 
   SetTargetFPS(m_fps);
   update_cam();
@@ -145,11 +145,11 @@ void video::run()
 {
   SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 
-  InitWindow(m_screen_width, m_screen_height, "Beatalizer");
+  InitWindow(m_screen_side, m_screen_side, "Beatalizer");
 
   GetFontDefault();
 
-  button nope(boardkey::restart);
+  button repeat(boardkey::restart, m_screen_side);
 
   while (!m_windeath)                // Detect window close button or ESC key
   {

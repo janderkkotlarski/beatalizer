@@ -23,11 +23,14 @@ private:
   const Vector2 m_xy
   { 0.0f, 0.0f };
 
+  const float m_mult
+  { 0.1f };
+
   const float m_size
   { 0.0f };
 
 public:
-  button(const boardkey board);
+  button(const boardkey board, const int window_size);
 };
 
 KeyboardKey board2key(const boardkey board) noexcept;

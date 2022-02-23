@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-button::button(const boardkey board)
+button::button(const boardkey board, const int window_size)
   : m_board(board), m_key(board2key(board))
 {
   assert(m_board != boardkey::none);
