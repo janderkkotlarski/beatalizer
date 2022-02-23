@@ -5,7 +5,7 @@
 
 enum class boardkey
 {
-  exit, restart, visible,
+  none, exit, restart, visible,
   bpm_plus, bpm_minus,
   up2front, front2up, right2front, front2right,
   up2right, right2up, zoom_in, zoom_out
@@ -14,6 +14,9 @@ enum class boardkey
 class button
 {
 private:
+  const boardkey m_board
+  { boardkey::none };
+
   const KeyboardKey m_key
   { KeyboardKey::KEY_KP_0 };
 
@@ -24,7 +27,7 @@ private:
   { 0.0f };
 
 public:
-  button();
+  button(const boardkey board);
 };
 
 

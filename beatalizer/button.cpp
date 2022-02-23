@@ -1,6 +1,6 @@
 #include "button.h"
 
-button::button()
+button::button(const boardkey board)
 {
 
 }
