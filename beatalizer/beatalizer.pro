@@ -56,6 +56,7 @@ LIBS += -LC:\raylib\
 
 SOURCES += \
         auronacci.cpp \
+        button.cpp \
         form.cpp \
         functions.cpp \
         group.cpp \
@@ -66,6 +67,7 @@ SOURCES += \
 
 HEADERS += \
         auronacci.h \
+        button.h \
         form.h \
         functions.h \
         group.h \
