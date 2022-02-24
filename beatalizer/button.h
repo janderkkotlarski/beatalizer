@@ -20,19 +20,26 @@ private:
   const KeyboardKey m_key
   { KeyboardKey::KEY_KP_0 };
 
+  const float m_screen
+  { 0.0f };
+
   const Vector2 m_xy
   { 0.0f, 0.0f };
 
   const float m_mult
-  { 0.1f };
+  { 0.05f };
 
   const float m_size
   { 0.0f };
 
 public:
   button(const boardkey board, const int window_size);
+
+  void display();
 };
 
 KeyboardKey board2key(const boardkey board) noexcept;
+
+Vector2 board2xy(const boardkey board) noexcept;
 
 #endif // BUTTON_H

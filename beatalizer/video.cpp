@@ -186,6 +186,8 @@ void video::run()
 
         update(cube_groups, m_clock.get_phase(), m_gold);
 
+        repeat.display();
+
         BeginMode3D(m_camera);
         {
           display(cube_groups);
