@@ -4,9 +4,12 @@
 
 #include "raymath.h"
 
+#include "functions.h"
+
 button::button(const boardkey board, const int window_size)
   : m_board(board), m_key(board2key(board)), m_screen(window_size),
-    m_xy(Vector2Scale(board2xy(board), m_screen)), m_size(m_mult*m_screen)
+    m_xy(Vector2Scale(board2xy(board), m_screen)), m_size(m_mult*m_screen),
+    m_color(board2color(board))
 {
   assert(m_board != boardkey::none);
   assert(board2key(m_board) == m_key);
@@ -14,6 +17,9 @@ button::button(const boardkey board, const int window_size)
   assert(m_size > 0.0f);
   assert(m_xy.x >= 0.0f);
   assert(m_xy.y >= 0.0f);
+  const Color devoid
+  { 0, 0, 0, 0 };
+  assert(color2ints(m_color) != color2ints(devoid));
 }
 
 void button::display()
@@ -24,7 +30,7 @@ void button::display()
   const Vector2 rect
   { m_size, m_size };
 
-  DrawRectangleV(pos, rect, GREEN);
+  DrawRectangleV(pos, rect, m_color);
 }
 
 KeyboardKey board2key(const boardkey board) noexcept
@@ -127,4 +133,55 @@ Vector2 board2xy(const boardkey board) noexcept
   }
 
   return Vector2{ -1.0f, -1.0f };
+}
+
+Color board2color(const boardkey board) noexcept
+{
+  switch (board)
+  {
+    case boardkey::none:
+    return Color{ 0, 0, 0, 0 };
+      break;
+    case boardkey::exit:
+      return Color{ 255, 0, 0, 255 };
+      break;
+    case boardkey::restart:
+      return Color{ 255, 255, 0, 255 };
+      break;
+    case boardkey::visible:
+      return Color{ 255, 255, 255, 127 };
+      break;
+    case boardkey::bpm_plus:
+      return Color{ 255, 127, 0, 255 };
+      break;
+    case boardkey::bpm_minus:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::up2front:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::front2up:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::right2front:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::front2right:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::up2right:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::right2up:
+      return Color{ 0, 255, 127, 255 };
+      break;
+    case boardkey::zoom_in:
+      return Color{ 255, 0, 127, 255 };
+      break;
+    case boardkey::zoom_out:
+      return Color{ 127, 0, 255, 255 };
+      break;
+  }
+
+  return Color{ 0, 0, 0, 0 };
 }

@@ -80,3 +80,15 @@ void orbit_jump(Vector3 &pos, Vector3 &dir, const float phase)
   pos = pos_c;
   dir = dir_c;
 }
+
+std::vector <int> color2ints(const Color &color)
+{
+  std::vector <int> ints;
+
+  ints.push_back(color.r);
+  ints.push_back(color.g);
+  ints.push_back(color.b);
+  ints.push_back(color.a);
+
+  return ints;
+}

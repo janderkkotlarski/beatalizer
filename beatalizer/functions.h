@@ -2,6 +2,7 @@
 #define FUNCTIONS_H
 
 #include <string>
+#include <vector>
 
 #include "raylib.h"
 
@@ -27,5 +28,7 @@ Vector3 orbit_pos(const Vector3 &pos, const Vector3 &dir,
                   const float dist, const float phase);
 
 void orbit_jump(Vector3 &pos, Vector3 &dir, const float phase);
+
+std::vector <int> color2ints(const Color &color);
 
 #endif // FUNCTIONS_H

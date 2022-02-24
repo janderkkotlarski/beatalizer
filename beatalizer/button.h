@@ -32,6 +32,9 @@ private:
   const float m_size
   { 0.0f };
 
+  const Color m_color
+  { 0, 0, 0, 0 };
+
 public:
   button(const boardkey board, const int window_size);
 
@@ -41,5 +44,8 @@ public:
 KeyboardKey board2key(const boardkey board) noexcept;
 
 Vector2 board2xy(const boardkey board) noexcept;
+
+Color board2color(const boardkey board) noexcept;
+
 
 #endif // BUTTON_H
