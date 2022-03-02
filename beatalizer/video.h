@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <thread>
+#include <vector>
 
 #include "raylib.h"
 
@@ -18,6 +19,9 @@ private:
 
   int m_screen_side
   { 800 };
+
+  std::vector <button> m_knobs
+  { knobverse(m_screen_side) };
 
   int m_x_pos
   { 0 };

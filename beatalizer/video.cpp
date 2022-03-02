@@ -149,8 +149,6 @@ void video::run()
 
   GetFontDefault();
 
-  button repeat(boardkey::restart, m_screen_side);
-
   while (!m_windeath)                // Detect window close button or ESC key
   {
     m_clock.phase_reset();
@@ -186,7 +184,7 @@ void video::run()
 
         update(cube_groups, m_clock.get_phase(), m_gold);
 
-        repeat.display();
+        knobsplay(m_knobs);
 
         BeginMode3D(m_camera);
         {

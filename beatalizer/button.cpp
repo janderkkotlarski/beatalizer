@@ -11,18 +11,13 @@ button::button(const boardkey board, const int window_size)
     m_xy(Vector2Scale(board2xy(board), m_screen)), m_size(m_mult*m_screen),
     m_color(board2color(board))
 {
-  assert(m_board != boardkey::none);
   assert(board2key(m_board) == m_key);
   assert(m_screen);
   assert(m_size > 0.0f);
-  assert(m_xy.x >= 0.0f);
-  assert(m_xy.y >= 0.0f);
-  const Color devoid
-  { 0, 0, 0, 0 };
-  assert(color2ints(m_color) != color2ints(devoid));
+
 }
 
-void button::display()
+void button::display() const
 {
   const Vector2 pos
   { m_xy.x - 0.5f*m_size, m_xy.y - 0.5f*m_size };
@@ -33,10 +28,100 @@ void button::display()
   DrawRectangleV(pos, rect, m_color);
 }
 
-boardkey button::pressing_key()
+std::vector <button> knobverse(const int window_size)
+{
+  std::vector <button> knobs;
+
+  int counter
+  { 0 };
+
+  while (counter > -1)
+  {
+    knobs.push_back(button(int2board(counter), window_size));
+
+    if (int2board(counter) == boardkey::none)
+    { counter = -137; }
+
+    ++counter;
+  }
+
+  return knobs;
+}
+
+void knobsplay(std::vector <button> &knobs)
+{
+  for (const button &knob: knobs)
+  { knob.display(); }
+}
+
+boardkey button::pressed_key() const noexcept
 {
   if (IsKeyDown(m_key))
   { return m_board; }
+
+  return boardkey::none;
+}
+
+std::vector <boardkey> pressed_keys(const std::vector <button> &knobs)
+{
+  std::vector <boardkey> p_keys;
+
+  for (const button &knob: knobs)
+  {
+    if (knob.pressed_key() != boardkey::none)
+    { p_keys.push_back(knob.pressed_key()); }
+  }
+
+  return p_keys;
+}
+
+boardkey int2board(const int number) noexcept
+{
+  switch (number)
+  {
+    case 0:
+      return boardkey::exit;
+      break;
+    case 1:
+      return boardkey::restart;
+      break;
+    case 2:
+      return boardkey::visible;
+      break;
+    case 3:
+      return boardkey::bpm_plus;
+      break;
+    case 4:
+      return boardkey::bpm_minus;
+      break;
+    case 5:
+      return boardkey::up2front;
+      break;
+    case 6:
+      return boardkey::front2up;
+      break;
+    case 7:
+      return boardkey::right2front;
+      break;
+    case 8:
+      return boardkey::front2right;
+      break;
+    case 9:
+      return boardkey::up2right;
+      break;
+    case 10:
+      return boardkey::right2up;
+      break;
+    case 11:
+      return boardkey::zoom_in;
+      break;
+    case 12:
+      return boardkey::zoom_out;
+      break;
+    case 13:
+      return boardkey::none;
+      break;
+  }
 
   return boardkey::none;
 }
@@ -45,9 +130,6 @@ KeyboardKey board2key(const boardkey board) noexcept
 {
   switch (board)
   {
-    case boardkey::none:
-      return KEY_KP_0;
-      break;
     case boardkey::exit:
       return KEY_DELETE;
       break;
@@ -87,6 +169,9 @@ KeyboardKey board2key(const boardkey board) noexcept
     case boardkey::zoom_out:
       return KEY_Z;
       break;
+    case boardkey::none:
+      return KEY_KP_0;
+      break;
   }
 
   return KEY_KP_0;
@@ -95,10 +180,7 @@ KeyboardKey board2key(const boardkey board) noexcept
 Vector2 board2xy(const boardkey board) noexcept
 {
   switch (board)
-  {
-    case boardkey::none:
-      return Vector2{ -1.0f, -1.0f };
-      break;
+  {    
     case boardkey::exit:
       return Vector2{ 0.1f, 0.1f };
       break;
@@ -138,6 +220,9 @@ Vector2 board2xy(const boardkey board) noexcept
     case boardkey::zoom_out:
       return Vector2{ 0.9f, 0.9f };
       break;
+    case boardkey::none:
+      return Vector2{ -1.0f, -1.0f };
+      break;
   }
 
   return Vector2{ -1.0f, -1.0f };
@@ -147,9 +232,6 @@ Color board2color(const boardkey board) noexcept
 {
   switch (board)
   {
-    case boardkey::none:
-    return Color{ 0, 0, 0, 0 };
-      break;
     case boardkey::exit:
       return Color{ 255, 0, 0, 255 };
       break;
@@ -166,22 +248,22 @@ Color board2color(const boardkey board) noexcept
       return Color{ 0, 255, 127, 255 };
       break;
     case boardkey::up2front:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::front2up:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::right2front:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::front2right:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::up2right:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::right2up:
-      return Color{ 0, 255, 127, 255 };
+      return Color{ 0, 255, 255, 255 };
       break;
     case boardkey::zoom_in:
       return Color{ 255, 0, 127, 255 };
@@ -189,7 +271,12 @@ Color board2color(const boardkey board) noexcept
     case boardkey::zoom_out:
       return Color{ 127, 0, 255, 255 };
       break;
+    case boardkey::none:
+    return Color{ 0, 0, 0, 0 };
+      break;
   }
 
   return Color{ 0, 0, 0, 0 };
 }
+
+

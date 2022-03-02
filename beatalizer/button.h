@@ -1,14 +1,17 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include <vector>
+
 #include "raylib.h"
 
 enum class boardkey
 {
-  none, exit, restart, visible,
+  exit, restart, visible,
   bpm_plus, bpm_minus,
   up2front, front2up, right2front, front2right,
-  up2right, right2up, zoom_in, zoom_out
+  up2right, right2up, zoom_in, zoom_out,
+  none
 };
 
 class button
@@ -38,16 +41,25 @@ private:
 public:
   button(const boardkey board, const int window_size);
 
-  void display();
+  void display() const;
 
-  boardkey pressing_key();
+  boardkey pressed_key() const noexcept;
 };
+
+std::vector <button> knobverse(const int window_size);
+
+void knobsplay(std::vector <button> &knobs);
+
+std::vector <boardkey> pressed_keys(const std::vector <button> &knobs);
+
+boardkey int2board(const int number) noexcept;
 
 KeyboardKey board2key(const boardkey board) noexcept;
 
 Vector2 board2xy(const boardkey board) noexcept;
 
 Color board2color(const boardkey board) noexcept;
+
 
 
 #endif // BUTTON_H
