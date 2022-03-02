@@ -39,6 +39,8 @@ public:
   button(const boardkey board, const int window_size);
 
   void display();
+
+  boardkey pressing_key();
 };
 
 KeyboardKey board2key(const boardkey board) noexcept;

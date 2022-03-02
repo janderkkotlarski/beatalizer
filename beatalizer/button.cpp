@@ -33,6 +33,14 @@ void button::display()
   DrawRectangleV(pos, rect, m_color);
 }
 
+boardkey button::pressing_key()
+{
+  if (IsKeyDown(m_key))
+  { return m_board; }
+
+  return boardkey::none;
+}
+
 KeyboardKey board2key(const boardkey board) noexcept
 {
   switch (board)
