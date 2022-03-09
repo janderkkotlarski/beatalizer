@@ -23,6 +23,8 @@ private:
   std::vector <button> m_knobs
   { knobverse(m_screen_side) };
 
+  std::vector <boardkey> m_keys_down;
+
   int m_x_pos
   { 0 };
 
@@ -121,9 +123,15 @@ public:
 
   void initialize();
 
+  void impress_keys();
+
+  void depress_keys();
+
   void upkeep();
 
   void rebeat();
+
+
 
   void update_cam();
 

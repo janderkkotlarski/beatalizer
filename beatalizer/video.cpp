@@ -42,6 +42,15 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "viewPos");
 }
 
+void video::impress_keys()
+{ m_keys_down = pressed_keys(m_knobs); }
+
+void video::depress_keys()
+{
+  while (m_keys_down.size() > 0)
+  { m_keys_down.pop_back(); }
+}
+
 void video::upkeep()
 {
   if (IsKeyPressed(KEY_SPACE))
@@ -77,8 +86,6 @@ void video::rotate(Vector3 &from, Vector3 &toward)
 
   toward = Vector3Normalize(new_toward);
 }
-
-
 
 void video::rotate_cam()
 {
@@ -169,6 +176,8 @@ void video::run()
 
     while (m_repeat && !m_windeath)
     {
+      impress_keys();
+
       upkeep();
       rotate_cam();
       update_cam();
@@ -217,6 +226,8 @@ void video::run()
       }
 
       EndDrawing();
+
+      depress_keys();
 
       ++m_frame_counter;
       m_frame_counter %= m_frame_skip;
