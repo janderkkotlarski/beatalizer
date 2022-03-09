@@ -75,6 +75,17 @@ std::vector <boardkey> pressed_keys(const std::vector <button> &knobs)
   return p_keys;
 }
 
+bool keypressed(const std::vector <boardkey> &keys_pressed, const boardkey accept_key)
+{
+  for (const boardkey key_press: keys_pressed)
+  {
+    if (key_press == accept_key)
+    { return true; }
+  }
+
+  return false;
+}
+
 boardkey int2board(const int number) noexcept
 {
   switch (number)

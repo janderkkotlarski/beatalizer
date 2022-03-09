@@ -52,6 +52,8 @@ void knobsplay(std::vector <button> &knobs);
 
 std::vector <boardkey> pressed_keys(const std::vector <button> &knobs);
 
+bool keypressed(const std::vector <boardkey> &keys_pressed, const boardkey accept_key);
+
 boardkey int2board(const int number) noexcept;
 
 KeyboardKey board2key(const boardkey board) noexcept;
