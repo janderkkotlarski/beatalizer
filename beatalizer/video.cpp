@@ -53,11 +53,10 @@ void video::depress_keys()
 
 void video::upkeep()
 {
-  if (IsKeyPressed(KEY_SPACE))
+  if (IsKeyPressed(board2key(boardkey::restart)))
   { m_repeat = false; }
 
-  if (IsKeyPressed(KEY_DELETE))
-  { m_windeath = true; }
+  m_windeath = keypressed(m_keys_down, boardkey::exit);
 }
 
 void video::rebeat()
@@ -89,34 +88,34 @@ void video::rotate(Vector3 &from, Vector3 &toward)
 
 void video::rotate_cam()
 {
-  if (IsKeyDown(KEY_W))
+  if (keypressed(m_keys_down, boardkey::up2front))
   { rotate(m_up_norm, m_front_norm); }
 
-  if (IsKeyDown(KEY_S))
+  if (keypressed(m_keys_down, boardkey::front2up))
   { rotate(m_front_norm, m_up_norm); }
 
-  if (IsKeyDown(KEY_D))
+  if (keypressed(m_keys_down, boardkey::right2front))
   { rotate(m_right_norm, m_front_norm); }
 
-  if (IsKeyDown(KEY_A))
+  if (keypressed(m_keys_down, boardkey::front2right))
   { rotate(m_front_norm, m_right_norm); }
 
-  if (IsKeyDown(KEY_L))
+  if (keypressed(m_keys_down, boardkey::up2right))
   { rotate(m_up_norm, m_right_norm); }
 
-  if (IsKeyDown(KEY_J))
+  if (keypressed(m_keys_down, boardkey::right2up))
   { rotate(m_right_norm, m_up_norm); }
 
-  if (IsKeyDown(KEY_I))
+  if (keypressed(m_keys_down, boardkey::zoom_in))
   { m_dist /= m_multiply; }
 
-  if (IsKeyDown(KEY_K))
+  if (keypressed(m_keys_down, boardkey::zoom_out))
   { m_dist *= m_multiply; }
 }
 
 void video::update_bpm()
 {
-  if (IsKeyDown(KEY_T))
+  if (keypressed(m_keys_down, boardkey::bpm_plus))
   {
     m_bpm += m_bpm_delta;
 
@@ -126,7 +125,7 @@ void video::update_bpm()
     rebeat();
   }
 
-  if (IsKeyDown(KEY_G))
+  if (keypressed(m_keys_down, boardkey::bpm_minus))
   {
     m_bpm -= m_bpm_delta;
 

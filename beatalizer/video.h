@@ -131,8 +131,6 @@ public:
 
   void rebeat();
 
-
-
   void update_cam();
 
   void update_bpm();
