@@ -41,6 +41,8 @@ private:
 public:
   button(const boardkey board, const int window_size);
 
+  void icon();
+
   void display() const;
 
   boardkey pressed_key() const noexcept;

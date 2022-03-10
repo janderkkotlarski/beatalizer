@@ -17,6 +17,11 @@ button::button(const boardkey board, const int window_size)
 
 }
 
+void button::icon()
+{
+  Image image;
+}
+
 void button::display() const
 {
   const Vector2 pos
